@@ -1,4 +1,4 @@
-# Dual-State LatentMAS
+# HyLaMAS: Hybrid-State LatentMAS
 
 A port of LatentMAS ([Gen-Verse/LatentMAS](https://github.com/Gen-Verse/LatentMAS),
 Apache-2.0) to a hybrid attention + Gated DeltaNet model, plus the machinery
@@ -9,8 +9,9 @@ cache. The first three emit no text; they think in latent space and the next
 agent inherits the result. On a dense transformer, handing over the KV cache
 hands over all of the model's memory. On Qwen3.5 it does not: three of every
 four layers are Gated DeltaNet and keep a fixed-size recurrent and convolution
-state instead of per-token KV. Dual-State LatentMAS carries both channels across every agent boundary, and
-adds a flag to turn each one off so their contributions can be separated.
+state instead of per-token KV. HyLaMAS (Hybrid-State LatentMAS) carries both
+channels across every agent boundary, and adds a flag to turn each one off so
+their contributions can be separated.
 
 See `DESIGN.md` for implementation notes and `REPRODUCIBILITY.md` for the
 full experimental record.

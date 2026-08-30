@@ -1,5 +1,5 @@
-Dual-State LatentMAS
-Copyright 2026 The Dual-State LatentMAS Contributors
+HyLaMAS (Hybrid-State LatentMAS)
+Copyright 2026 The HyLaMAS Contributors
 
 This product includes software developed as part of the LatentMAS project:
     https://github.com/Gen-Verse/LatentMAS
@@ -18,7 +18,7 @@ of the License at:
 
     http://www.apache.org/licenses/LICENSE-2.0
 
-Dual-State LatentMAS is a derivative work: the LatentMAS method ported to hybrid
+HyLaMAS is a derivative work: the LatentMAS method ported to hybrid
 attention + Gated DeltaNet models (Qwen3.5). Files modified relative to the
 upstream project carry a modification notice at the top of the file, per
 Section 4(b) of the License. See DESIGN.md for the implementation notes and
