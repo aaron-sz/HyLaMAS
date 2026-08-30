@@ -1,0 +1,38 @@
+run                        turn/vis           st      acc     tok  tok|ok tok|cut   CUT%  NOBOX%  PLCHLD%  cache
+-----------------------------------------------------------------------------------------------------------------
+20260823_081747_baseline_m raw/full           both  0.890     0.0     0.0     0.0   0.0%    0.0%     0.0%      0
+20260823_084727_latent_mas content/full       both  0.880   966.9   731.4  4096.0   7.0%    4.0%    96.0%   1624  <<<
+20260823_093004_text_mas_m raw/full           both  0.880   778.0   744.4  4096.0   1.0%    1.0%    99.0%      0  <<<
+20260823_103729_baseline_m raw/full           both  0.850     0.0     0.0     0.0   0.0%    0.0%     0.0%      0
+20260823_110023_latent_mas content/full       both  0.760   618.9   511.3  4096.0   3.0%  100.0%     0.0%   1226  <<<
+20260823_112859_text_mas_m raw/full           both  0.790   273.1   234.5  4096.0   1.0%  100.0%     0.0%      0  <<<
+20260823_121510_baseline_h raw/full           both  0.830     0.0     0.0     0.0   0.0%    0.0%     0.0%      0
+20260823_123350_latent_mas content/full       both  0.900   725.2   471.5  4096.0   7.0%  100.0%     0.0%   1178  <<<
+20260823_130103_text_mas_h raw/full           both  0.930   243.6   243.6     0.0   0.0%  100.0%     0.0%      0  <<<
+20260823_133237_baseline_a raw/full           both  0.940     0.0     0.0     0.0   0.0%    0.0%     0.0%      0
+20260823_134209_latent_mas content/full       both  0.930   430.3   397.3  2048.0   2.0%    2.0%    98.0%    773  <<<
+20260823_135428_text_mas_a raw/full           both  0.950   505.1   505.1     0.0   0.0%    0.0%   100.0%      0  <<<
+20260823_142056_baseline_g raw/full           both  0.960     0.0     0.0     0.0   0.0%    0.0%     0.0%      0
+20260823_142852_latent_mas content/full       both  0.970   354.9   337.8  2048.0   1.0%    0.0%     0.0%    735
+20260823_144043_text_mas_g raw/full           both  0.900   339.1   339.1     0.0   0.0%    0.0%     0.0%      0
+20260823_150547_baseline_a raw/full           both  1.000     0.0     0.0     0.0   0.0%    0.0%     0.0%      0
+20260823_151253_latent_mas content/full       both  0.990   356.8   356.8     0.0   0.0%    0.0%   100.0%    707  <<<
+20260823_152311_text_mas_a raw/full           both  0.980   440.9   440.9     0.0   0.0%    0.0%   100.0%      0  <<<
+
+how to read this
+  CUT%    judger hit --max_new_tokens. Anything above ~2% means the Acc and
+          Token columns are both partly measuring the cap. Raise the cap and
+          re-run before believing either number.
+  NOBOX%  judger never emitted \boxed{}. Those samples were graded on the last
+          number appearing anywhere in the text -- often a figure from its own
+          scratch work. High here with low Acc is an extraction failure, not a
+          reasoning failure.
+  PLCHLD% judger emitted a oxed{} whose contents have no digits -- almost
+          always because it quoted the prompt's own oxed{YOUR_FINAL_ANSWER}
+          late in a ramble. The grader takes the LAST box, so these are graded
+          on the placeholder even when the right number appears earlier.
+  tok|ok  mean output tokens over samples that finished. Compare against a
+          `--method baseline` run on the SAME model: if latent_mas is not
+          well below it, the judger is re-deriving rather than inheriting,
+          i.e. it is ignoring the shared workspace.
+  cache   KV positions in the workspace when the judger started.

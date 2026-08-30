@@ -1,0 +1,947 @@
+[dbg +    0.1s] init: method=latent_mas model=Qwen/Qwen3.5-9B task=mbppplus device=cuda state_transfer=both
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[dbg +    0.9s] dtype: loading Qwen/Qwen3.5-9B in torch.bfloat16
+[dbg +    0.9s] [▶ load model Qwen/Qwen3.5-9B (HF, torch.bfloat16)] ...
+[print2] writing run to runs/20260823_110023_latent_mas_mbppplus/
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]Fetching 4 files: 100%|██████████| 4/4 [00:00<00:00, 1873.08it/s]
+Loading weights:   0%|          | 0/427 [00:00<?, ?it/s]Loading weights: 100%|██████████| 427/427 [00:00<00:00, 6084.90it/s]
+[dbg +    1.5s] [✓ load model Qwen/Qwen3.5-9B (HF, torch.bfloat16)] 0.60s
+[dbg +    1.5s] [▶ move model to cuda] ...
+[dbg +    3.3s] [✓ move model to cuda] 1.84s
+[dbg +    3.3s] model: 24/32 layers are Gated DeltaNet (recurrent state [B, 32, 128, 128] per layer, conv kernel 4)
+[dbg +    4.5s] hybrid: append-carries-state probe — split 3.12e-02 vs reset 7.87e+00 (0.4% of a full reset; state |max| 11.5, dtype torch.bfloat16) -> carries
+[dbg +    4.5s] hybrid: append mode = auto
+[dbg +    4.5s] model: attn_implementation = sdpa, dtype = torch.bfloat16
+[dbg +    4.5s] theorem 3.1: d_h=4096 |V|=248077 — 1 latent thought >= 228.6 text tokens
+[dbg +    4.6s] latent_mas: template tails {'auto': '<think>\n', 'on': '<think>\n', 'off': '<think>\n\n</think>\n\n'}
+[dbg +    4.6s] latent_mas: chat framing resolved against the live template
+[dbg +    4.6s] latent_mas: latent_turn=content latent_visibility=full chat_thinking=off judger_thinking=off
+[dbg +    4.6s] latent_mas: generate_bs=8 > 1 — ragged batches pay extra forwards on every append after the first; compare against --generate_bs 1 on your hardware
+[dbg +    4.6s] [▶ load dataset mbppplus] ...
+[dbg +    4.8s] [✓ load dataset mbppplus] 0.23s
+[dbg +    4.8s] dataset mbppplus: 100 samples to run
+[dbg +    4.8s] warmup batch 1/1 (8 items, discarded)
+[dbg +    4.8s] agent Planner (planner) — latent thinking
+[dbg +    5.3s] [◆ latent Planner] 40 steps (bs=8) ...
+[dbg +    5.3s] [▶ build latent realignment matrix] ...
+[dbg +    5.7s] [✓ build latent realignment matrix] 0.44s
+[dbg +    7.4s] [◆ latent Planner] 40 steps in 2.16s · 18.5 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +    7.6s] workspace after Planner: kv_len=378 kv=94.5MiB state=396.0MiB state_norm=0.0529
+[dbg +    7.6s] agent Critic (critic) — latent thinking
+[dbg +    7.6s] append: padded over live state (pad prefix 153) — 153 column(s) stepwise with per-row state restore, then 207 in one forward
+[dbg +    7.6s] [◆ append Critic] 153 steps (bs=8) ...
+[dbg +   14.5s] [◆ append Critic] 153 steps in 6.92s · 22.1 step/s (bs=8) · ≳35.0k text-tok (×228.6)
+[dbg +   14.8s] [◆ latent Critic] 40 steps (bs=8) ...
+[dbg +   16.5s] [◆ latent Critic] 40 steps in 1.74s · 23.0 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +   16.7s] workspace after Critic: kv_len=780 kv=195.0MiB state=396.0MiB state_norm=0.045361
+[dbg +   16.7s] agent Refiner (refiner) — latent thinking
+[dbg +   16.7s] append: padded over live state (pad prefix 153) — 153 column(s) stepwise with per-row state restore, then 191 in one forward
+[dbg +   16.7s] [◆ append Refiner] 153 steps (bs=8) ...
+[dbg +   23.7s] [◆ append Refiner] 153 steps in 6.94s · 22.0 step/s (bs=8) · ≳35.0k text-tok (×228.6)
+[dbg +   23.9s] [◆ latent Refiner] 40 steps (bs=8) ...
+[dbg +   25.6s] [◆ latent Refiner] 40 steps in 1.72s · 23.3 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +   25.8s] workspace after Refiner: kv_len=1166 kv=291.5MiB state=396.0MiB state_norm=0.047338
+[dbg +   25.8s] agent Judger (judger) — text decode
+[dbg +   25.8s] append: padded over live state (pad prefix 153) — 153 column(s) stepwise with per-row state restore, then 237 in one forward
+[dbg +   25.8s] [◆ append Judger] 153 steps (bs=8) ...
+[dbg +   32.8s] [◆ append Judger] 153 steps in 6.99s · 21.9 step/s (bs=8) · ≳35.0k text-tok (×228.6)
+[dbg +   94.0s] [⚡ decode Judger] 1291 tok in 60.90s · 21.2 tok/s/seq · ×8 = 169.6 tok/s
+=========================================
+Question 0
+error_msg: None
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: None
+=========================================
+Question 3
+error_msg: None
+=========================================
+Question 4
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 38, in <module>
+  File "<string>", line 32, in assertion
+AssertionError: out: {'characters', 'string', 'words', 'least', 'This', 'with', 'long', 'very', 'that', 'long.'}, exp: {'characters', 'string', 'words', 'least', 'This', 'with', 'long', 'very', 'that'}
+
+=========================================
+Question 5
+error_msg: None
+=========================================
+Question 6
+error_msg: None
+[dbg +   95.0s] batch: 8 items (done 0/100)
+[dbg +   95.0s] agent Planner (planner) — latent thinking
+[dbg +   95.4s] [◆ latent Planner] 40 steps (bs=8) ...
+[dbg +   97.2s] [◆ latent Planner] 40 steps in 1.74s · 23.0 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +   97.3s] workspace after Planner: kv_len=378 kv=94.5MiB state=396.0MiB state_norm=0.0529
+[dbg +   97.3s] agent Critic (critic) — latent thinking
+[dbg +   97.3s] append: padded over live state (pad prefix 153) — 153 column(s) stepwise with per-row state restore, then 207 in one forward
+[dbg +   97.3s] [◆ append Critic] 153 steps (bs=8) ...
+[dbg +  104.3s] [◆ append Critic] 153 steps in 6.99s · 21.9 step/s (bs=8) · ≳35.0k text-tok (×228.6)
+[dbg +  104.6s] [◆ latent Critic] 40 steps (bs=8) ...
+[dbg +  106.3s] [◆ latent Critic] 40 steps in 1.74s · 23.0 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  106.5s] workspace after Critic: kv_len=780 kv=195.0MiB state=396.0MiB state_norm=0.045361
+[dbg +  106.5s] agent Refiner (refiner) — latent thinking
+[dbg +  106.5s] append: padded over live state (pad prefix 153) — 153 column(s) stepwise with per-row state restore, then 191 in one forward
+[dbg +  106.5s] [◆ append Refiner] 153 steps (bs=8) ...
+[dbg +  113.5s] [◆ append Refiner] 153 steps in 6.95s · 22.0 step/s (bs=8) · ≳35.0k text-tok (×228.6)
+[dbg +  113.7s] [◆ latent Refiner] 40 steps (bs=8) ...
+[dbg +  115.4s] [◆ latent Refiner] 40 steps in 1.74s · 23.0 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  115.6s] workspace after Refiner: kv_len=1166 kv=291.5MiB state=396.0MiB state_norm=0.047338
+[dbg +  115.6s] agent Judger (judger) — text decode
+[dbg +  115.6s] append: padded over live state (pad prefix 153) — 153 column(s) stepwise with per-row state restore, then 237 in one forward
+[dbg +  115.6s] [◆ append Judger] 153 steps (bs=8) ...
+[dbg +  122.5s] [◆ append Judger] 153 steps in 6.92s · 22.1 step/s (bs=8) · ≳35.0k text-tok (×228.6)
+[dbg +  183.7s] [⚡ decode Judger] 1291 tok in 60.89s · 21.2 tok/s/seq · ×8 = 169.6 tok/s
+=========================================
+Question 7
+error_msg: None
+=========================================
+Question 0
+error_msg: None
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: None
+=========================================
+Question 3
+error_msg: None
+=========================================
+Question 4
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 38, in <module>
+  File "<string>", line 32, in assertion
+AssertionError: out: {'characters', 'string', 'words', 'least', 'This', 'with', 'long', 'very', 'that', 'long.'}, exp: {'characters', 'string', 'words', 'least', 'This', 'with', 'long', 'very', 'that'}
+
+=========================================
+Question 5
+error_msg: None
+=========================================
+Question 6
+error_msg: None
+[dbg +  184.8s] batch: 8 items (done 8/100)
+[dbg +  184.8s] agent Planner (planner) — latent thinking
+[dbg +  185.2s] [◆ latent Planner] 40 steps (bs=8) ...
+[dbg +  186.9s] [◆ latent Planner] 40 steps in 1.72s · 23.3 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  187.1s] workspace after Planner: kv_len=371 kv=92.8MiB state=396.0MiB state_norm=0.049051
+[dbg +  187.1s] agent Critic (critic) — latent thinking
+[dbg +  187.1s] append: padded over live state (pad prefix 144) — 144 column(s) stepwise with per-row state restore, then 209 in one forward
+[dbg +  187.1s] [◆ append Critic] 144 steps (bs=8) ...
+[dbg +  193.6s] [◆ append Critic] 144 steps in 6.54s · 22.0 step/s (bs=8) · ≳32.9k text-tok (×228.6)
+[dbg +  193.9s] [◆ latent Critic] 40 steps (bs=8) ...
+[dbg +  195.6s] [◆ latent Critic] 40 steps in 1.71s · 23.4 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  195.8s] workspace after Critic: kv_len=766 kv=191.5MiB state=396.0MiB state_norm=0.049993
+[dbg +  195.8s] agent Refiner (refiner) — latent thinking
+[dbg +  195.8s] append: padded over live state (pad prefix 144) — 144 column(s) stepwise with per-row state restore, then 193 in one forward
+[dbg +  195.8s] [◆ append Refiner] 144 steps (bs=8) ...
+[dbg +  202.4s] [◆ append Refiner] 144 steps in 6.62s · 21.8 step/s (bs=8) · ≳32.9k text-tok (×228.6)
+[dbg +  202.6s] [◆ latent Refiner] 40 steps (bs=8) ...
+[dbg +  204.4s] [◆ latent Refiner] 40 steps in 1.73s · 23.1 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  204.5s] workspace after Refiner: kv_len=1145 kv=286.2MiB state=396.0MiB state_norm=0.047251
+[dbg +  204.5s] agent Judger (judger) — text decode
+[dbg +  204.5s] append: padded over live state (pad prefix 144) — 144 column(s) stepwise with per-row state restore, then 239 in one forward
+[dbg +  204.5s] [◆ append Judger] 144 steps (bs=8) ...
+[dbg +  211.1s] [◆ append Judger] 144 steps in 6.60s · 21.8 step/s (bs=8) · ≳32.9k text-tok (×228.6)
+[dbg +  249.3s] [⚡ decode Judger] 824 tok in 37.84s · 21.8 tok/s/seq · ×8 = 174.2 tok/s
+=========================================
+Question 7
+error_msg: None
+[   1/100] ✓  pred=def similar_e… gold=import numpy … latent=120  ≳ 27.4k txt ~11.22s kv=1166 s=0.0473
+[   2/100] ✓  pred=import math  … gold=import numpy … latent=120  ≳ 27.4k txt ~11.22s kv=1166 s=0.0473
+[   3/100] ✓  pred=def heap_queu… gold=import numpy … latent=120  ≳ 27.4k txt ~11.22s kv=1166 s=0.0473
+[   4/100] ✓  pred=def differ_At… gold=import numpy … latent=120  ≳ 27.4k txt ~11.22s kv=1166 s=0.0473
+[   5/100] ✗  pred=def find_char… gold=import numpy … latent=120  ≳ 27.4k txt ~11.22s kv=1166 s=0.0473
+[   6/100] ✓  pred=def square_nu… gold=import numpy … latent=120  ≳ 27.4k txt ~11.22s kv=1166 s=0.0473
+[   7/100] ✓  pred=def find_Rota… gold=import numpy … latent=120  ≳ 27.4k txt ~11.22s kv=1166 s=0.0473
+[   8/100] ✓  pred=def remove_Oc… gold=import numpy … latent=120  ≳ 27.4k txt ~11.22s kv=1166 s=0.0473
+=========================================
+Question 0
+error_msg: None
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 32, in <module>
+  File "<string>", line 26, in assertion
+AssertionError: out: True, exp: False
+
+=========================================
+Question 3
+error_msg: None
+All test cases passed.
+=========================================
+Question 4
+error_msg: None
+=========================================
+Question 5
+error_msg: None
+=========================================
+Question 6
+error_msg: None
+[dbg +  250.3s] batch: 8 items (done 16/100)
+[dbg +  250.3s] agent Planner (planner) — latent thinking
+[dbg +  250.7s] [◆ latent Planner] 40 steps (bs=8) ...
+[dbg +  252.4s] [◆ latent Planner] 40 steps in 1.73s · 23.2 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  252.6s] workspace after Planner: kv_len=357 kv=89.2MiB state=396.0MiB state_norm=0.051684
+[dbg +  252.6s] agent Critic (critic) — latent thinking
+[dbg +  252.6s] append: padded over live state (pad prefix 124) — 124 column(s) stepwise with per-row state restore, then 215 in one forward
+[dbg +  252.6s] [◆ append Critic] 124 steps (bs=8) ...
+[dbg +  258.3s] [◆ append Critic] 124 steps in 5.67s · 21.9 step/s (bs=8) · ≳28.3k text-tok (×228.6)
+[dbg +  258.5s] [◆ latent Critic] 40 steps (bs=8) ...
+[dbg +  260.3s] [◆ latent Critic] 40 steps in 1.77s · 22.6 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  260.5s] workspace after Critic: kv_len=738 kv=184.5MiB state=396.0MiB state_norm=0.052692
+[dbg +  260.5s] agent Refiner (refiner) — latent thinking
+[dbg +  260.5s] append: padded over live state (pad prefix 124) — 124 column(s) stepwise with per-row state restore, then 199 in one forward
+[dbg +  260.5s] [◆ append Refiner] 124 steps (bs=8) ...
+[dbg +  266.2s] [◆ append Refiner] 124 steps in 5.70s · 21.8 step/s (bs=8) · ≳28.3k text-tok (×228.6)
+[dbg +  266.4s] [◆ latent Refiner] 40 steps (bs=8) ...
+[dbg +  268.2s] [◆ latent Refiner] 40 steps in 1.79s · 22.4 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  268.4s] workspace after Refiner: kv_len=1103 kv=275.8MiB state=396.0MiB state_norm=0.051756
+[dbg +  268.4s] agent Judger (judger) — text decode
+[dbg +  268.4s] append: padded over live state (pad prefix 124) — 124 column(s) stepwise with per-row state restore, then 245 in one forward
+[dbg +  268.4s] [◆ append Judger] 124 steps (bs=8) ...
+[dbg +  274.1s] [◆ append Judger] 124 steps in 5.71s · 21.7 step/s (bs=8) · ≳28.3k text-tok (×228.6)
+[dbg +  491.5s] [⚡ decode Judger] 4096 tok in 217.10s · 18.9 tok/s/seq · ×8 = 150.9 tok/s
+=========================================
+Question 7
+error_msg: None
+[   9/100] ✓  pred=def sort_matr… gold=import numpy … latent=120  ≳ 27.4k txt ~8.19s kv=1145 s=0.0473
+[  10/100] ✓  pred=def find_Volu… gold=import numpy … latent=120  ≳ 27.4k txt ~8.19s kv=1145 s=0.0473
+           acc 0.900 (9/10) · elapsed 4m10s · eta 37m31s · vram 19.4GiB
+[  11/100] ✗  pred=def text_lowe… gold=import numpy … latent=120  ≳ 27.4k txt ~8.19s kv=1145 s=0.0473
+[  12/100] ✓  pred=def square_pe… gold=import numpy … latent=120  ≳ 27.4k txt ~8.19s kv=1145 s=0.0473
+[  13/100] ✓  pred=def remove_di… gold=import numpy … latent=120  ≳ 27.4k txt ~8.19s kv=1145 s=0.0473
+[  14/100] ✓  pred=def test_dupl… gold=import numpy … latent=120  ≳ 27.4k txt ~8.19s kv=1145 s=0.0473
+[  15/100] ✓  pred=def is_woodal… gold=import numpy … latent=120  ≳ 27.4k txt ~8.19s kv=1145 s=0.0473
+[  16/100] ✓  pred=def check(n):… gold=import numpy … latent=120  ≳ 27.4k txt ~8.19s kv=1145 s=0.0473
+=========================================
+Question 0
+error_msg: None
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: None
+=========================================
+Question 3
+error_msg: None
+=========================================
+Question 4
+error_msg: None
+All test cases passed.
+=========================================
+Question 5
+error_msg: None
+=========================================
+Question 6
+error_msg: None
+[dbg +  492.6s] batch: 8 items (done 24/100)
+[dbg +  492.6s] agent Planner (planner) — latent thinking
+[dbg +  492.9s] [◆ latent Planner] 40 steps (bs=8) ...
+[dbg +  494.7s] [◆ latent Planner] 40 steps in 1.73s · 23.2 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  494.8s] workspace after Planner: kv_len=317 kv=79.2MiB state=396.0MiB state_norm=0.051927
+[dbg +  494.8s] agent Critic (critic) — latent thinking
+[dbg +  494.8s] append: padded over live state (pad prefix 81) — 81 column(s) stepwise with per-row state restore, then 218 in one forward
+[dbg +  494.8s] [◆ append Critic] 81 steps (bs=8) ...
+[dbg +  498.5s] [◆ append Critic] 81 steps in 3.66s · 22.1 step/s (bs=8) · ≳18.5k text-tok (×228.6)
+[dbg +  498.8s] [◆ latent Critic] 40 steps (bs=8) ...
+[dbg +  500.5s] [◆ latent Critic] 40 steps in 1.72s · 23.2 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  500.7s] workspace after Critic: kv_len=658 kv=164.5MiB state=396.0MiB state_norm=0.050776
+[dbg +  500.7s] agent Refiner (refiner) — latent thinking
+[dbg +  500.7s] append: padded over live state (pad prefix 81) — 81 column(s) stepwise with per-row state restore, then 202 in one forward
+[dbg +  500.7s] [◆ append Refiner] 81 steps (bs=8) ...
+[dbg +  504.3s] [◆ append Refiner] 81 steps in 3.65s · 22.2 step/s (bs=8) · ≳18.5k text-tok (×228.6)
+[dbg +  504.6s] [◆ latent Refiner] 40 steps (bs=8) ...
+[dbg +  506.3s] [◆ latent Refiner] 40 steps in 1.74s · 23.0 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  506.5s] workspace after Refiner: kv_len=983 kv=245.8MiB state=396.0MiB state_norm=0.046551
+[dbg +  506.5s] agent Judger (judger) — text decode
+[dbg +  506.5s] append: padded over live state (pad prefix 81) — 81 column(s) stepwise with per-row state restore, then 248 in one forward
+[dbg +  506.5s] [◆ append Judger] 81 steps (bs=8) ...
+[dbg +  510.2s] [◆ append Judger] 81 steps in 3.70s · 21.9 step/s (bs=8) · ≳18.5k text-tok (×228.6)
+[dbg +  549.0s] [⚡ decode Judger] 853 tok in 38.53s · 22.1 tok/s/seq · ×8 = 177.1 tok/s
+=========================================
+Question 7
+error_msg: None
+[  17/100] ✓  pred=def find_Max_… gold=import numpy … latent=120  ≳ 27.4k txt ~30.28s kv=1103 s=0.0518
+[  18/100] ✓  pred=def opposite_… gold=import numpy … latent=120  ≳ 27.4k txt ~30.28s kv=1103 s=0.0518
+[  19/100] ✓  pred=def is_octago… gold=import numpy … latent=120  ≳ 27.4k txt ~30.28s kv=1103 s=0.0518
+[  20/100] ✓  pred=def count_Sub… gold=import numpy … latent=120  ≳ 27.4k txt ~30.28s kv=1103 s=0.0518 CUT
+           acc 0.900 (18/20) · elapsed 8m12s · eta 32m49s · vram 43.6GiB · cut 1
+[  21/100] ✓  pred=def smallest_… gold=import numpy … latent=120  ≳ 27.4k txt ~30.28s kv=1103 s=0.0518
+[  22/100] ✓  pred=def max_diffe… gold=import numpy … latent=120  ≳ 27.4k txt ~30.28s kv=1103 s=0.0518
+[  23/100] ✓  pred=def subject_m… gold=import numpy … latent=120  ≳ 27.4k txt ~30.28s kv=1103 s=0.0518
+[  24/100] ✓  pred=def recursive… gold=import numpy … latent=120  ≳ 27.4k txt ~30.28s kv=1103 s=0.0518
+=========================================
+Question 0
+error_msg: None
+=========================================
+Question 1
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 14, in <module>
+AssertionError
+
+=========================================
+Question 2
+error_msg: None
+=========================================
+Question 3
+error_msg: None
+=========================================
+Question 4
+error_msg: None
+=========================================
+Question 5
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 26, in <module>
+AssertionError
+
+All test cases passed.
+=========================================
+Question 6
+error_msg: None
+[dbg +  550.1s] batch: 8 items (done 32/100)
+[dbg +  550.1s] agent Planner (planner) — latent thinking
+[dbg +  550.5s] [◆ latent Planner] 40 steps (bs=8) ...
+[dbg +  552.2s] [◆ latent Planner] 40 steps in 1.74s · 23.0 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  552.4s] workspace after Planner: kv_len=351 kv=87.8MiB state=396.0MiB state_norm=0.054842
+[dbg +  552.4s] agent Critic (critic) — latent thinking
+[dbg +  552.4s] append: padded over live state (pad prefix 125) — 125 column(s) stepwise with per-row state restore, then 208 in one forward
+[dbg +  552.4s] [◆ append Critic] 125 steps (bs=8) ...
+[dbg +  558.1s] [◆ append Critic] 125 steps in 5.72s · 21.8 step/s (bs=8) · ≳28.6k text-tok (×228.6)
+[dbg +  558.3s] [◆ latent Critic] 40 steps (bs=8) ...
+[dbg +  560.1s] [◆ latent Critic] 40 steps in 1.74s · 22.9 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  560.2s] workspace after Critic: kv_len=726 kv=181.5MiB state=396.0MiB state_norm=0.050251
+[dbg +  560.3s] agent Refiner (refiner) — latent thinking
+[dbg +  560.3s] append: padded over live state (pad prefix 125) — 125 column(s) stepwise with per-row state restore, then 192 in one forward
+[dbg +  560.3s] [◆ append Refiner] 125 steps (bs=8) ...
+[dbg +  566.0s] [◆ append Refiner] 125 steps in 5.70s · 21.9 step/s (bs=8) · ≳28.6k text-tok (×228.6)
+[dbg +  566.2s] [◆ latent Refiner] 40 steps (bs=8) ...
+[dbg +  567.9s] [◆ latent Refiner] 40 steps in 1.74s · 23.0 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  568.1s] workspace after Refiner: kv_len=1085 kv=271.2MiB state=396.0MiB state_norm=0.04589
+[dbg +  568.1s] agent Judger (judger) — text decode
+[dbg +  568.1s] append: padded over live state (pad prefix 125) — 125 column(s) stepwise with per-row state restore, then 238 in one forward
+[dbg +  568.1s] [◆ append Judger] 125 steps (bs=8) ...
+[dbg +  573.8s] [◆ append Judger] 125 steps in 5.71s · 21.9 step/s (bs=8) · ≳28.6k text-tok (×228.6)
+[dbg +  613.9s] [⚡ decode Judger] 868 tok in 39.77s · 21.8 tok/s/seq · ×8 = 174.6 tok/s
+=========================================
+Question 7
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 44, in <module>
+  File "<string>", line 38, in assertion
+AssertionError: out: False, exp: True
+
+[  25/100] ✓  pred=def pos_count… gold=import numpy … latent=120  ≳ 27.4k txt ~7.19s kv=983 s=0.0466
+[  26/100] ✗  pred=def bell_numb… gold=import numpy … latent=120  ≳ 27.4k txt ~7.19s kv=983 s=0.0466
+[  27/100] ✓  pred=def is_Monoto… gold=import numpy … latent=120  ≳ 27.4k txt ~7.19s kv=983 s=0.0466
+[  28/100] ✓  pred=def is_sublis… gold=import numpy … latent=120  ≳ 27.4k txt ~7.19s kv=983 s=0.0466
+[  29/100] ✓  pred=def get_equal… gold=import numpy … latent=120  ≳ 27.4k txt ~7.19s kv=983 s=0.0466
+[  30/100] ✗  pred=def comb_sort… gold=import numpy … latent=120  ≳ 27.4k txt ~7.19s kv=983 s=0.0466
+           acc 0.867 (26/30) · elapsed 9m09s · eta 21m23s · vram 43.6GiB · cut 1
+[  31/100] ✓  pred=def dif_Squar… gold=import numpy … latent=120  ≳ 27.4k txt ~7.19s kv=983 s=0.0466
+[  32/100] ✗  pred=def is_samepa… gold=import numpy … latent=120  ≳ 27.4k txt ~7.19s kv=983 s=0.0466
+=========================================
+Question 0
+error_msg: None
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: None
+=========================================
+Question 3
+error_msg: None
+=========================================
+Question 4
+error_msg: None
+sequence(10) = 6
+sequence(2) = 1
+sequence(3) = 2
+=========================================
+Question 5
+error_msg: None
+=========================================
+Question 6
+error_msg: None
+All test cases passed.
+[dbg +  616.2s] batch: 8 items (done 40/100)
+[dbg +  616.2s] agent Planner (planner) — latent thinking
+[dbg +  616.7s] [◆ latent Planner] 40 steps (bs=8) ...
+[dbg +  618.4s] [◆ latent Planner] 40 steps in 1.72s · 23.3 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  618.5s] workspace after Planner: kv_len=466 kv=116.5MiB state=396.0MiB state_norm=0.051608
+[dbg +  618.5s] agent Critic (critic) — latent thinking
+[dbg +  618.6s] append: padded over live state (pad prefix 238) — 238 column(s) stepwise with per-row state restore, then 210 in one forward
+[dbg +  618.6s] [◆ append Critic] 238 steps (bs=8) ...
+[dbg +  629.3s] [◆ append Critic] 238 steps in 10.79s · 22.1 step/s (bs=8) · ≳54.4k text-tok (×228.6)
+[dbg +  629.6s] [◆ latent Critic] 40 steps (bs=8) ...
+[dbg +  631.3s] [◆ latent Critic] 40 steps in 1.73s · 23.1 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  631.5s] workspace after Critic: kv_len=956 kv=239.0MiB state=396.0MiB state_norm=0.049757
+[dbg +  631.5s] agent Refiner (refiner) — latent thinking
+[dbg +  631.5s] append: padded over live state (pad prefix 238) — 238 column(s) stepwise with per-row state restore, then 194 in one forward
+[dbg +  631.5s] [◆ append Refiner] 238 steps (bs=8) ...
+[dbg +  642.4s] [◆ append Refiner] 238 steps in 10.91s · 21.8 step/s (bs=8) · ≳54.4k text-tok (×228.6)
+[dbg +  642.7s] [◆ latent Refiner] 40 steps (bs=8) ...
+[dbg +  644.4s] [◆ latent Refiner] 40 steps in 1.74s · 23.0 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  644.6s] workspace after Refiner: kv_len=1430 kv=357.5MiB state=396.0MiB state_norm=0.050494
+[dbg +  644.6s] agent Judger (judger) — text decode
+[dbg +  644.6s] append: padded over live state (pad prefix 238) — 238 column(s) stepwise with per-row state restore, then 240 in one forward
+[dbg +  644.6s] [◆ append Judger] 238 steps (bs=8) ...
+[dbg +  655.7s] [◆ append Judger] 238 steps in 11.07s · 21.5 step/s (bs=8) · ≳54.4k text-tok (×228.6)
+[dbg +  685.0s] [⚡ decode Judger] 615 tok in 29.01s · 21.2 tok/s/seq · ×8 = 169.6 tok/s
+=========================================
+Question 7
+error_msg: None
+[  33/100] ✓  pred=def find_tupl… gold=import numpy … latent=120  ≳ 27.4k txt ~8.26s kv=1085 s=0.0459
+[  34/100] ✓  pred=def is_Diff(n… gold=import numpy … latent=120  ≳ 27.4k txt ~8.26s kv=1085 s=0.0459
+[  35/100] ✓  pred=def word_len(… gold=import numpy … latent=120  ≳ 27.4k txt ~8.26s kv=1085 s=0.0459
+[  36/100] ✓  pred=def tetrahedr… gold=import numpy … latent=120  ≳ 27.4k txt ~8.26s kv=1085 s=0.0459
+[  37/100] ✓  pred=import math  … gold=import numpy … latent=120  ≳ 27.4k txt ~8.26s kv=1085 s=0.0459
+[  38/100] ✓  pred=def sequence(… gold=import numpy … latent=120  ≳ 27.4k txt ~8.26s kv=1085 s=0.0459
+[  39/100] ✓  pred=import math  … gold=import numpy … latent=120  ≳ 27.4k txt ~8.26s kv=1085 s=0.0459
+[  40/100] ✓  pred=def centered_… gold=import numpy … latent=120  ≳ 27.4k txt ~8.26s kv=1085 s=0.0459
+           acc 0.875 (35/40) · elapsed 10m16s · eta 15m24s · vram 43.6GiB · cut 1
+=========================================
+Question 0
+error_msg: None
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: None
+=========================================
+Question 3
+error_msg: None
+=========================================
+Question 4
+error_msg: None
+=========================================
+Question 5
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 41, in <module>
+  File "<string>", line 35, in assertion
+AssertionError: out: False, exp: True
+
+=========================================
+Question 6
+error_msg: None
+[dbg +  686.0s] batch: 8 items (done 48/100)
+[dbg +  686.0s] agent Planner (planner) — latent thinking
+[dbg +  686.6s] [◆ latent Planner] 40 steps (bs=8) ...
+[dbg +  688.3s] [◆ latent Planner] 40 steps in 1.70s · 23.6 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  688.4s] workspace after Planner: kv_len=495 kv=123.8MiB state=396.0MiB state_norm=0.052797
+[dbg +  688.4s] agent Critic (critic) — latent thinking
+[dbg +  688.4s] append: padded over live state (pad prefix 268) — 268 column(s) stepwise with per-row state restore, then 209 in one forward
+[dbg +  688.4s] [◆ append Critic] 268 steps (bs=8) ...
+[dbg +  700.7s] [◆ append Critic] 268 steps in 12.22s · 21.9 step/s (bs=8) · ≳61.3k text-tok (×228.6)
+[dbg +  700.9s] [◆ latent Critic] 40 steps (bs=8) ...
+[dbg +  702.7s] [◆ latent Critic] 40 steps in 1.77s · 22.6 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  702.9s] workspace after Critic: kv_len=1014 kv=253.5MiB state=396.0MiB state_norm=0.047862
+[dbg +  702.9s] agent Refiner (refiner) — latent thinking
+[dbg +  702.9s] append: padded over live state (pad prefix 268) — 268 column(s) stepwise with per-row state restore, then 193 in one forward
+[dbg +  702.9s] [◆ append Refiner] 268 steps (bs=8) ...
+[dbg +  715.2s] [◆ append Refiner] 268 steps in 12.30s · 21.8 step/s (bs=8) · ≳61.3k text-tok (×228.6)
+[dbg +  715.4s] [◆ latent Refiner] 40 steps (bs=8) ...
+[dbg +  717.2s] [◆ latent Refiner] 40 steps in 1.77s · 22.6 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  717.4s] workspace after Refiner: kv_len=1517 kv=379.2MiB state=396.0MiB state_norm=0.045786
+[dbg +  717.4s] agent Judger (judger) — text decode
+[dbg +  717.4s] append: padded over live state (pad prefix 268) — 268 column(s) stepwise with per-row state restore, then 239 in one forward
+[dbg +  717.4s] [◆ append Judger] 268 steps (bs=8) ...
+[dbg +  729.9s] [◆ append Judger] 268 steps in 12.56s · 21.3 step/s (bs=8) · ≳61.3k text-tok (×228.6)
+[dbg +  770.9s] [⚡ decode Judger] 842 tok in 40.68s · 20.7 tok/s/seq · ×8 = 165.6 tok/s
+=========================================
+Question 7
+error_msg: None
+[  41/100] ✓  pred=def merge_dic… gold=import numpy … latent=120  ≳ 27.4k txt ~8.74s kv=1430 s=0.0505
+[  42/100] ✓  pred=from collecti… gold=import numpy … latent=120  ≳ 27.4k txt ~8.74s kv=1430 s=0.0505
+[  43/100] ✓  pred=def closest_n… gold=import numpy … latent=120  ≳ 27.4k txt ~8.74s kv=1430 s=0.0505
+[  44/100] ✓  pred=def len_log(w… gold=import numpy … latent=120  ≳ 27.4k txt ~8.74s kv=1430 s=0.0505
+[  45/100] ✓  pred=def find_subs… gold=import numpy … latent=120  ≳ 27.4k txt ~8.74s kv=1430 s=0.0505
+[  46/100] ✗  pred=def is_undula… gold=import numpy … latent=120  ≳ 27.4k txt ~8.74s kv=1430 s=0.0505
+[  47/100] ✓  pred=def power(a, … gold=import numpy … latent=120  ≳ 27.4k txt ~8.74s kv=1430 s=0.0505
+[  48/100] ✓  pred=def index_min… gold=import numpy … latent=120  ≳ 27.4k txt ~8.74s kv=1430 s=0.0505
+=========================================
+Question 0
+error_msg: None
+=========================================
+Question 1
+error_msg: None
+All tests passed.
+=========================================
+Question 2
+error_msg: None
+=========================================
+Question 3
+error_msg: None
+=========================================
+Question 4
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 42, in <module>
+  File "<string>", line 36, in assertion
+AssertionError: out: , exp: -101
+
+121
+=========================================
+Question 5
+error_msg: None
+=========================================
+Question 6
+error_msg: None
+All tests passed.
+[dbg +  772.1s] batch: 8 items (done 56/100)
+[dbg +  772.1s] agent Planner (planner) — latent thinking
+[dbg +  772.8s] [◆ latent Planner] 40 steps (bs=8) ...
+[dbg +  774.5s] [◆ latent Planner] 40 steps in 1.73s · 23.2 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  774.7s] workspace after Planner: kv_len=636 kv=159.0MiB state=396.0MiB state_norm=0.053189
+[dbg +  774.7s] agent Critic (critic) — latent thinking
+[dbg +  774.7s] append: padded over live state (pad prefix 412) — 412 column(s) stepwise with per-row state restore, then 206 in one forward
+[dbg +  774.7s] [◆ append Critic] 412 steps (bs=8) ...
+[dbg +  793.6s] [◆ append Critic] 412 steps in 18.85s · 21.9 step/s (bs=8) · ≳94.2k text-tok (×228.6)
+[dbg +  793.8s] [◆ latent Critic] 40 steps (bs=8) ...
+[dbg +  795.6s] [◆ latent Critic] 40 steps in 1.75s · 22.9 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  795.7s] workspace after Critic: kv_len=1296 kv=324.0MiB state=396.0MiB state_norm=0.051906
+[dbg +  795.7s] agent Refiner (refiner) — latent thinking
+[dbg +  795.7s] append: padded over live state (pad prefix 412) — 412 column(s) stepwise with per-row state restore, then 190 in one forward
+[dbg +  795.7s] [◆ append Refiner] 412 steps (bs=8) ...
+[dbg +  814.6s] [◆ append Refiner] 412 steps in 18.90s · 21.8 step/s (bs=8) · ≳94.2k text-tok (×228.6)
+[dbg +  814.9s] [◆ latent Refiner] 40 steps (bs=8) ...
+[dbg +  816.7s] [◆ latent Refiner] 40 steps in 1.81s · 22.1 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  816.9s] workspace after Refiner: kv_len=1940 kv=485.0MiB state=396.0MiB state_norm=0.047425
+[dbg +  816.9s] agent Judger (judger) — text decode
+[dbg +  816.9s] append: padded over live state (pad prefix 412) — 412 column(s) stepwise with per-row state restore, then 236 in one forward
+[dbg +  816.9s] [◆ append Judger] 412 steps (bs=8) ...
+[dbg +  837.0s] [◆ append Judger] 412 steps in 20.11s · 20.5 step/s (bs=8) · ≳94.2k text-tok (×228.6)
+[dbg + 1074.1s] [⚡ decode Judger] 4096 tok in 236.81s · 17.3 tok/s/seq · ×8 = 138.4 tok/s
+=========================================
+Question 7
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 45, in <module>
+  File "<string>", line 39, in assertion
+AssertionError: out: PythonProgram, exp: ___PythonProgram
+
+[  49/100] ✓  pred=def Find_Min_… gold=import numpy … latent=120  ≳ 27.4k txt ~10.75s kv=1517 s=0.0458
+[  50/100] ✓  pred=def divisor(n… gold=import numpy … latent=120  ≳ 27.4k txt ~10.75s kv=1517 s=0.0458
+           acc 0.880 (44/50) · elapsed 12m51s · eta 12m51s · vram 43.6GiB · cut 1
+[  51/100] ✓  pred=from collecti… gold=import numpy … latent=120  ≳ 27.4k txt ~10.75s kv=1517 s=0.0458
+[  52/100] ✓  pred=def multiply_… gold=import numpy … latent=120  ≳ 27.4k txt ~10.75s kv=1517 s=0.0458
+[  53/100] ✗  pred=def decimal_t… gold=import numpy … latent=120  ≳ 27.4k txt ~10.75s kv=1517 s=0.0458
+[  54/100] ✓  pred=def next_smal… gold=import numpy … latent=120  ≳ 27.4k txt ~10.75s kv=1517 s=0.0458
+[  55/100] ✓  pred=def kth_eleme… gold=import numpy … latent=120  ≳ 27.4k txt ~10.75s kv=1517 s=0.0458
+[  56/100] ✗  pred=def snake_to_… gold=import numpy … latent=120  ≳ 27.4k txt ~10.75s kv=1517 s=0.0458
+=========================================
+Question 0
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 1, in <module>
+NameError: name 'YOUR_PYTHON_CODE' is not defined
+
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: None
+=========================================
+Question 3
+error_msg: None
+=========================================
+Question 4
+error_msg: None
+All tests passed.
+=========================================
+Question 5
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 43, in <module>
+  File "<string>", line 37, in assertion
+AssertionError: out: 3, exp: 1
+
+=========================================
+Question 6
+error_msg: None
+[dbg + 1075.2s] batch: 8 items (done 64/100)
+[dbg + 1075.2s] agent Planner (planner) — latent thinking
+[dbg + 1075.5s] [◆ latent Planner] 40 steps (bs=8) ...
+[dbg + 1077.3s] [◆ latent Planner] 40 steps in 1.73s · 23.1 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1077.4s] workspace after Planner: kv_len=320 kv=80.0MiB state=396.0MiB state_norm=0.052255
+[dbg + 1077.4s] agent Critic (critic) — latent thinking
+[dbg + 1077.5s] append: padded over live state (pad prefix 81) — 81 column(s) stepwise with per-row state restore, then 221 in one forward
+[dbg + 1077.5s] [◆ append Critic] 81 steps (bs=8) ...
+[dbg + 1081.1s] [◆ append Critic] 81 steps in 3.69s · 22.0 step/s (bs=8) · ≳18.5k text-tok (×228.6)
+[dbg + 1081.4s] [◆ latent Critic] 40 steps (bs=8) ...
+[dbg + 1083.2s] [◆ latent Critic] 40 steps in 1.75s · 22.9 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1083.3s] workspace after Critic: kv_len=664 kv=166.0MiB state=396.0MiB state_norm=0.052878
+[dbg + 1083.3s] agent Refiner (refiner) — latent thinking
+[dbg + 1083.3s] append: padded over live state (pad prefix 81) — 81 column(s) stepwise with per-row state restore, then 205 in one forward
+[dbg + 1083.3s] [◆ append Refiner] 81 steps (bs=8) ...
+[dbg + 1087.0s] [◆ append Refiner] 81 steps in 3.69s · 22.0 step/s (bs=8) · ≳18.5k text-tok (×228.6)
+[dbg + 1087.3s] [◆ latent Refiner] 40 steps (bs=8) ...
+[dbg + 1089.0s] [◆ latent Refiner] 40 steps in 1.73s · 23.1 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1089.2s] workspace after Refiner: kv_len=992 kv=248.0MiB state=396.0MiB state_norm=0.052597
+[dbg + 1089.2s] agent Judger (judger) — text decode
+[dbg + 1089.2s] append: padded over live state (pad prefix 81) — 81 column(s) stepwise with per-row state restore, then 251 in one forward
+[dbg + 1089.2s] [◆ append Judger] 81 steps (bs=8) ...
+[dbg + 1092.8s] [◆ append Judger] 81 steps in 3.66s · 22.1 step/s (bs=8) · ≳18.5k text-tok (×228.6)
+[dbg + 1142.9s] [⚡ decode Judger] 1088 tok in 49.73s · 21.9 tok/s/seq · ×8 = 175.0 tok/s
+=========================================
+Question 7
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 38, in <module>
+  File "<string>", line 32, in assertion
+AssertionError: out: False, exp: None
+
+[  57/100] ✗  pred=YOUR_PYTHON_C… gold=import numpy … latent=120  ≳ 27.4k txt ~37.89s kv=1940 s=0.0474 CUT
+[  58/100] ✓  pred=def sort_subl… gold=import numpy … latent=120  ≳ 27.4k txt ~37.89s kv=1940 s=0.0474
+[  59/100] ✓  pred=def count(lst… gold=import numpy … latent=120  ≳ 27.4k txt ~37.89s kv=1940 s=0.0474
+[  60/100] ✓  pred=def add_lists… gold=import numpy … latent=120  ≳ 27.4k txt ~37.89s kv=1940 s=0.0474
+           acc 0.850 (51/60) · elapsed 17m55s · eta 11m56s · vram 43.8GiB · cut 2
+[  61/100] ✓  pred=def merge_sor… gold=import numpy … latent=120  ≳ 27.4k txt ~37.89s kv=1940 s=0.0474
+[  62/100] ✗  pred=def odd_Equiv… gold=import numpy … latent=120  ≳ 27.4k txt ~37.89s kv=1940 s=0.0474
+[  63/100] ✓  pred=def common_in… gold=import numpy … latent=120  ≳ 27.4k txt ~37.89s kv=1940 s=0.0474
+[  64/100] ✗  pred=def check_int… gold=import numpy … latent=120  ≳ 27.4k txt ~37.89s kv=1940 s=0.0474
+=========================================
+Question 0
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 32, in <module>
+  File "<string>", line 26, in assertion
+AssertionError: out: 17649, exp: 123456789
+
+=========================================
+Question 1
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 34, in <module>
+  File "<string>", line 28, in assertion
+AssertionError: out: [], exp: ['']
+
+=========================================
+Question 2
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 41, in <module>
+  File "<string>", line 14, in search
+IndexError: list index out of range
+
+=========================================
+Question 3
+error_msg: None
+=========================================
+Question 4
+error_msg: None
+=========================================
+Question 5
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 36, in <module>
+  File "<string>", line 4, in angle_complex
+TypeError: must be real number, not complex
+
+=========================================
+Question 6
+error_msg: None
+[dbg + 1154.5s] batch: 8 items (done 72/100)
+[dbg + 1154.5s] agent Planner (planner) — latent thinking
+[dbg + 1154.9s] [◆ latent Planner] 40 steps (bs=8) ...
+[dbg + 1156.6s] [◆ latent Planner] 40 steps in 1.71s · 23.4 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1156.8s] workspace after Planner: kv_len=336 kv=84.0MiB state=396.0MiB state_norm=0.051252
+[dbg + 1156.8s] agent Critic (critic) — latent thinking
+[dbg + 1156.8s] append: padded over live state (pad prefix 109) — 109 column(s) stepwise with per-row state restore, then 209 in one forward
+[dbg + 1156.8s] [◆ append Critic] 109 steps (bs=8) ...
+[dbg + 1161.7s] [◆ append Critic] 109 steps in 4.92s · 22.1 step/s (bs=8) · ≳24.9k text-tok (×228.6)
+[dbg + 1162.0s] [◆ latent Critic] 40 steps (bs=8) ...
+[dbg + 1163.7s] [◆ latent Critic] 40 steps in 1.72s · 23.3 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1163.8s] workspace after Critic: kv_len=696 kv=174.0MiB state=396.0MiB state_norm=0.048575
+[dbg + 1163.8s] agent Refiner (refiner) — latent thinking
+[dbg + 1163.8s] append: padded over live state (pad prefix 109) — 109 column(s) stepwise with per-row state restore, then 193 in one forward
+[dbg + 1163.8s] [◆ append Refiner] 109 steps (bs=8) ...
+[dbg + 1168.8s] [◆ append Refiner] 109 steps in 4.94s · 22.1 step/s (bs=8) · ≳24.9k text-tok (×228.6)
+[dbg + 1169.0s] [◆ latent Refiner] 40 steps (bs=8) ...
+[dbg + 1170.8s] [◆ latent Refiner] 40 steps in 1.72s · 23.3 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1170.9s] workspace after Refiner: kv_len=1040 kv=260.0MiB state=396.0MiB state_norm=0.048481
+[dbg + 1170.9s] agent Judger (judger) — text decode
+[dbg + 1170.9s] append: padded over live state (pad prefix 109) — 109 column(s) stepwise with per-row state restore, then 239 in one forward
+[dbg + 1170.9s] [◆ append Judger] 109 steps (bs=8) ...
+[dbg + 1175.9s] [◆ append Judger] 109 steps in 4.95s · 22.0 step/s (bs=8) · ≳24.9k text-tok (×228.6)
+[dbg + 1211.7s] [⚡ decode Judger] 784 tok in 35.55s · 22.1 tok/s/seq · ×8 = 176.4 tok/s
+=========================================
+Question 7
+error_msg: TimeoutError: Execution exceeded 10 seconds
+[  65/100] ✗  pred=def tuple_to_… gold=import numpy … latent=120  ≳ 27.4k txt ~9.92s kv=992 s=0.0526
+[  66/100] ✗  pred=def string_to… gold=import numpy … latent=120  ≳ 27.4k txt ~9.92s kv=992 s=0.0526
+[  67/100] ✗  pred=def search(ar… gold=import numpy … latent=120  ≳ 27.4k txt ~9.92s kv=992 s=0.0526
+[  68/100] ✓  pred=def max_produ… gold=import numpy … latent=120  ≳ 27.4k txt ~9.92s kv=992 s=0.0526
+[  69/100] ✓  pred=def sum_of_di… gold=import numpy … latent=120  ≳ 27.4k txt ~9.92s kv=992 s=0.0526
+[  70/100] ✗  pred=import math  … gold=import numpy … latent=120  ≳ 27.4k txt ~9.92s kv=992 s=0.0526
+           acc 0.786 (55/70) · elapsed 19m14s · eta 8m14s · vram 43.8GiB · cut 2
+[  71/100] ✓  pred=def find_leng… gold=import numpy … latent=120  ≳ 27.4k txt ~9.92s kv=992 s=0.0526
+[  72/100] ✗  pred=import math  … gold=import numpy … latent=120  ≳ 27.4k txt ~9.92s kv=992 s=0.0526
+=========================================
+Question 0
+error_msg: None
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 71, in <module>
+  File "<string>", line 65, in assertion
+AssertionError: out: False, exp: True
+
+=========================================
+Question 3
+error_msg: None
+=========================================
+Question 4
+error_msg: None
+=========================================
+Question 5
+error_msg: None
+=========================================
+Question 6
+error_msg: None
+[dbg + 1212.8s] batch: 8 items (done 80/100)
+[dbg + 1212.8s] agent Planner (planner) — latent thinking
+[dbg + 1213.2s] [◆ latent Planner] 40 steps (bs=8) ...
+[dbg + 1214.9s] [◆ latent Planner] 40 steps in 1.73s · 23.2 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1215.1s] workspace after Planner: kv_len=383 kv=95.8MiB state=396.0MiB state_norm=0.056009
+[dbg + 1215.1s] agent Critic (critic) — latent thinking
+[dbg + 1215.1s] append: padded over live state (pad prefix 129) — 129 column(s) stepwise with per-row state restore, then 236 in one forward
+[dbg + 1215.1s] [◆ append Critic] 129 steps (bs=8) ...
+[dbg + 1220.9s] [◆ append Critic] 129 steps in 5.84s · 22.1 step/s (bs=8) · ≳29.5k text-tok (×228.6)
+[dbg + 1221.2s] [◆ latent Critic] 40 steps (bs=8) ...
+[dbg + 1222.9s] [◆ latent Critic] 40 steps in 1.72s · 23.3 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1223.1s] workspace after Critic: kv_len=790 kv=197.5MiB state=396.0MiB state_norm=0.050367
+[dbg + 1223.1s] agent Refiner (refiner) — latent thinking
+[dbg + 1223.1s] append: padded over live state (pad prefix 129) — 129 column(s) stepwise with per-row state restore, then 220 in one forward
+[dbg + 1223.1s] [◆ append Refiner] 129 steps (bs=8) ...
+[dbg + 1229.0s] [◆ append Refiner] 129 steps in 5.88s · 21.9 step/s (bs=8) · ≳29.5k text-tok (×228.6)
+[dbg + 1229.3s] [◆ latent Refiner] 40 steps (bs=8) ...
+[dbg + 1231.0s] [◆ latent Refiner] 40 steps in 1.74s · 23.0 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1231.2s] workspace after Refiner: kv_len=1181 kv=295.2MiB state=396.0MiB state_norm=0.04935
+[dbg + 1231.2s] agent Judger (judger) — text decode
+[dbg + 1231.2s] append: padded over live state (pad prefix 129) — 129 column(s) stepwise with per-row state restore, then 266 in one forward
+[dbg + 1231.2s] [◆ append Judger] 129 steps (bs=8) ...
+[dbg + 1237.1s] [◆ append Judger] 129 steps in 5.89s · 21.9 step/s (bs=8) · ≳29.5k text-tok (×228.6)
+[dbg + 1455.9s] [⚡ decode Judger] 4096 tok in 218.48s · 18.7 tok/s/seq · ×8 = 150.0 tok/s
+=========================================
+Question 7
+error_msg: None
+[  73/100] ✓  pred=def multiply_… gold=import numpy … latent=120  ≳ 27.4k txt ~7.28s kv=1040 s=0.0485
+[  74/100] ✓  pred=def long_word… gold=import numpy … latent=120  ≳ 27.4k txt ~7.28s kv=1040 s=0.0485
+[  75/100] ✗  pred=def magic_squ… gold=import numpy … latent=120  ≳ 27.4k txt ~7.28s kv=1040 s=0.0485
+[  76/100] ✓  pred=from collecti… gold=import numpy … latent=120  ≳ 27.4k txt ~7.28s kv=1040 s=0.0485
+[  77/100] ✓  pred=def reverse_v… gold=import numpy … latent=120  ≳ 27.4k txt ~7.28s kv=1040 s=0.0485
+[  78/100] ✓  pred=def tup_strin… gold=import numpy … latent=120  ≳ 27.4k txt ~7.28s kv=1040 s=0.0485
+[  79/100] ✓  pred=def sum_negat… gold=import numpy … latent=120  ≳ 27.4k txt ~7.28s kv=1040 s=0.0485
+[  80/100] ✓  pred=def hexagonal… gold=import numpy … latent=120  ≳ 27.4k txt ~7.28s kv=1040 s=0.0485
+           acc 0.787 (63/80) · elapsed 20m12s · eta 5m03s · vram 43.8GiB · cut 2
+=========================================
+Question 0
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 42, in <module>
+  File "<string>", line 34, in assertion
+AssertionError
+
+=========================================
+Question 1
+error_msg: python error: No python code block found
+=========================================
+Question 2
+error_msg: None
+=========================================
+Question 3
+error_msg: None
+=========================================
+Question 4
+error_msg: None
+3
+4
+5
+=========================================
+Question 5
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 41, in <module>
+NameError: name 'count_samepair' is not defined
+
+=========================================
+Question 6
+error_msg: None
+[dbg + 1456.9s] batch: 8 items (done 88/100)
+[dbg + 1456.9s] agent Planner (planner) — latent thinking
+[dbg + 1457.3s] [◆ latent Planner] 40 steps (bs=8) ...
+[dbg + 1459.0s] [◆ latent Planner] 40 steps in 1.73s · 23.2 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1459.2s] workspace after Planner: kv_len=399 kv=99.8MiB state=396.0MiB state_norm=0.049341
+[dbg + 1459.2s] agent Critic (critic) — latent thinking
+[dbg + 1459.2s] append: padded over live state (pad prefix 157) — 157 column(s) stepwise with per-row state restore, then 224 in one forward
+[dbg + 1459.2s] [◆ append Critic] 157 steps (bs=8) ...
+[dbg + 1466.3s] [◆ append Critic] 157 steps in 7.17s · 21.9 step/s (bs=8) · ≳35.9k text-tok (×228.6)
+[dbg + 1466.6s] [◆ latent Critic] 40 steps (bs=8) ...
+[dbg + 1468.3s] [◆ latent Critic] 40 steps in 1.72s · 23.2 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1468.5s] workspace after Critic: kv_len=822 kv=205.5MiB state=396.0MiB state_norm=0.050101
+[dbg + 1468.5s] agent Refiner (refiner) — latent thinking
+[dbg + 1468.5s] append: padded over live state (pad prefix 157) — 157 column(s) stepwise with per-row state restore, then 208 in one forward
+[dbg + 1468.5s] [◆ append Refiner] 157 steps (bs=8) ...
+[dbg + 1475.8s] [◆ append Refiner] 157 steps in 7.30s · 21.5 step/s (bs=8) · ≳35.9k text-tok (×228.6)
+[dbg + 1476.1s] [◆ latent Refiner] 40 steps (bs=8) ...
+[dbg + 1477.8s] [◆ latent Refiner] 40 steps in 1.74s · 23.0 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1478.0s] workspace after Refiner: kv_len=1229 kv=307.2MiB state=396.0MiB state_norm=0.047013
+[dbg + 1478.0s] agent Judger (judger) — text decode
+[dbg + 1478.0s] append: padded over live state (pad prefix 157) — 157 column(s) stepwise with per-row state restore, then 254 in one forward
+[dbg + 1478.0s] [◆ append Judger] 157 steps (bs=8) ...
+[dbg + 1485.2s] [◆ append Judger] 157 steps in 7.19s · 21.8 step/s (bs=8) · ≳35.9k text-tok (×228.6)
+[dbg + 1567.5s] [⚡ decode Judger] 1695 tok in 82.02s · 20.7 tok/s/seq · ×8 = 165.3 tok/s
+=========================================
+Question 7
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 50, in <module>
+  File "<string>", line 44, in assertion
+AssertionError: out: (-7, 7), exp: (2, 1)
+
+[  81/100] ✗  pred=import math  … gold=import numpy … latent=120  ≳ 27.4k txt ~30.51s kv=1181 s=0.0493
+[  82/100] ✗  pred=None           gold=import numpy … latent=120  ≳ 27.4k txt ~30.51s kv=1181 s=0.0493 CUT
+[  83/100] ✓  pred=import math  … gold=import numpy … latent=120  ≳ 27.4k txt ~30.51s kv=1181 s=0.0493
+[  84/100] ✓  pred=def extract_s… gold=import numpy … latent=120  ≳ 27.4k txt ~30.51s kv=1181 s=0.0493
+[  85/100] ✓  pred=def pancake_s… gold=import numpy … latent=120  ≳ 27.4k txt ~30.51s kv=1181 s=0.0493
+[  86/100] ✗  pred=def count_sam… gold=import numpy … latent=120  ≳ 27.4k txt ~30.51s kv=1181 s=0.0493
+[  87/100] ✓  pred=def max_Abs_D… gold=import numpy … latent=120  ≳ 27.4k txt ~30.51s kv=1181 s=0.0493
+[  88/100] ✗  pred=import math  … gold=import numpy … latent=120  ≳ 27.4k txt ~30.51s kv=1181 s=0.0493
+=========================================
+Question 0
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 38, in <module>
+  File "<string>", line 3, in remove_elements
+TypeError: unhashable type: 'list'
+
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: None
+=========================================
+Question 3
+error_msg: None
+=========================================
+Question 4
+error_msg: None
+=========================================
+Question 5
+error_msg: None
+=========================================
+Question 6
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 54, in <module>
+  File "<string>", line 48, in assertion
+AssertionError: out: 210, exp: 0
+
+[dbg + 1569.1s] batch: 4 items (done 96/100)
+[dbg + 1569.1s] agent Planner (planner) — latent thinking
+[dbg + 1569.3s] [◆ latent Planner] 40 steps (bs=4) ...
+[dbg + 1571.0s] [◆ latent Planner] 40 steps in 1.72s · 23.3 step/s (bs=4) · ≳9.1k text-tok (×228.6)
+[dbg + 1571.2s] workspace after Planner: kv_len=331 kv=41.4MiB state=198.0MiB state_norm=0.04786
+[dbg + 1571.2s] agent Critic (critic) — latent thinking
+[dbg + 1571.2s] append: padded over live state (pad prefix 89) — 89 column(s) stepwise with per-row state restore, then 224 in one forward
+[dbg + 1571.2s] [◆ append Critic] 89 steps (bs=4) ...
+[dbg + 1575.1s] [◆ append Critic] 89 steps in 3.94s · 22.6 step/s (bs=4) · ≳20.3k text-tok (×228.6)
+[dbg + 1575.3s] [◆ latent Critic] 40 steps (bs=4) ...
+[dbg + 1577.0s] [◆ latent Critic] 40 steps in 1.73s · 23.2 step/s (bs=4) · ≳9.1k text-tok (×228.6)
+[dbg + 1577.2s] workspace after Critic: kv_len=686 kv=85.8MiB state=198.0MiB state_norm=0.052947
+[dbg + 1577.2s] agent Refiner (refiner) — latent thinking
+[dbg + 1577.2s] append: padded over live state (pad prefix 89) — 89 column(s) stepwise with per-row state restore, then 208 in one forward
+[dbg + 1577.2s] [◆ append Refiner] 89 steps (bs=4) ...
+[dbg + 1581.2s] [◆ append Refiner] 89 steps in 3.97s · 22.4 step/s (bs=4) · ≳20.3k text-tok (×228.6)
+[dbg + 1581.4s] [◆ latent Refiner] 40 steps (bs=4) ...
+[dbg + 1583.1s] [◆ latent Refiner] 40 steps in 1.72s · 23.3 step/s (bs=4) · ≳9.1k text-tok (×228.6)
+[dbg + 1583.2s] workspace after Refiner: kv_len=1025 kv=128.1MiB state=198.0MiB state_norm=0.05507
+[dbg + 1583.2s] agent Judger (judger) — text decode
+[dbg + 1583.3s] append: padded over live state (pad prefix 89) — 89 column(s) stepwise with per-row state restore, then 254 in one forward
+[dbg + 1583.3s] [◆ append Judger] 89 steps (bs=4) ...
+[dbg + 1587.2s] [◆ append Judger] 89 steps in 3.99s · 22.3 step/s (bs=4) · ≳20.3k text-tok (×228.6)
+[dbg + 1709.7s] [⚡ decode Judger] 2762 tok in 122.32s · 22.6 tok/s/seq · ×4 = 90.3 tok/s
+=========================================
+Question 7
+error_msg: None
+[  89/100] ✗  pred=def remove_el… gold=import numpy … latent=120  ≳ 27.4k txt ~14.03s kv=1229 s=0.0470
+[  90/100] ✓  pred=def sum_serie… gold=import numpy … latent=120  ≳ 27.4k txt ~14.03s kv=1229 s=0.0470
+           acc 0.756 (68/90) · elapsed 26m08s · eta 2m54s · vram 43.8GiB · cut 3
+[  91/100] ✓  pred=def count_cha… gold=import numpy … latent=120  ≳ 27.4k txt ~14.03s kv=1229 s=0.0470
+[  92/100] ✓  pred=def find_even… gold=import numpy … latent=120  ≳ 27.4k txt ~14.03s kv=1229 s=0.0470
+[  93/100] ✓  pred=def next_powe… gold=import numpy … latent=120  ≳ 27.4k txt ~14.03s kv=1229 s=0.0470
+[  94/100] ✓  pred=def frequency… gold=import numpy … latent=120  ≳ 27.4k txt ~14.03s kv=1229 s=0.0470
+[  95/100] ✗  pred=def sum_range… gold=import numpy … latent=120  ≳ 27.4k txt ~14.03s kv=1229 s=0.0470
+[  96/100] ✓  pred=def perimeter… gold=import numpy … latent=120  ≳ 27.4k txt ~14.03s kv=1229 s=0.0470
+=========================================
+Question 0
+error_msg: None
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 69, in <module>
+  File "<string>", line 6, in is_majority
+IndexError: list index out of range
+
+[print2] WARNING: 3/100 answers hit --max_new_tokens and were cut off. Accuracy and token totals both reflect the cap, not the method.
+=========================================
+Question 3
+error_msg: None
+[  97/100] ✓  pred=def count_occ… gold=import numpy … latent=120  ≳ 27.4k txt ~35.30s kv=1025 s=0.0551
+[  98/100] ✓  pred=def check_typ… gold=import numpy … latent=120  ≳ 27.4k txt ~35.30s kv=1025 s=0.0551
+[  99/100] ✗  pred=def is_majori… gold=import numpy … latent=120  ≳ 27.4k txt ~35.30s kv=1025 s=0.0551
+[ 100/100] ✓  pred=def count_Set… gold=import numpy … latent=120  ≳ 27.4k txt ~35.30s kv=1025 s=0.0551
+           acc 0.760 (76/100) · elapsed 28m30s · eta 0s · vram 43.8GiB · cut 3
+{"method": "latent_mas", "model": "Qwen/Qwen3.5-9B", "task": "mbppplus", "sample_offset": 0, "latent_steps": 40, "latent_turn": "content", "latent_visibility": "full", "chat_thinking": "off", "judger_thinking": "inherit", "latent_space_realign": true, "max_new_tokens": 4096, "generate_bs": 8, "state_transfer": "both", "split": "test", "seed": 42, "max_samples": 100, "processed": 100, "status": "completed", "accuracy": 0.76, "accuracy_ci95": {"low": 0.6677, "high": 0.8331, "half_width": 0.0827, "z": 1.96}, "correct": 76, "generated_tokens": 61888, "generated_tokens_per_sample": 618.88, "prompt_tokens": 105216, "latent_steps_total": 12000, "truncated_final": 3, "peak_vram_mib": 44826.0, "total_time_sec": 1615.2698, "time_per_sample_sec": 16.1527}
+[print2] runs/20260823_110023_latent_mas_mbppplus/trace.jsonl  (100 samples, completed)
+[print2] runs/20260823_110023_latent_mas_mbppplus/batches.jsonl  (13 batches)
+[print2] runs/20260823_110023_latent_mas_mbppplus/manifest.json  acc=0.7600 (76/100)

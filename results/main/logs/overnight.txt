@@ -1,0 +1,239 @@
+nohup: ignoring input
+----------------------------------------------------------------------------
+PREFLIGHT
+----------------------------------------------------------------------------
+0, NVIDIA L40S, 46068 MiB
+free disk: 20G
+verify_hybrid: 26/26 checks passed
+
+model=Qwen/Qwen3.5-9B  N=100  batch=8  gpu=0  latent_steps=40
+cap: 2048 gsm8k/arc_*   4096 medqa/mbppplus/humanevalplus
+tune: task=medqa offset=100     report: offset 0
+tasks: medqa mbppplus humanevalplus arc_challenge gsm8k arc_easy
+
+----------------------------------------------------------------------------
+PHASE 1 - TUNE   task=medqa  offset=100  cap=4096
+----------------------------------------------------------------------------
+  controls (decoding mode selected by the same rule as LatentMAS):
+    [run ] tune_baseline_off                  acc=0.8800+/-0.064  tok=1076.59  cut=4  1883s
+    [run ] tune_baseline_auto                 acc=0.5600+/-0.096  tok=3359.21  cut=54  2805s
+    [run ] tune_textmas_off                   acc=0.8800+/-0.064  tok=2602.44  cut=0  3998s
+    [run ] tune_textmas_auto                  FAILED (exit 1, 4127s)
+               File "/opt/conda/lib/python3.12/site-packages/transformers/models/qwen3_5/modeling_qwen3_5.py", line 326, in torch_chunk_gated_delta_rule
+                 core_attn_out = core_attn_out.transpose(1, 2).contiguous().to(initial_dtype)
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+             torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 1.56 GiB. GPU 0 has a total capacity of 44.39 GiB of which 633.31 MiB is free. Including non-PyTorch memory, this process has 43.77 GiB memory in use. Of the allocated memory 37.96 GiB is allocated by PyTorch, and 5.31 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)
+  latent_mas candidates:
+    [run ] tune_latent_content_full           acc=0.9200+/-0.054  tok=875.22  cut=4  2519s
+    [run ] tune_latent_content_lo             acc=0.8700+/-0.066  tok=972.61  cut=4  2380s
+    [run ] tune_latent_think_lo               acc=0.9200+/-0.054  tok=978.02  cut=2  2452s
+    [run ] tune_latent_think_judgeoff         acc=0.9100+/-0.057  tok=860.19  cut=4  2580s
+
+----------------------------------------------------------------------------
+PHASE 2 - SELECT
+----------------------------------------------------------------------------
+tuning slice: task=medqa offset=100  (7 completed runs)
+
+method      turn     vis          chat  judger   steps     acc     cut      tok
+----------------------------------------------------------------------------------
+baseline    raw      full         off   inherit      0  0.8800    4.0%   1076.6  !cut
+baseline    raw      full         auto  inherit      0  0.5600   54.0%   3359.2  !cut
+latent_mas  content  full         off   inherit     40  0.9200    4.0%    875.2  !cut
+latent_mas  think    latent_only  off   inherit     40  0.9200    2.0%    978.0  !cut
+latent_mas  think    full         auto  off         40  0.9100    4.0%    860.2  !cut
+latent_mas  content  latent_only  off   inherit     40  0.8700    4.0%    972.6  !cut
+text_mas    raw      full         off   inherit      0  0.8800    0.0%   2602.4
+
+baseline    -> 20260823_015843_baseline_medqa  acc=0.8800 cut=4.0%
+               WARNING: no configuration met the 2% truncation gate; selected on accuracy alone and the reported numbers will be partly measuring --max_new_tokens
+text_mas    -> 20260823_031651_text_mas_medqa  acc=0.8800 cut=0.0%
+latent_mas  -> 20260823_053216_latent_mas_medqa  acc=0.9200 cut=4.0%
+               WARNING: no configuration met the 2% truncation gate; selected on accuracy alone and the reported numbers will be partly measuring --max_new_tokens
+
+shell form:
+  SEL_BASELINE_CHAT=off
+  SEL_TEXT_MAS_CHAT=off
+  SEL_LATENT_MAS_CHAT=off
+  SEL_LATENT_TURN=content
+  SEL_LATENT_VIS=full
+  SEL_LATENT_STEPS=40
+  SEL_LATENT_JUDGER=inherit
+
+----------------------------------------------------------------------------
+SELECTED (applied to every task in phase 3):
+  baseline    --chat_thinking off
+  text_mas    --chat_thinking off
+  latent_mas  --chat_thinking off --latent_turn content
+              --latent_visibility full --latent_steps 40
+              --judger_thinking inherit
+----------------------------------------------------------------------------
+
+----------------------------------------------------------------------------
+PHASE 3 - TABLE   offset 0  (disjoint from the tuning slice)
+----------------------------------------------------------------------------
+--- medqa  (cap 4096)
+    [run ] medqa_baseline                     acc=0.8900+/-0.062  tok=1139.9  cut=4  1779s
+    [run ] medqa_latentmas                    acc=0.8800+/-0.064  tok=966.92  cut=7  2558s
+    [run ] medqa_textmas                      acc=0.8800+/-0.064  tok=2740.56  cut=1  4045s
+--- mbppplus  (cap 4096)
+    [run ] mbppplus_baseline                  acc=0.8500+/-0.070  tok=723.02  cut=1  1373s
+    [run ] mbppplus_latentmas                 acc=0.7600+/-0.083  tok=618.88  cut=3  1717s
+    [run ] mbppplus_textmas                   acc=0.7900+/-0.079  tok=1716.1  cut=1  2770s
+--- humanevalplus  (cap 4096)
+    [run ] humanevalplus_baseline             acc=0.8300+/-0.073  tok=617.93  cut=2  1120s
+    [run ] humanevalplus_latentmas            acc=0.9000+/-0.060  tok=725.2  cut=7  1633s
+    [run ] humanevalplus_textmas              acc=0.9300+/-0.052  tok=1557.88  cut=0  1894s
+--- arc_challenge  (cap 2048)
+    [run ] arc_challenge_baseline             acc=0.9400+/-0.049  tok=465.83  cut=2  572s
+    [run ] arc_challenge_latentmas            acc=0.9300+/-0.052  tok=430.3  cut=2  739s
+    [run ] arc_challenge_textmas              acc=0.9500+/-0.045  tok=1524.14  cut=0  1588s
+--- gsm8k  (cap 2048)
+    [run ] gsm8k_baseline                     acc=0.9600+/-0.041  tok=368.09  cut=2  476s
+    [run ] gsm8k_latentmas                    acc=0.9700+/-0.037  tok=354.94  cut=1  711s
+    [run ] gsm8k_textmas                      acc=0.9000+/-0.060  tok=1222.87  cut=0  1504s
+--- arc_easy  (cap 2048)
+    [run ] arc_easy_baseline                  acc=1.0000+/-0.018  tok=386.79  cut=0  426s
+    [run ] arc_easy_latentmas                 acc=0.9900+/-0.026  tok=356.77  cut=0  618s
+    [run ] arc_easy_textmas                   acc=0.9800+/-0.032  tok=1350.21  cut=0  1269s
+
+----------------------------------------------------------------------------
+RESULTS
+----------------------------------------------------------------------------
+method      transfer  task           n    bs  Acc.       Token  Speed(s)  s/sample  latent  cut  VRAM  chan   Tok vs baseline  Speed vs baseline
+----------  --------  -------------  ---  --  ---------  -----  --------  --------  ------  ---  ----  -----  ---------------  -----------------
+baseline    -         arc_challenge  100  8   94.0±4.9   466    514       5.14      0       2%!  27.0  0.0    1.00x            1.00x            
+latent_mas  both      arc_challenge  100  8   93.0±5.2   430    685       6.85      120     2%!  19.8  608.8  0.92x            1.33x            
+text_mas    -         arc_challenge  100  8   95.0±4.5   1524   1431      14.31     0       0%   29.2  0.0    3.27x            2.79x            
+baseline    -         arc_easy       100  8   100.0±1.8  387    393       3.93      0       0%   23.9  0.0    1.00x            1.00x            
+latent_mas  both      arc_easy       100  8   99.0±2.6   357    574       5.74      120     0%   19.5  592.2  0.92x            1.46x            
+text_mas    -         arc_easy       100  8   98.0±3.2   1350   1176      11.76     0       0%   25.2  0.0    3.49x            2.99x            
+baseline    -         gsm8k          100  8   96.0±4.1   368    438       4.38      0       2%!  26.8  0.0    1.00x            1.00x            
+latent_mas  both      gsm8k          100  8   97.0±3.7   355    656       6.56      120     1%!  20.3  605.0  0.96x            1.50x            
+text_mas    -         gsm8k          100  8   90.0±6.0   1223   1341      13.41     0       0%   36.8  0.0    3.32x            3.06x            
+baseline    -         humanevalplus  100  8   83.0±7.3   618    1057      10.57     0       2%!  43.7  0.0    1.00x            1.00x            
+latent_mas  both      humanevalplus  100  8   90.0±6.0   725    1588      15.88     120     7%!  43.7  780.5  1.17x            1.50x            
+text_mas    -         humanevalplus  100  8   93.0±5.2   1558   1798      17.98     0       0%   43.7  0.0    2.52x            1.70x            
+baseline    -         mbppplus       100  8   85.0±7.0   723    1321      13.21     0       1%!  43.7  0.0    1.00x            1.00x            
+latent_mas  both      mbppplus       100  8   76.0±8.3   619    1615      16.15     120     3%!  43.8  881.0  0.86x            1.22x            
+text_mas    -         mbppplus       100  8   79.0±7.9   1716   2623      26.23     0       1%!  43.5  0.0    2.37x            1.99x            
+baseline    -         medqa          100  8   89.0±6.2   1140   1686      16.86     0       4%!  43.7  0.0    1.00x            1.00x            
+latent_mas  both      medqa          100  8   88.0±6.4   967    2437      24.37     120     7%!  43.6  867.5  0.85x            1.44x            
+text_mas    -         medqa          100  8   88.0±6.4   2741   3878      38.78     0       1%!  43.5  0.0    2.40x            2.30x            
+
+Acc. = % correct ± Wilson 95% half width · Token = generated tokens/sample
+Speed(s) = end-to-end seconds for the run · chan = MiB crossing the widest
+agent boundary · * = interrupted run · ! = answers hit --max_new_tokens
+
+Runs with clipped answers — Acc. and Token both partly measure the cap:
+  20260823_133237_baseline_arc_challenge  2.0% of finals hit --max_new_tokens
+  20260823_134209_latent_mas_arc_challenge  2.0% of finals hit --max_new_tokens
+  20260823_142056_baseline_gsm8k  2.0% of finals hit --max_new_tokens
+  20260823_142852_latent_mas_gsm8k  1.0% of finals hit --max_new_tokens
+  20260823_121510_baseline_humanevalplus  2.0% of finals hit --max_new_tokens
+  20260823_123350_latent_mas_humanevalplus  7.0% of finals hit --max_new_tokens
+  20260823_103729_baseline_mbppplus  1.0% of finals hit --max_new_tokens
+  20260823_110023_latent_mas_mbppplus  3.0% of finals hit --max_new_tokens
+  20260823_112859_text_mas_mbppplus  1.0% of finals hit --max_new_tokens
+  20260823_081747_baseline_medqa  4.0% of finals hit --max_new_tokens
+  20260823_084727_latent_mas_medqa  7.0% of finals hit --max_new_tokens
+  20260823_093004_text_mas_medqa  1.0% of finals hit --max_new_tokens
+
+run                        turn/vis           st      acc     tok  tok|ok tok|cut   CUT%  NOBOX%  PLCHLD%  cache
+-----------------------------------------------------------------------------------------------------------------
+20260823_081747_baseline_m raw/full           both  0.890     0.0     0.0     0.0   0.0%    0.0%     0.0%      0
+20260823_084727_latent_mas content/full       both  0.880   966.9   731.4  4096.0   7.0%    4.0%    96.0%   1624  <<<
+20260823_093004_text_mas_m raw/full           both  0.880   778.0   744.4  4096.0   1.0%    1.0%    99.0%      0  <<<
+20260823_103729_baseline_m raw/full           both  0.850     0.0     0.0     0.0   0.0%    0.0%     0.0%      0
+20260823_110023_latent_mas content/full       both  0.760   618.9   511.3  4096.0   3.0%  100.0%     0.0%   1226  <<<
+20260823_112859_text_mas_m raw/full           both  0.790   273.1   234.5  4096.0   1.0%  100.0%     0.0%      0  <<<
+20260823_121510_baseline_h raw/full           both  0.830     0.0     0.0     0.0   0.0%    0.0%     0.0%      0
+20260823_123350_latent_mas content/full       both  0.900   725.2   471.5  4096.0   7.0%  100.0%     0.0%   1178  <<<
+20260823_130103_text_mas_h raw/full           both  0.930   243.6   243.6     0.0   0.0%  100.0%     0.0%      0  <<<
+20260823_133237_baseline_a raw/full           both  0.940     0.0     0.0     0.0   0.0%    0.0%     0.0%      0
+20260823_134209_latent_mas content/full       both  0.930   430.3   397.3  2048.0   2.0%    2.0%    98.0%    773  <<<
+20260823_135428_text_mas_a raw/full           both  0.950   505.1   505.1     0.0   0.0%    0.0%   100.0%      0  <<<
+20260823_142056_baseline_g raw/full           both  0.960     0.0     0.0     0.0   0.0%    0.0%     0.0%      0
+20260823_142852_latent_mas content/full       both  0.970   354.9   337.8  2048.0   1.0%    0.0%     0.0%    735
+20260823_144043_text_mas_g raw/full           both  0.900   339.1   339.1     0.0   0.0%    0.0%     0.0%      0
+20260823_150547_baseline_a raw/full           both  1.000     0.0     0.0     0.0   0.0%    0.0%     0.0%      0
+20260823_151253_latent_mas content/full       both  0.990   356.8   356.8     0.0   0.0%    0.0%   100.0%    707  <<<
+20260823_152311_text_mas_a raw/full           both  0.980   440.9   440.9     0.0   0.0%    0.0%   100.0%      0  <<<
+
+how to read this
+  CUT%    judger hit --max_new_tokens. Anything above ~2% means the Acc and
+          Token columns are both partly measuring the cap. Raise the cap and
+          re-run before believing either number.
+  NOBOX%  judger never emitted \boxed{}. Those samples were graded on the last
+          number appearing anywhere in the text -- often a figure from its own
+          scratch work. High here with low Acc is an extraction failure, not a
+          reasoning failure.
+  PLCHLD% judger emitted a oxed{} whose contents have no digits -- almost
+          always because it quoted the prompt's own oxed{YOUR_FINAL_ANSWER}
+          late in a ramble. The grader takes the LAST box, so these are graded
+          on the placeholder even when the right number appears earlier.
+  tok|ok  mean output tokens over samples that finished. Compare against a
+          `--method baseline` run on the SAME model: if latent_mas is not
+          well below it, the judger is re-deriving rather than inheriting,
+          i.e. it is ignoring the shared workspace.
+  cache   KV positions in the workspace when the judger started.
+
+----------------------------------------------------------------------------
+PAIRED TESTS (McNemar, same questions)
+----------------------------------------------------------------------------
+--- medqa : baseline vs latent_mas
+      acc A = 0.8900    acc B = 0.8800    delta = -0.0100
+      discordant: B fixed 2, B broke 3
+      McNemar exact two-sided p = 1   (NOT significant)
+--- medqa : text_mas vs latent_mas
+      acc A = 0.8800    acc B = 0.8800    delta = +0.0000
+      discordant: B fixed 2, B broke 2
+      McNemar exact two-sided p = 1   (NOT significant)
+--- mbppplus : baseline vs latent_mas
+      acc A = 0.8500    acc B = 0.7600    delta = -0.0900
+      discordant: B fixed 2, B broke 11
+      McNemar exact two-sided p = 0.0225   (significant at 0.05)
+--- mbppplus : text_mas vs latent_mas
+      acc A = 0.7900    acc B = 0.7600    delta = -0.0300
+      discordant: B fixed 6, B broke 9
+      McNemar exact two-sided p = 0.607   (NOT significant)
+--- humanevalplus : baseline vs latent_mas
+      acc A = 0.8300    acc B = 0.9000    delta = +0.0700
+      discordant: B fixed 10, B broke 3
+      McNemar exact two-sided p = 0.0923   (NOT significant)
+--- humanevalplus : text_mas vs latent_mas
+      acc A = 0.9300    acc B = 0.9000    delta = -0.0300
+      discordant: B fixed 4, B broke 7
+      McNemar exact two-sided p = 0.549   (NOT significant)
+--- arc_challenge : baseline vs latent_mas
+      acc A = 0.9400    acc B = 0.9300    delta = -0.0100
+      discordant: B fixed 1, B broke 2
+      McNemar exact two-sided p = 1   (NOT significant)
+--- arc_challenge : text_mas vs latent_mas
+      acc A = 0.9500    acc B = 0.9300    delta = -0.0200
+      discordant: B fixed 2, B broke 4
+      McNemar exact two-sided p = 0.688   (NOT significant)
+--- gsm8k : baseline vs latent_mas
+      acc A = 0.9600    acc B = 0.9700    delta = +0.0100
+      discordant: B fixed 1, B broke 0
+      McNemar exact two-sided p = 1   (NOT significant)
+--- gsm8k : text_mas vs latent_mas
+      acc A = 0.9000    acc B = 0.9700    delta = +0.0700
+      discordant: B fixed 7, B broke 0
+      McNemar exact two-sided p = 0.0156   (significant at 0.05)
+--- arc_easy : baseline vs latent_mas
+      acc A = 1.0000    acc B = 0.9900    delta = -0.0100
+      discordant: B fixed 0, B broke 1
+      McNemar exact two-sided p = 1   (NOT significant)
+--- arc_easy : text_mas vs latent_mas
+      acc A = 0.9800    acc B = 0.9900    delta = +0.0100
+      discordant: B fixed 1, B broke 0
+      McNemar exact two-sided p = 1   (NOT significant)
+
+----------------------------------------------------------------------------
+Gate before anything goes in the paper:
+  * every row CUT% < 2 and PLCHLD% < 2   (diagnose.py)
+  * collect.py must not warn about a mixed GPU / dtype / attention set
+  * at N=100 a paired gap needs ~8 points for p<0.05; smaller gaps are
+    measurements, not significant differences
+  * state in the paper: configurations selected on task=medqa
+    offset=100, reported on offset 0 -- disjoint slices

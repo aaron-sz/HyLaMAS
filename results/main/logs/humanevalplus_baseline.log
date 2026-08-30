@@ -1,0 +1,597 @@
+[dbg +    0.1s] init: method=baseline model=Qwen/Qwen3.5-9B task=humanevalplus device=cuda state_transfer=both
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[dbg +    0.9s] dtype: loading Qwen/Qwen3.5-9B in torch.bfloat16
+[dbg +    0.9s] [▶ load model Qwen/Qwen3.5-9B (HF, torch.bfloat16)] ...
+[print2] writing run to runs/20260823_121510_baseline_humanevalplus/
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]Fetching 4 files: 100%|██████████| 4/4 [00:00<00:00, 1539.76it/s]
+Loading weights:   0%|          | 0/427 [00:00<?, ?it/s]Loading weights: 100%|██████████| 427/427 [00:00<00:00, 6388.65it/s]
+[dbg +    1.5s] [✓ load model Qwen/Qwen3.5-9B (HF, torch.bfloat16)] 0.61s
+[dbg +    1.5s] [▶ move model to cuda] ...
+[dbg +    3.3s] [✓ move model to cuda] 1.82s
+[dbg +    3.3s] model: 24/32 layers are Gated DeltaNet (recurrent state [B, 32, 128, 128] per layer, conv kernel 4)
+[dbg +    4.5s] hybrid: append-carries-state probe — split 3.12e-02 vs reset 7.87e+00 (0.4% of a full reset; state |max| 11.5, dtype torch.bfloat16) -> carries
+[dbg +    4.5s] hybrid: append mode = auto
+[dbg +    4.5s] model: attn_implementation = sdpa, dtype = torch.bfloat16
+[dbg +    4.5s] theorem 3.1: d_h=4096 |V|=248077 — 1 latent thought >= 228.6 text tokens
+[dbg +    4.6s] [▶ load dataset humanevalplus] ...
+[dbg +    4.9s] [✓ load dataset humanevalplus] 0.30s
+[dbg +    4.9s] dataset humanevalplus: 100 samples to run
+[dbg +    4.9s] warmup batch 1/1 (8 items, discarded)
+[dbg +   55.8s] [⚡ decode] 1172 tok in 50.91s · 23.0 tok/s/seq · ×8 = 184.2 tok/s
+=========================================
+Question 0
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 3, in <module>
+NameError: name 'List' is not defined. Did you mean: 'list'?
+
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: None
+=========================================
+Question 3
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 1, in <module>
+NameError: name 'List' is not defined. Did you mean: 'list'?
+
+=========================================
+Question 4
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 3, in <module>
+NameError: name 'List' is not defined. Did you mean: 'list'?
+
+=========================================
+Question 5
+error_msg: None
+=========================================
+Question 6
+error_msg: None
+[dbg +   56.9s] batch: 8 items (done 0/100)
+[dbg +  107.9s] [⚡ decode] 1172 tok in 50.94s · 23.0 tok/s/seq · ×8 = 184.1 tok/s
+=========================================
+Question 7
+error_msg: None
+=========================================
+Question 0
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 3, in <module>
+NameError: name 'List' is not defined. Did you mean: 'list'?
+
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: None
+=========================================
+Question 3
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 1, in <module>
+NameError: name 'List' is not defined. Did you mean: 'list'?
+
+=========================================
+Question 4
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 3, in <module>
+NameError: name 'List' is not defined. Did you mean: 'list'?
+
+=========================================
+Question 5
+error_msg: None
+=========================================
+Question 6
+error_msg: None
+[dbg +  109.0s] batch: 8 items (done 8/100)
+[dbg +  160.2s] [⚡ decode] 1183 tok in 51.22s · 23.1 tok/s/seq · ×8 = 184.8 tok/s
+=========================================
+Question 7
+error_msg: None
+[   1/100] ✗  pred=import math  … gold=  import nump… latent=0    ~6.51s
+[   2/100] ✓  pred=from typing i… gold=  import nump… latent=0    ~6.51s
+[   3/100] ✓  pred=def truncate_… gold=  import nump… latent=0    ~6.51s
+[   4/100] ✗  pred=def below_zer… gold=  import nump… latent=0    ~6.51s
+[   5/100] ✗  pred=import math  … gold=  import nump… latent=0    ~6.51s
+[   6/100] ✓  pred=from typing i… gold=  import nump… latent=0    ~6.51s
+[   7/100] ✓  pred=from typing i… gold=  import nump… latent=0    ~6.51s
+[   8/100] ✓  pred=from typing i… gold=  import nump… latent=0    ~6.51s
+=========================================
+Question 0
+error_msg: None
+=========================================
+Question 1
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 1, in <module>
+NameError: name 'List' is not defined. Did you mean: 'list'?
+
+=========================================
+Question 2
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 64, in <module>
+  File "<string>", line 61, in check
+  File "<string>", line 54, in assertion
+AssertionError
+
+=========================================
+Question 3
+error_msg: None
+=========================================
+Question 4
+error_msg: None
+=========================================
+Question 5
+error_msg: None
+=========================================
+Question 6
+error_msg: None
+[dbg +  165.4s] batch: 8 items (done 16/100)
+[dbg +  231.1s] [⚡ decode] 1504 tok in 65.75s · 22.9 tok/s/seq · ×8 = 183.0 tok/s
+=========================================
+Question 7
+error_msg: None
+[   9/100] ✓  pred=from typing i… gold=  import nump… latent=0    ~7.05s
+[  10/100] ✗  pred=def rolling_m… gold=  import nump… latent=0    ~7.05s
+           acc 0.600 (6/10) · elapsed 2m45s · eta 24m47s · vram 20.8GiB
+[  11/100] ✗  pred=def is_palind… gold=  import nump… latent=0    ~7.05s
+[  12/100] ✓  pred=def string_xo… gold=  import nump… latent=0    ~7.05s
+[  13/100] ✓  pred=from typing i… gold=  import nump… latent=0    ~7.05s
+[  14/100] ✓  pred=def greatest_… gold=  import nump… latent=0    ~7.05s
+[  15/100] ✓  pred=from typing i… gold=import numpy … latent=0    ~7.05s
+[  16/100] ✓  pred=def string_se… gold=import numpy … latent=0    ~7.05s
+=========================================
+Question 0
+error_msg: None
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: None
+=========================================
+Question 3
+error_msg: None
+=========================================
+Question 4
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 3, in <module>
+NameError: name 'List' is not defined. Did you mean: 'list'?
+
+=========================================
+Question 5
+error_msg: None
+=========================================
+Question 6
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 1, in <module>
+NameError: name 'List' is not defined. Did you mean: 'list'?
+
+[dbg +  232.3s] batch: 8 items (done 24/100)
+[dbg +  280.4s] [⚡ decode] 1108 tok in 48.07s · 23.0 tok/s/seq · ×8 = 184.4 tok/s
+=========================================
+Question 7
+error_msg: None
+[  17/100] ✓  pred=def count_dis… gold=  import nump… latent=0    ~8.37s
+[  18/100] ✓  pred=from typing i… gold=  import nump… latent=0    ~8.37s
+[  19/100] ✓  pred=def how_many_… gold=  import nump… latent=0    ~8.37s
+[  20/100] ✓  pred=from typing i… gold=  import nump… latent=0    ~8.37s
+           acc 0.750 (15/20) · elapsed 3m52s · eta 15m28s · vram 23.0GiB
+[  21/100] ✗  pred=import math  … gold=  import nump… latent=0    ~8.37s
+[  22/100] ✓  pred=from typing i… gold=  import nump… latent=0    ~8.37s
+[  23/100] ✗  pred=def filter_in… gold=  import nump… latent=0    ~8.37s
+[  24/100] ✓  pred=def strlen(st… gold=  import nump… latent=0    ~8.37s
+=========================================
+Question 0
+error_msg: None
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: None
+=========================================
+Question 3
+error_msg: None
+=========================================
+Question 4
+error_msg: None
+=========================================
+Question 5
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 1, in <module>
+NameError: name 'List' is not defined. Did you mean: 'list'?
+
+=========================================
+Question 6
+error_msg: None
+[dbg +  281.6s] batch: 8 items (done 32/100)
+[dbg +  481.3s] [⚡ decode] 4096 tok in 199.64s · 20.5 tok/s/seq · ×8 = 164.1 tok/s
+=========================================
+Question 7
+error_msg: None
+[  25/100] ✓  pred=import math  … gold=  import nump… latent=0    ~6.16s
+[  26/100] ✓  pred=from typing i… gold=  import nump… latent=0    ~6.16s
+[  27/100] ✓  pred=from typing i… gold=  import nump… latent=0    ~6.16s
+[  28/100] ✓  pred=def flip_case… gold=  import nump… latent=0    ~6.16s
+[  29/100] ✓  pred=from typing i… gold=  import nump… latent=0    ~6.16s
+[  30/100] ✗  pred=def filter_by… gold=  import nump… latent=0    ~6.16s
+           acc 0.733 (22/30) · elapsed 4m41s · eta 10m56s · vram 23.0GiB
+[  31/100] ✓  pred=def get_posit… gold=  import nump… latent=0    ~6.16s
+[  32/100] ✓  pred=import math  … gold=  import nump… latent=0    ~6.16s
+=========================================
+Question 0
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 63, in <module>
+  File "<string>", line 60, in check
+TypeError: Value after * must be an iterable, not float
+
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: None
+=========================================
+Question 3
+error_msg: None
+=========================================
+Question 4
+error_msg: None
+=========================================
+Question 5
+error_msg: None
+=========================================
+Question 6
+error_msg: None
+[dbg +  488.0s] batch: 8 items (done 40/100)
+[dbg +  536.4s] [⚡ decode] 1112 tok in 48.38s · 23.0 tok/s/seq · ×8 = 183.9 tok/s
+=========================================
+Question 7
+error_msg: None
+[  33/100] ✗  pred=import math  … gold=import math  … latent=0    ~25.80s CUT
+[  34/100] ✓  pred=def sort_thir… gold=  import nump… latent=0    ~25.80s
+[  35/100] ✓  pred=def unique(l:… gold=  import nump… latent=0    ~25.80s
+[  36/100] ✓  pred=def max_eleme… gold=  import nump… latent=0    ~25.80s
+[  37/100] ✓  pred=def fizz_buzz… gold=  import nump… latent=0    ~25.80s
+[  38/100] ✓  pred=def sort_even… gold=  import nump… latent=0    ~25.80s
+[  39/100] ✓  pred=def decode_cy… gold=  import nump… latent=0    ~25.80s
+[  40/100] ✓  pred=def is_prime(… gold=  import nump… latent=0    ~25.80s
+           acc 0.775 (31/40) · elapsed 8m07s · eta 12m11s · vram 43.7GiB · cut 1
+=========================================
+Question 0
+error_msg: None
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: None
+=========================================
+Question 3
+error_msg: None
+=========================================
+Question 4
+error_msg: None
+=========================================
+Question 5
+error_msg: None
+=========================================
+Question 6
+error_msg: None
+[dbg +  537.5s] batch: 8 items (done 48/100)
+[dbg +  573.3s] [⚡ decode] 821 tok in 35.72s · 23.0 tok/s/seq · ×8 = 183.9 tok/s
+=========================================
+Question 7
+error_msg: None
+[  41/100] ✓  pred=def triples_s… gold=  import nump… latent=0    ~6.19s
+[  42/100] ✓  pred=def car_race_… gold=  import nump… latent=0    ~6.19s
+[  43/100] ✓  pred=def incr_list… gold=  import nump… latent=0    ~6.19s
+[  44/100] ✓  pred=def pairs_sum… gold=  import nump… latent=0    ~6.19s
+[  45/100] ✓  pred=def change_ba… gold=  import nump… latent=0    ~6.19s
+[  46/100] ✓  pred=def triangle_… gold=  import nump… latent=0    ~6.19s
+[  47/100] ✓  pred=def fib4(n: i… gold=  import nump… latent=0    ~6.19s
+[  48/100] ✓  pred=def median(l:… gold=  import nump… latent=0    ~6.19s
+=========================================
+Question 0
+error_msg: None
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: None
+=========================================
+Question 3
+error_msg: None
+=========================================
+Question 4
+error_msg: None
+=========================================
+Question 5
+error_msg: None
+=========================================
+Question 6
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 38, in <module>
+  File "<string>", line 35, in check
+  File "<string>", line 28, in assertion
+AssertionError
+
+[dbg +  574.4s] batch: 8 items (done 56/100)
+[dbg +  622.8s] [⚡ decode] 1114 tok in 48.45s · 23.0 tok/s/seq · ×8 = 183.9 tok/s
+=========================================
+Question 7
+error_msg: None
+[  49/100] ✓  pred=def is_palind… gold=  import nump… latent=0    ~4.60s
+[  50/100] ✓  pred=def modp(n: i… gold=  import nump… latent=0    ~4.60s
+           acc 0.820 (41/50) · elapsed 9m34s · eta 9m34s · vram 43.7GiB · cut 1
+[  51/100] ✓  pred=def decode_sh… gold=  import nump… latent=0    ~4.60s
+[  52/100] ✓  pred=def remove_vo… gold=  import nump… latent=0    ~4.60s
+[  53/100] ✓  pred=def below_thr… gold=  import nump… latent=0    ~4.60s
+[  54/100] ✓  pred=def add(x: in… gold=  import nump… latent=0    ~4.60s
+[  55/100] ✗  pred=from collecti… gold=  import nump… latent=0    ~4.60s
+[  56/100] ✓  pred=def fib(n: in… gold=  import nump… latent=0    ~4.60s
+=========================================
+Question 0
+error_msg: None
+=========================================
+Question 1
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 61, in <module>
+  File "<string>", line 58, in check
+  File "<string>", line 51, in assertion
+AssertionError
+
+=========================================
+Question 2
+error_msg: None
+=========================================
+Question 3
+error_msg: None
+=========================================
+Question 4
+error_msg: None
+=========================================
+Question 5
+error_msg: None
+=========================================
+Question 6
+error_msg: None
+[dbg +  623.9s] batch: 8 items (done 64/100)
+[dbg +  661.8s] [⚡ decode] 864 tok in 37.82s · 22.8 tok/s/seq · ×8 = 182.8 tok/s
+=========================================
+Question 7
+error_msg: None
+[  57/100] ✓  pred=def correct_b… gold=  import nump… latent=0    ~6.20s
+[  58/100] ✗  pred=def monotonic… gold=  import nump… latent=0    ~6.20s
+[  59/100] ✓  pred=def common(l1… gold=  import nump… latent=0    ~6.20s
+[  60/100] ✓  pred=def largest_p… gold=  import nump… latent=0    ~6.20s
+           acc 0.817 (49/60) · elapsed 10m23s · eta 6m55s · vram 43.7GiB · cut 1
+[  61/100] ✓  pred=def sum_to_n(… gold=  import nump… latent=0    ~6.20s
+[  62/100] ✓  pred=def correct_b… gold=  import nump… latent=0    ~6.20s
+[  63/100] ✓  pred=def derivativ… gold=  import nump… latent=0    ~6.20s
+[  64/100] ✓  pred=def fibfib(n:… gold=  import nump… latent=0    ~6.20s
+=========================================
+Question 0
+error_msg: None
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: None
+=========================================
+Question 3
+error_msg: None
+=========================================
+Question 4
+error_msg: None
+=========================================
+Question 5
+error_msg: None
+=========================================
+Question 6
+error_msg: None
+[dbg +  663.0s] batch: 8 items (done 72/100)
+[dbg +  863.3s] [⚡ decode] 4096 tok in 200.36s · 20.4 tok/s/seq · ×8 = 163.5 tok/s
+=========================================
+Question 7
+error_msg: None
+[  65/100] ✓  pred=def vowels_co… gold=  import nump… latent=0    ~4.88s
+[  66/100] ✓  pred=def circular_… gold=  import nump… latent=0    ~4.88s
+[  67/100] ✓  pred=def digitSum(… gold=  import nump… latent=0    ~4.88s
+[  68/100] ✓  pred=def fruit_dis… gold=  import nump… latent=0    ~4.88s
+[  69/100] ✓  pred=def pluck(arr… gold=  import nump… latent=0    ~4.88s
+[  70/100] ✓  pred=from collecti… gold=  import nump… latent=0    ~4.88s
+           acc 0.843 (59/70) · elapsed 11m02s · eta 4m44s · vram 43.7GiB · cut 1
+[  71/100] ✓  pred=def strange_s… gold=  import nump… latent=0    ~4.88s
+[  72/100] ✓  pred=import math  … gold=  import nump… latent=0    ~4.88s
+=========================================
+Question 0
+error_msg: None
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 49, in <module>
+  File "<string>", line 46, in check
+  File "<string>", line 39, in assertion
+AssertionError
+
+=========================================
+Question 3
+error_msg: None
+=========================================
+Question 4
+error_msg: python error: No python code block found
+=========================================
+Question 5
+error_msg: None
+=========================================
+Question 6
+error_msg: None
+[dbg +  864.3s] batch: 8 items (done 80/100)
+[dbg +  987.9s] [⚡ decode] 2691 tok in 123.53s · 21.8 tok/s/seq · ×8 = 174.3 tok/s
+=========================================
+Question 7
+error_msg: None
+[  73/100] ✓  pred=def will_it_f… gold=  import nump… latent=0    ~25.17s
+[  74/100] ✓  pred=def smallest_… gold=  import nump… latent=0    ~25.17s
+[  75/100] ✗  pred=def total_mat… gold=  import nump… latent=0    ~25.17s
+[  76/100] ✓  pred=def is_multip… gold=  import nump… latent=0    ~25.17s
+[  77/100] ✗  pred=None           gold=  import nump… latent=0    ~25.17s CUT
+[  78/100] ✓  pred=import math  … gold=  import nump… latent=0    ~25.17s
+[  79/100] ✓  pred=def hex_key(n… gold=  import nump… latent=0    ~25.17s
+[  80/100] ✓  pred=def decimal_t… gold=  import nump… latent=0    ~25.17s
+           acc 0.838 (67/80) · elapsed 14m24s · eta 3m36s · vram 43.7GiB · cut 2
+=========================================
+Question 0
+error_msg: None
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: None
+=========================================
+Question 3
+error_msg: None
+=========================================
+Question 4
+error_msg: None
+=========================================
+Question 5
+error_msg: None
+=========================================
+Question 6
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 51, in <module>
+  File "<string>", line 48, in check
+  File "<string>", line 41, in assertion
+AssertionError
+
+[dbg +  991.0s] batch: 8 items (done 88/100)
+[dbg + 1068.1s] [⚡ decode] 1737 tok in 77.12s · 22.5 tok/s/seq · ×8 = 180.2 tok/s
+=========================================
+Question 7
+error_msg: None
+[  81/100] ✓  pred=def is_happy(… gold=  import nump… latent=0    ~15.83s
+[  82/100] ✓  pred=def numerical… gold=  import nump… latent=0    ~15.83s
+[  83/100] ✓  pred=import math  … gold=  import nump… latent=0    ~15.83s
+[  84/100] ✓  pred=def starts_on… gold=import numpy … latent=0    ~15.83s
+[  85/100] ✓  pred=def solve(N):… gold=  import nump… latent=0    ~15.83s
+[  86/100] ✓  pred=def add(lst):… gold=  import nump… latent=0    ~15.83s
+[  87/100] ✗  pred=import re  de… gold=  import nump… latent=0    ~15.83s
+[  88/100] ✓  pred=def get_row(l… gold=  import nump… latent=0    ~15.83s
+=========================================
+Question 0
+error_msg: None
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: None
+=========================================
+Question 3
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 55, in <module>
+  File "<string>", line 52, in check
+  File "<string>", line 45, in assertion
+AssertionError
+
+=========================================
+Question 4
+error_msg: None
+=========================================
+Question 5
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 60, in <module>
+  File "<string>", line 57, in check
+  File "<string>", line 50, in assertion
+AssertionError
+
+=========================================
+Question 6
+error_msg: None
+[dbg + 1070.2s] batch: 4 items (done 96/100)
+[dbg + 1113.3s] [⚡ decode] 991 tok in 43.09s · 23.0 tok/s/seq · ×4 = 92.0 tok/s
+=========================================
+Question 7
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 52, in <module>
+  File "<string>", line 49, in check
+  File "<string>", line 42, in assertion
+AssertionError
+
+[  89/100] ✓  pred=def sort_arra… gold=  import nump… latent=0    ~9.90s
+[  90/100] ✓  pred=def encrypt(s… gold=  import nump… latent=0    ~9.90s
+           acc 0.844 (76/90) · elapsed 17m50s · eta 1m58s · vram 43.7GiB · cut 2
+[  91/100] ✓  pred=def next_smal… gold=  import nump… latent=0    ~9.90s
+[  92/100] ✗  pred=import re  de… gold=  import nump… latent=0    ~9.90s
+[  93/100] ✓  pred=def any_int(x… gold=  import nump… latent=0    ~9.90s
+[  94/100] ✗  pred=def encode(me… gold=  import nump… latent=0    ~9.90s
+[  95/100] ✓  pred=import math  … gold=  import nump… latent=0    ~9.90s
+[  96/100] ✗  pred=def check_dic… gold=  import nump… latent=0    ~9.90s
+=========================================
+Question 0
+error_msg: None
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: None
+[print2] WARNING: 2/100 answers hit --max_new_tokens and were cut off. Accuracy and token totals both reflect the cap, not the method.
+=========================================
+Question 3
+error_msg: None
+[  97/100] ✓  pred=import math  … gold=  import nump… latent=0    ~10.95s
+[  98/100] ✓  pred=def multiply(… gold=  import nump… latent=0    ~10.95s
+[  99/100] ✓  pred=def count_upp… gold=  import nump… latent=0    ~10.95s
+[ 100/100] ✓  pred=import math  … gold=  import nump… latent=0    ~10.95s
+           acc 0.830 (83/100) · elapsed 18m33s · eta 0s · vram 43.7GiB · cut 2
+{"method": "baseline", "model": "Qwen/Qwen3.5-9B", "task": "humanevalplus", "sample_offset": 0, "latent_steps": 0, "latent_turn": "raw", "latent_visibility": "full", "chat_thinking": "off", "judger_thinking": "inherit", "latent_space_realign": false, "max_new_tokens": 4096, "generate_bs": 8, "state_transfer": "both", "split": "test", "seed": 42, "max_samples": 100, "processed": 100, "status": "completed", "accuracy": 0.83, "accuracy_ci95": {"low": 0.7445, "high": 0.8911, "half_width": 0.0733, "z": 1.96}, "correct": 83, "generated_tokens": 61793, "generated_tokens_per_sample": 617.93, "prompt_tokens": 25822, "latent_steps_total": 0, "truncated_final": 2, "peak_vram_mib": 44782.0, "total_time_sec": 1057.1082, "time_per_sample_sec": 10.5711}
+[print2] runs/20260823_121510_baseline_humanevalplus/trace.jsonl  (100 samples, completed)
+[print2] runs/20260823_121510_baseline_humanevalplus/batches.jsonl  (13 batches)
+[print2] runs/20260823_121510_baseline_humanevalplus/manifest.json  acc=0.8300 (83/100)

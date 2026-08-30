@@ -1,0 +1,560 @@
+[dbg +    0.1s] init: method=latent_mas model=Qwen/Qwen3.5-9B task=medqa device=cuda state_transfer=both
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[dbg +    0.8s] dtype: loading Qwen/Qwen3.5-9B in torch.bfloat16
+[dbg +    0.8s] [▶ load model Qwen/Qwen3.5-9B (HF, torch.bfloat16)] ...
+[print2] writing run to runs/20260823_065355_latent_mas_medqa/
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]Fetching 4 files: 100%|██████████| 4/4 [00:00<00:00, 1929.52it/s]
+Loading weights:   0%|          | 0/427 [00:00<?, ?it/s]Loading weights: 100%|██████████| 427/427 [00:00<00:00, 6226.33it/s]
+[dbg +    1.5s] [✓ load model Qwen/Qwen3.5-9B (HF, torch.bfloat16)] 0.61s
+[dbg +    1.5s] [▶ move model to cuda] ...
+[dbg +    3.3s] [✓ move model to cuda] 1.82s
+[dbg +    3.3s] model: 24/32 layers are Gated DeltaNet (recurrent state [B, 32, 128, 128] per layer, conv kernel 4)
+[dbg +    4.4s] hybrid: append-carries-state probe — split 3.12e-02 vs reset 7.87e+00 (0.4% of a full reset; state |max| 11.5, dtype torch.bfloat16) -> carries
+[dbg +    4.4s] hybrid: append mode = auto
+[dbg +    4.4s] model: attn_implementation = sdpa, dtype = torch.bfloat16
+[dbg +    4.5s] theorem 3.1: d_h=4096 |V|=248077 — 1 latent thought >= 228.6 text tokens
+[dbg +    4.6s] latent_mas: template tails {'auto': '<think>\n', 'on': '<think>\n', 'off': '<think>\n\n</think>\n\n'}
+[dbg +    4.6s] latent_mas: chat framing resolved against the live template
+[dbg +    4.6s] latent_mas: latent_turn=think latent_visibility=latent_only chat_thinking=off judger_thinking=off
+[dbg +    4.6s] latent_mas: generate_bs=8 > 1 — ragged batches pay extra forwards on every append after the first; compare against --generate_bs 1 on your hardware
+[dbg +    4.6s] [▶ load dataset medqa] ...
+[dbg +    4.7s] [✓ load dataset medqa] 0.11s
+[dbg +    4.7s] dataset medqa: skipped 100, 200 remain
+[dbg +    4.7s] dataset medqa: 100 samples to run
+[dbg +    4.7s] warmup batch 1/1 (8 items, discarded)
+[dbg +    4.7s] agent Planner (planner) — latent thinking
+[dbg +    5.4s] [◆ latent Planner] 40 steps (bs=8) ...
+[dbg +    5.4s] [▶ build latent realignment matrix] ...
+[dbg +    5.8s] [✓ build latent realignment matrix] 0.43s
+[dbg +    7.6s] [◆ latent Planner] 40 steps in 2.18s · 18.3 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +    7.7s] [◆ republish Planner] 40 steps (bs=8) ...
+[dbg +    9.4s] [◆ republish Planner] 40 steps in 1.70s · 23.5 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +    9.6s] workspace after Planner: kv_len=83 kv=20.8MiB state=396.0MiB state_norm=0.044432
+[dbg +    9.6s] agent Critic (critic) — latent thinking
+[dbg +    9.6s] append: padded over live state (pad prefix 311) — 311 column(s) stepwise with per-row state restore, then 252 in one forward
+[dbg +    9.6s] [◆ append Critic] 311 steps (bs=8) ...
+[dbg +   24.1s] [◆ append Critic] 311 steps in 14.49s · 21.5 step/s (bs=8) · ≳71.1k text-tok (×228.6)
+[dbg +   24.4s] [◆ latent Critic] 40 steps (bs=8) ...
+[dbg +   26.2s] [◆ latent Critic] 40 steps in 1.76s · 22.8 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +   26.3s] [◆ republish Critic] 40 steps (bs=8) ...
+[dbg +   28.1s] [◆ republish Critic] 40 steps in 1.74s · 22.9 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +   28.2s] workspace after Critic: kv_len=148 kv=37.0MiB state=396.0MiB state_norm=0.041854
+[dbg +   28.2s] agent Refiner (refiner) — latent thinking
+[dbg +   28.2s] append: padded over live state (pad prefix 311) — 311 column(s) stepwise with per-row state restore, then 236 in one forward
+[dbg +   28.2s] [◆ append Refiner] 311 steps (bs=8) ...
+[dbg +   42.6s] [◆ append Refiner] 311 steps in 14.36s · 21.7 step/s (bs=8) · ≳71.1k text-tok (×228.6)
+[dbg +   42.9s] [◆ latent Refiner] 40 steps (bs=8) ...
+[dbg +   44.6s] [◆ latent Refiner] 40 steps in 1.75s · 22.9 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +   44.8s] [◆ republish Refiner] 40 steps (bs=8) ...
+[dbg +   46.5s] [◆ republish Refiner] 40 steps in 1.69s · 23.7 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +   46.7s] workspace after Refiner: kv_len=211 kv=52.8MiB state=396.0MiB state_norm=0.041753
+[dbg +   46.7s] agent Judger (judger) — text decode
+[dbg +   46.7s] append: padded over live state (pad prefix 311) — 311 column(s) stepwise with per-row state restore, then 261 in one forward
+[dbg +   46.7s] [◆ append Judger] 311 steps (bs=8) ...
+[dbg +   60.8s] [◆ append Judger] 311 steps in 14.18s · 21.9 step/s (bs=8) · ≳71.1k text-tok (×228.6)
+[dbg +  217.5s] [⚡ decode Judger] 3225 tok in 156.36s · 20.6 tok/s/seq · ×8 = 165.0 tok/s
+[dbg +  217.5s] batch: 8 items (done 0/100)
+[dbg +  217.5s] agent Planner (planner) — latent thinking
+[dbg +  218.2s] [◆ latent Planner] 40 steps (bs=8) ...
+[dbg +  219.9s] [◆ latent Planner] 40 steps in 1.73s · 23.1 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  220.1s] [◆ republish Planner] 40 steps (bs=8) ...
+[dbg +  221.7s] [◆ republish Planner] 40 steps in 1.69s · 23.7 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  221.9s] workspace after Planner: kv_len=83 kv=20.8MiB state=396.0MiB state_norm=0.044432
+[dbg +  221.9s] agent Critic (critic) — latent thinking
+[dbg +  221.9s] append: padded over live state (pad prefix 311) — 311 column(s) stepwise with per-row state restore, then 252 in one forward
+[dbg +  221.9s] [◆ append Critic] 311 steps (bs=8) ...
+[dbg +  236.1s] [◆ append Critic] 311 steps in 14.22s · 21.9 step/s (bs=8) · ≳71.1k text-tok (×228.6)
+[dbg +  236.4s] [◆ latent Critic] 40 steps (bs=8) ...
+[dbg +  238.2s] [◆ latent Critic] 40 steps in 1.74s · 23.0 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  238.3s] [◆ republish Critic] 40 steps (bs=8) ...
+[dbg +  240.0s] [◆ republish Critic] 40 steps in 1.70s · 23.5 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  240.2s] workspace after Critic: kv_len=148 kv=37.0MiB state=396.0MiB state_norm=0.041854
+[dbg +  240.2s] agent Refiner (refiner) — latent thinking
+[dbg +  240.2s] append: padded over live state (pad prefix 311) — 311 column(s) stepwise with per-row state restore, then 236 in one forward
+[dbg +  240.2s] [◆ append Refiner] 311 steps (bs=8) ...
+[dbg +  254.4s] [◆ append Refiner] 311 steps in 14.21s · 21.9 step/s (bs=8) · ≳71.1k text-tok (×228.6)
+[dbg +  254.7s] [◆ latent Refiner] 40 steps (bs=8) ...
+[dbg +  256.4s] [◆ latent Refiner] 40 steps in 1.74s · 23.0 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  256.6s] [◆ republish Refiner] 40 steps (bs=8) ...
+[dbg +  258.3s] [◆ republish Refiner] 40 steps in 1.69s · 23.7 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  258.5s] workspace after Refiner: kv_len=211 kv=52.8MiB state=396.0MiB state_norm=0.041753
+[dbg +  258.5s] agent Judger (judger) — text decode
+[dbg +  258.5s] append: padded over live state (pad prefix 311) — 311 column(s) stepwise with per-row state restore, then 261 in one forward
+[dbg +  258.5s] [◆ append Judger] 311 steps (bs=8) ...
+[dbg +  272.6s] [◆ append Judger] 311 steps in 14.16s · 22.0 step/s (bs=8) · ≳71.1k text-tok (×228.6)
+[dbg +  428.6s] [⚡ decode Judger] 3225 tok in 155.64s · 20.7 tok/s/seq · ×8 = 165.8 tok/s
+[dbg +  428.6s] batch: 8 items (done 8/100)
+[dbg +  428.6s] agent Planner (planner) — latent thinking
+[dbg +  429.2s] [◆ latent Planner] 40 steps (bs=8) ...
+[dbg +  430.9s] [◆ latent Planner] 40 steps in 1.74s · 23.0 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  431.1s] [◆ republish Planner] 40 steps (bs=8) ...
+[dbg +  432.7s] [◆ republish Planner] 40 steps in 1.68s · 23.8 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  432.9s] workspace after Planner: kv_len=83 kv=20.8MiB state=396.0MiB state_norm=0.048121
+[dbg +  432.9s] agent Critic (critic) — latent thinking
+[dbg +  432.9s] append: padded over live state (pad prefix 243) — 243 column(s) stepwise with per-row state restore, then 276 in one forward
+[dbg +  432.9s] [◆ append Critic] 243 steps (bs=8) ...
+[dbg +  444.2s] [◆ append Critic] 243 steps in 11.25s · 21.6 step/s (bs=8) · ≳55.5k text-tok (×228.6)
+[dbg +  444.5s] [◆ latent Critic] 40 steps (bs=8) ...
+[dbg +  446.3s] [◆ latent Critic] 40 steps in 1.75s · 22.8 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  446.4s] [◆ republish Critic] 40 steps (bs=8) ...
+[dbg +  448.1s] [◆ republish Critic] 40 steps in 1.70s · 23.5 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  448.3s] workspace after Critic: kv_len=148 kv=37.0MiB state=396.0MiB state_norm=0.044809
+[dbg +  448.3s] agent Refiner (refiner) — latent thinking
+[dbg +  448.3s] append: padded over live state (pad prefix 243) — 243 column(s) stepwise with per-row state restore, then 260 in one forward
+[dbg +  448.3s] [◆ append Refiner] 243 steps (bs=8) ...
+[dbg +  459.4s] [◆ append Refiner] 243 steps in 11.13s · 21.8 step/s (bs=8) · ≳55.5k text-tok (×228.6)
+[dbg +  459.7s] [◆ latent Refiner] 40 steps (bs=8) ...
+[dbg +  461.5s] [◆ latent Refiner] 40 steps in 1.71s · 23.4 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  461.6s] [◆ republish Refiner] 40 steps (bs=8) ...
+[dbg +  463.3s] [◆ republish Refiner] 40 steps in 1.68s · 23.8 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  463.5s] workspace after Refiner: kv_len=211 kv=52.8MiB state=396.0MiB state_norm=0.044049
+[dbg +  463.5s] agent Judger (judger) — text decode
+[dbg +  463.5s] append: padded over live state (pad prefix 243) — 243 column(s) stepwise with per-row state restore, then 285 in one forward
+[dbg +  463.5s] [◆ append Judger] 243 steps (bs=8) ...
+[dbg +  474.6s] [◆ append Judger] 243 steps in 11.12s · 21.8 step/s (bs=8) · ≳55.5k text-tok (×228.6)
+[dbg +  516.4s] [⚡ decode Judger] 934 tok in 41.44s · 22.5 tok/s/seq · ×8 = 180.3 tok/s
+[dbg +  516.4s] batch: 8 items (done 16/100)
+[dbg +  516.4s] agent Planner (planner) — latent thinking
+[dbg +  517.0s] [◆ latent Planner] 40 steps (bs=8) ...
+[dbg +  518.7s] [◆ latent Planner] 40 steps in 1.74s · 23.0 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  518.9s] [◆ republish Planner] 40 steps (bs=8) ...
+[dbg +  520.6s] [◆ republish Planner] 40 steps in 1.74s · 22.9 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  520.8s] workspace after Planner: kv_len=83 kv=20.8MiB state=396.0MiB state_norm=0.050091
+[dbg +  520.8s] agent Critic (critic) — latent thinking
+[dbg +  520.8s] append: padded over live state (pad prefix 310) — 310 column(s) stepwise with per-row state restore, then 221 in one forward
+[dbg +  520.8s] [◆ append Critic] 310 steps (bs=8) ...
+[dbg +  535.1s] [◆ append Critic] 310 steps in 14.30s · 21.7 step/s (bs=8) · ≳70.9k text-tok (×228.6)
+[dbg +  535.4s] [◆ latent Critic] 40 steps (bs=8) ...
+[dbg +  537.1s] [◆ latent Critic] 40 steps in 1.74s · 23.0 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  537.3s] [◆ republish Critic] 40 steps (bs=8) ...
+[dbg +  538.9s] [◆ republish Critic] 40 steps in 1.69s · 23.7 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  539.1s] workspace after Critic: kv_len=148 kv=37.0MiB state=396.0MiB state_norm=0.046863
+[dbg +  539.1s] agent Refiner (refiner) — latent thinking
+[dbg +  539.1s] append: padded over live state (pad prefix 310) — 310 column(s) stepwise with per-row state restore, then 205 in one forward
+[dbg +  539.1s] [◆ append Refiner] 310 steps (bs=8) ...
+[dbg +  553.3s] [◆ append Refiner] 310 steps in 14.14s · 21.9 step/s (bs=8) · ≳70.9k text-tok (×228.6)
+[dbg +  553.5s] [◆ latent Refiner] 40 steps (bs=8) ...
+[dbg +  555.3s] [◆ latent Refiner] 40 steps in 1.76s · 22.7 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  555.4s] [◆ republish Refiner] 40 steps (bs=8) ...
+[dbg +  557.2s] [◆ republish Refiner] 40 steps in 1.72s · 23.3 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  557.3s] workspace after Refiner: kv_len=211 kv=52.8MiB state=396.0MiB state_norm=0.045344
+[dbg +  557.3s] agent Judger (judger) — text decode
+[dbg +  557.3s] append: padded over live state (pad prefix 310) — 310 column(s) stepwise with per-row state restore, then 230 in one forward
+[dbg +  557.3s] [◆ append Judger] 310 steps (bs=8) ...
+[dbg +  571.4s] [◆ append Judger] 310 steps in 14.09s · 22.0 step/s (bs=8) · ≳70.9k text-tok (×228.6)
+[dbg +  776.4s] [⚡ decode Judger] 4096 tok in 204.66s · 20.0 tok/s/seq · ×8 = 160.1 tok/s
+[dbg +  776.4s] batch: 8 items (done 24/100)
+[dbg +  776.4s] agent Planner (planner) — latent thinking
+[dbg +  776.9s] [◆ latent Planner] 40 steps (bs=8) ...
+[dbg +  778.6s] [◆ latent Planner] 40 steps in 1.72s · 23.2 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  778.8s] [◆ republish Planner] 40 steps (bs=8) ...
+[dbg +  780.4s] [◆ republish Planner] 40 steps in 1.68s · 23.8 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  780.6s] workspace after Planner: kv_len=83 kv=20.8MiB state=396.0MiB state_norm=0.049559
+[dbg +  780.6s] agent Critic (critic) — latent thinking
+[dbg +  780.6s] append: padded over live state (pad prefix 245) — 245 column(s) stepwise with per-row state restore, then 237 in one forward
+[dbg +  780.6s] [◆ append Critic] 245 steps (bs=8) ...
+[dbg +  791.8s] [◆ append Critic] 245 steps in 11.24s · 21.8 step/s (bs=8) · ≳56.0k text-tok (×228.6)
+[dbg +  792.1s] [◆ latent Critic] 40 steps (bs=8) ...
+[dbg +  793.9s] [◆ latent Critic] 40 steps in 1.75s · 22.8 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  794.1s] [◆ republish Critic] 40 steps (bs=8) ...
+[dbg +  795.8s] [◆ republish Critic] 40 steps in 1.71s · 23.4 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  795.9s] workspace after Critic: kv_len=148 kv=37.0MiB state=396.0MiB state_norm=0.04278
+[dbg +  795.9s] agent Refiner (refiner) — latent thinking
+[dbg +  795.9s] append: padded over live state (pad prefix 245) — 245 column(s) stepwise with per-row state restore, then 221 in one forward
+[dbg +  795.9s] [◆ append Refiner] 245 steps (bs=8) ...
+[dbg +  807.2s] [◆ append Refiner] 245 steps in 11.23s · 21.8 step/s (bs=8) · ≳56.0k text-tok (×228.6)
+[dbg +  807.4s] [◆ latent Refiner] 40 steps (bs=8) ...
+[dbg +  809.2s] [◆ latent Refiner] 40 steps in 1.76s · 22.8 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  809.4s] [◆ republish Refiner] 40 steps (bs=8) ...
+[dbg +  811.1s] [◆ republish Refiner] 40 steps in 1.74s · 23.0 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  811.3s] workspace after Refiner: kv_len=211 kv=52.8MiB state=396.0MiB state_norm=0.042724
+[dbg +  811.3s] agent Judger (judger) — text decode
+[dbg +  811.3s] append: padded over live state (pad prefix 245) — 245 column(s) stepwise with per-row state restore, then 246 in one forward
+[dbg +  811.3s] [◆ append Judger] 245 steps (bs=8) ...
+[dbg +  822.4s] [◆ append Judger] 245 steps in 11.11s · 22.1 step/s (bs=8) · ≳56.0k text-tok (×228.6)
+[dbg +  915.9s] [⚡ decode Judger] 2043 tok in 93.24s · 21.9 tok/s/seq · ×8 = 175.3 tok/s
+[dbg +  915.9s] batch: 8 items (done 32/100)
+[dbg +  915.9s] agent Planner (planner) — latent thinking
+[dbg +  916.4s] [◆ latent Planner] 40 steps (bs=8) ...
+[dbg +  918.2s] [◆ latent Planner] 40 steps in 1.77s · 22.5 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  918.4s] [◆ republish Planner] 40 steps (bs=8) ...
+[dbg +  920.1s] [◆ republish Planner] 40 steps in 1.72s · 23.3 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  920.3s] workspace after Planner: kv_len=83 kv=20.8MiB state=396.0MiB state_norm=0.048578
+[dbg +  920.3s] agent Critic (critic) — latent thinking
+[dbg +  920.3s] append: padded over live state (pad prefix 248) — 248 column(s) stepwise with per-row state restore, then 229 in one forward
+[dbg +  920.3s] [◆ append Critic] 248 steps (bs=8) ...
+[dbg +  931.8s] [◆ append Critic] 248 steps in 11.54s · 21.5 step/s (bs=8) · ≳56.7k text-tok (×228.6)
+[dbg +  932.1s] [◆ latent Critic] 40 steps (bs=8) ...
+[dbg +  933.9s] [◆ latent Critic] 40 steps in 1.78s · 22.4 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  934.0s] [◆ republish Critic] 40 steps (bs=8) ...
+[dbg +  935.7s] [◆ republish Critic] 40 steps in 1.71s · 23.4 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  935.9s] workspace after Critic: kv_len=148 kv=37.0MiB state=396.0MiB state_norm=0.047193
+[dbg +  935.9s] agent Refiner (refiner) — latent thinking
+[dbg +  935.9s] append: padded over live state (pad prefix 248) — 248 column(s) stepwise with per-row state restore, then 213 in one forward
+[dbg +  935.9s] [◆ append Refiner] 248 steps (bs=8) ...
+[dbg +  947.3s] [◆ append Refiner] 248 steps in 11.37s · 21.8 step/s (bs=8) · ≳56.7k text-tok (×228.6)
+[dbg +  947.5s] [◆ latent Refiner] 40 steps (bs=8) ...
+[dbg +  949.3s] [◆ latent Refiner] 40 steps in 1.73s · 23.1 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  949.4s] [◆ republish Refiner] 40 steps (bs=8) ...
+[dbg +  951.1s] [◆ republish Refiner] 40 steps in 1.69s · 23.7 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  951.3s] workspace after Refiner: kv_len=211 kv=52.8MiB state=396.0MiB state_norm=0.043303
+[dbg +  951.3s] agent Judger (judger) — text decode
+[dbg +  951.3s] append: padded over live state (pad prefix 248) — 248 column(s) stepwise with per-row state restore, then 238 in one forward
+[dbg +  951.3s] [◆ append Judger] 248 steps (bs=8) ...
+[dbg +  962.9s] [◆ append Judger] 248 steps in 11.61s · 21.4 step/s (bs=8) · ≳56.7k text-tok (×228.6)
+[dbg + 1040.0s] [⚡ decode Judger] 1692 tok in 76.78s · 22.0 tok/s/seq · ×8 = 176.3 tok/s
+[dbg + 1040.0s] batch: 8 items (done 40/100)
+[dbg + 1040.0s] agent Planner (planner) — latent thinking
+[dbg + 1040.6s] [◆ latent Planner] 40 steps (bs=8) ...
+[dbg + 1042.4s] [◆ latent Planner] 40 steps in 1.74s · 23.1 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1042.5s] [◆ republish Planner] 40 steps (bs=8) ...
+[dbg + 1044.2s] [◆ republish Planner] 40 steps in 1.69s · 23.7 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1044.4s] workspace after Planner: kv_len=83 kv=20.8MiB state=396.0MiB state_norm=0.049008
+[dbg + 1044.4s] agent Critic (critic) — latent thinking
+[dbg + 1044.4s] append: padded over live state (pad prefix 314) — 314 column(s) stepwise with per-row state restore, then 255 in one forward
+[dbg + 1044.4s] [◆ append Critic] 314 steps (bs=8) ...
+[dbg + 1058.7s] [◆ append Critic] 314 steps in 14.36s · 21.9 step/s (bs=8) · ≳71.8k text-tok (×228.6)
+[dbg + 1059.0s] [◆ latent Critic] 40 steps (bs=8) ...
+[dbg + 1060.8s] [◆ latent Critic] 40 steps in 1.74s · 23.0 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1060.9s] [◆ republish Critic] 40 steps (bs=8) ...
+[dbg + 1062.6s] [◆ republish Critic] 40 steps in 1.70s · 23.6 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1062.8s] workspace after Critic: kv_len=148 kv=37.0MiB state=396.0MiB state_norm=0.0449
+[dbg + 1062.8s] agent Refiner (refiner) — latent thinking
+[dbg + 1062.8s] append: padded over live state (pad prefix 314) — 314 column(s) stepwise with per-row state restore, then 239 in one forward
+[dbg + 1062.8s] [◆ append Refiner] 314 steps (bs=8) ...
+[dbg + 1077.2s] [◆ append Refiner] 314 steps in 14.41s · 21.8 step/s (bs=8) · ≳71.8k text-tok (×228.6)
+[dbg + 1077.5s] [◆ latent Refiner] 40 steps (bs=8) ...
+[dbg + 1079.2s] [◆ latent Refiner] 40 steps in 1.74s · 23.0 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1079.4s] [◆ republish Refiner] 40 steps (bs=8) ...
+[dbg + 1081.1s] [◆ republish Refiner] 40 steps in 1.69s · 23.6 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1081.3s] workspace after Refiner: kv_len=211 kv=52.8MiB state=396.0MiB state_norm=0.043955
+[dbg + 1081.3s] agent Judger (judger) — text decode
+[dbg + 1081.3s] append: padded over live state (pad prefix 314) — 314 column(s) stepwise with per-row state restore, then 264 in one forward
+[dbg + 1081.3s] [◆ append Judger] 314 steps (bs=8) ...
+[dbg + 1095.6s] [◆ append Judger] 314 steps in 14.38s · 21.8 step/s (bs=8) · ≳71.8k text-tok (×228.6)
+[dbg + 1228.5s] [⚡ decode Judger] 2782 tok in 132.53s · 21.0 tok/s/seq · ×8 = 167.9 tok/s
+[dbg + 1228.5s] batch: 8 items (done 48/100)
+[dbg + 1228.5s] agent Planner (planner) — latent thinking
+[dbg + 1228.9s] [◆ latent Planner] 40 steps (bs=8) ...
+[dbg + 1230.7s] [◆ latent Planner] 40 steps in 1.80s · 22.2 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1230.9s] [◆ republish Planner] 40 steps (bs=8) ...
+[dbg + 1232.6s] [◆ republish Planner] 40 steps in 1.74s · 23.0 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1232.8s] workspace after Planner: kv_len=83 kv=20.8MiB state=396.0MiB state_norm=0.051469
+[dbg + 1232.8s] agent Critic (critic) — latent thinking
+[dbg + 1232.8s] append: padded over live state (pad prefix 110) — 110 column(s) stepwise with per-row state restore, then 283 in one forward
+[dbg + 1232.8s] [◆ append Critic] 110 steps (bs=8) ...
+[dbg + 1238.0s] [◆ append Critic] 110 steps in 5.18s · 21.2 step/s (bs=8) · ≳25.1k text-tok (×228.6)
+[dbg + 1238.3s] [◆ latent Critic] 40 steps (bs=8) ...
+[dbg + 1240.1s] [◆ latent Critic] 40 steps in 1.78s · 22.5 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1240.3s] [◆ republish Critic] 40 steps (bs=8) ...
+[dbg + 1242.0s] [◆ republish Critic] 40 steps in 1.75s · 22.9 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1242.2s] workspace after Critic: kv_len=148 kv=37.0MiB state=396.0MiB state_norm=0.046632
+[dbg + 1242.2s] agent Refiner (refiner) — latent thinking
+[dbg + 1242.2s] append: padded over live state (pad prefix 110) — 110 column(s) stepwise with per-row state restore, then 267 in one forward
+[dbg + 1242.2s] [◆ append Refiner] 110 steps (bs=8) ...
+[dbg + 1247.3s] [◆ append Refiner] 110 steps in 5.10s · 21.6 step/s (bs=8) · ≳25.1k text-tok (×228.6)
+[dbg + 1247.6s] [◆ latent Refiner] 40 steps (bs=8) ...
+[dbg + 1249.4s] [◆ latent Refiner] 40 steps in 1.79s · 22.4 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1249.6s] [◆ republish Refiner] 40 steps (bs=8) ...
+[dbg + 1251.3s] [◆ republish Refiner] 40 steps in 1.74s · 23.0 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1251.5s] workspace after Refiner: kv_len=211 kv=52.8MiB state=396.0MiB state_norm=0.043479
+[dbg + 1251.5s] agent Judger (judger) — text decode
+[dbg + 1251.5s] append: padded over live state (pad prefix 110) — 110 column(s) stepwise with per-row state restore, then 292 in one forward
+[dbg + 1251.5s] [◆ append Judger] 110 steps (bs=8) ...
+[dbg + 1256.5s] [◆ append Judger] 110 steps in 5.07s · 21.7 step/s (bs=8) · ≳25.1k text-tok (×228.6)
+[dbg + 1301.9s] [⚡ decode Judger] 1004 tok in 45.01s · 22.3 tok/s/seq · ×8 = 178.5 tok/s
+[dbg + 1301.9s] batch: 8 items (done 56/100)
+[dbg + 1301.9s] agent Planner (planner) — latent thinking
+[dbg + 1303.3s] [◆ latent Planner] 40 steps (bs=8) ...
+[dbg + 1305.1s] [◆ latent Planner] 40 steps in 1.75s · 22.9 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1305.2s] [◆ republish Planner] 40 steps (bs=8) ...
+[dbg + 1306.9s] [◆ republish Planner] 40 steps in 1.68s · 23.8 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1307.1s] workspace after Planner: kv_len=83 kv=20.8MiB state=396.0MiB state_norm=0.047511
+[dbg + 1307.1s] agent Critic (critic) — latent thinking
+[dbg + 1307.1s] append: padded over live state (pad prefix 834) — 834 column(s) stepwise with per-row state restore, then 252 in one forward
+[dbg + 1307.1s] [◆ append Critic] 834 steps (bs=8) ...
+[dbg + 1345.4s] [◆ append Critic] 834 steps in 38.27s · 21.8 step/s (bs=8) · ≳190.6k text-tok (×228.6)
+[dbg + 1345.7s] [◆ latent Critic] 40 steps (bs=8) ...
+[dbg + 1347.4s] [◆ latent Critic] 40 steps in 1.77s · 22.6 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1347.6s] [◆ republish Critic] 40 steps (bs=8) ...
+[dbg + 1349.3s] [◆ republish Critic] 40 steps in 1.72s · 23.2 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1349.5s] workspace after Critic: kv_len=148 kv=37.0MiB state=396.0MiB state_norm=0.044416
+[dbg + 1349.5s] agent Refiner (refiner) — latent thinking
+[dbg + 1349.5s] append: padded over live state (pad prefix 834) — 834 column(s) stepwise with per-row state restore, then 236 in one forward
+[dbg + 1349.5s] [◆ append Refiner] 834 steps (bs=8) ...
+[dbg + 1388.0s] [◆ append Refiner] 834 steps in 38.50s · 21.7 step/s (bs=8) · ≳190.6k text-tok (×228.6)
+[dbg + 1388.3s] [◆ latent Refiner] 40 steps (bs=8) ...
+[dbg + 1390.0s] [◆ latent Refiner] 40 steps in 1.76s · 22.8 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1390.2s] [◆ republish Refiner] 40 steps (bs=8) ...
+[dbg + 1392.0s] [◆ republish Refiner] 40 steps in 1.75s · 22.9 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1392.1s] workspace after Refiner: kv_len=211 kv=52.8MiB state=396.0MiB state_norm=0.04375
+[dbg + 1392.1s] agent Judger (judger) — text decode
+[dbg + 1392.1s] append: padded over live state (pad prefix 834) — 834 column(s) stepwise with per-row state restore, then 261 in one forward
+[dbg + 1392.1s] [◆ append Judger] 834 steps (bs=8) ...
+[dbg + 1430.7s] [◆ append Judger] 834 steps in 38.57s · 21.6 step/s (bs=8) · ≳190.6k text-tok (×228.6)
+[dbg + 1604.7s] [⚡ decode Judger] 3420 tok in 173.70s · 19.7 tok/s/seq · ×8 = 157.5 tok/s
+[dbg + 1604.7s] batch: 8 items (done 64/100)
+[dbg + 1604.7s] agent Planner (planner) — latent thinking
+[dbg + 1605.3s] [◆ latent Planner] 40 steps (bs=8) ...
+[dbg + 1607.0s] [◆ latent Planner] 40 steps in 1.76s · 22.7 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1607.2s] [◆ republish Planner] 40 steps (bs=8) ...
+[dbg + 1608.9s] [◆ republish Planner] 40 steps in 1.71s · 23.4 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1609.1s] workspace after Planner: kv_len=83 kv=20.8MiB state=396.0MiB state_norm=0.047856
+[dbg + 1609.1s] agent Critic (critic) — latent thinking
+[dbg + 1609.1s] append: padded over live state (pad prefix 232) — 232 column(s) stepwise with per-row state restore, then 258 in one forward
+[dbg + 1609.1s] [◆ append Critic] 232 steps (bs=8) ...
+[dbg + 1619.7s] [◆ append Critic] 232 steps in 10.61s · 21.9 step/s (bs=8) · ≳53.0k text-tok (×228.6)
+[dbg + 1620.0s] [◆ latent Critic] 40 steps (bs=8) ...
+[dbg + 1621.7s] [◆ latent Critic] 40 steps in 1.71s · 23.4 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1621.9s] [◆ republish Critic] 40 steps (bs=8) ...
+[dbg + 1623.6s] [◆ republish Critic] 40 steps in 1.71s · 23.5 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1623.7s] workspace after Critic: kv_len=148 kv=37.0MiB state=396.0MiB state_norm=0.044432
+[dbg + 1623.8s] agent Refiner (refiner) — latent thinking
+[dbg + 1623.8s] append: padded over live state (pad prefix 232) — 232 column(s) stepwise with per-row state restore, then 242 in one forward
+[dbg + 1623.8s] [◆ append Refiner] 232 steps (bs=8) ...
+[dbg + 1634.3s] [◆ append Refiner] 232 steps in 10.57s · 22.0 step/s (bs=8) · ≳53.0k text-tok (×228.6)
+[dbg + 1634.6s] [◆ latent Refiner] 40 steps (bs=8) ...
+[dbg + 1636.4s] [◆ latent Refiner] 40 steps in 1.75s · 22.9 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1636.5s] [◆ republish Refiner] 40 steps (bs=8) ...
+[dbg + 1638.2s] [◆ republish Refiner] 40 steps in 1.72s · 23.3 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1638.4s] workspace after Refiner: kv_len=211 kv=52.8MiB state=396.0MiB state_norm=0.043516
+[dbg + 1638.4s] agent Judger (judger) — text decode
+[dbg + 1638.4s] append: padded over live state (pad prefix 232) — 232 column(s) stepwise with per-row state restore, then 267 in one forward
+[dbg + 1638.4s] [◆ append Judger] 232 steps (bs=8) ...
+[dbg + 1648.9s] [◆ append Judger] 232 steps in 10.45s · 22.2 step/s (bs=8) · ≳53.0k text-tok (×228.6)
+[dbg + 1853.3s] [⚡ decode Judger] 4096 tok in 204.16s · 20.1 tok/s/seq · ×8 = 160.5 tok/s
+[   1/100] ✓  pred=a              gold=a              latent=120  ≳ 27.4k txt ~26.38s kv=211 s=0.0418
+[   2/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~26.38s kv=211 s=0.0418
+[   3/100] ✓  pred=b              gold=b              latent=120  ≳ 27.4k txt ~26.38s kv=211 s=0.0418
+[   4/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~26.38s kv=211 s=0.0418
+[   5/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~26.38s kv=211 s=0.0418
+[   6/100] ✓  pred=b              gold=b              latent=120  ≳ 27.4k txt ~26.38s kv=211 s=0.0418
+[   7/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~26.38s kv=211 s=0.0418
+[   8/100] ✗  pred=a              gold=c              latent=120  ≳ 27.4k txt ~26.38s kv=211 s=0.0418
+[   9/100] ✓  pred=d              gold=d              latent=120  ≳ 27.4k txt ~10.97s kv=211 s=0.0440
+[  10/100] ✓  pred=b              gold=b              latent=120  ≳ 27.4k txt ~10.97s kv=211 s=0.0440
+           acc 0.900 (9/10) · elapsed 8m36s · eta 1h17m · vram 20.1GiB
+[  11/100] ✓  pred=b              gold=b              latent=120  ≳ 27.4k txt ~10.97s kv=211 s=0.0440
+[  12/100] ✓  pred=a              gold=a              latent=120  ≳ 27.4k txt ~10.97s kv=211 s=0.0440
+[  13/100] ✓  pred=d              gold=d              latent=120  ≳ 27.4k txt ~10.97s kv=211 s=0.0440
+[  14/100] ✓  pred=b              gold=b              latent=120  ≳ 27.4k txt ~10.97s kv=211 s=0.0440
+[  15/100] ✓  pred=a              gold=a              latent=120  ≳ 27.4k txt ~10.97s kv=211 s=0.0440
+[  16/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~10.97s kv=211 s=0.0440
+[  17/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~32.50s kv=211 s=0.0453
+[  18/100] ✓  pred=b              gold=b              latent=120  ≳ 27.4k txt ~32.50s kv=211 s=0.0453
+[  19/100] ✓  pred=b              gold=b              latent=120  ≳ 27.4k txt ~32.50s kv=211 s=0.0453
+[  20/100] ✓  pred=b              gold=b              latent=120  ≳ 27.4k txt ~32.50s kv=211 s=0.0453
+           acc 0.950 (19/20) · elapsed 12m56s · eta 51m44s · vram 33.3GiB
+[  21/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~32.50s kv=211 s=0.0453
+[  22/100] ✓  pred=d              gold=d              latent=120  ≳ 27.4k txt ~32.50s kv=211 s=0.0453
+[  23/100] ✗  pred=11             gold=a              latent=120  ≳ 27.4k txt ~32.50s kv=211 s=0.0453 CUT
+[  24/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~32.50s kv=211 s=0.0453
+[  25/100] ✓  pred=a              gold=a              latent=120  ≳ 27.4k txt ~17.44s kv=211 s=0.0427
+[  26/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~17.44s kv=211 s=0.0427
+[  27/100] ✓  pred=a              gold=a              latent=120  ≳ 27.4k txt ~17.44s kv=211 s=0.0427
+[  28/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~17.44s kv=211 s=0.0427
+[  29/100] ✓  pred=a              gold=a              latent=120  ≳ 27.4k txt ~17.44s kv=211 s=0.0427
+[  30/100] ✓  pred=b              gold=b              latent=120  ≳ 27.4k txt ~17.44s kv=211 s=0.0427
+           acc 0.933 (28/30) · elapsed 15m15s · eta 35m36s · vram 33.3GiB · cut 1
+[  31/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~17.44s kv=211 s=0.0427
+[  32/100] ✓  pred=a              gold=a              latent=120  ≳ 27.4k txt ~17.44s kv=211 s=0.0427
+[  33/100] ✓  pred=d              gold=d              latent=120  ≳ 27.4k txt ~15.51s kv=211 s=0.0433
+[  34/100] ✓  pred=a              gold=a              latent=120  ≳ 27.4k txt ~15.51s kv=211 s=0.0433
+[  35/100] ✓  pred=b              gold=b              latent=120  ≳ 27.4k txt ~15.51s kv=211 s=0.0433
+[  36/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~15.51s kv=211 s=0.0433
+[  37/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~15.51s kv=211 s=0.0433
+[  38/100] ✗  pred=a              gold=b              latent=120  ≳ 27.4k txt ~15.51s kv=211 s=0.0433
+[  39/100] ✓  pred=b              gold=b              latent=120  ≳ 27.4k txt ~15.51s kv=211 s=0.0433
+[  40/100] ✓  pred=a              gold=a              latent=120  ≳ 27.4k txt ~15.51s kv=211 s=0.0433
+           acc 0.925 (37/40) · elapsed 17m19s · eta 25m59s · vram 33.3GiB · cut 1
+[  41/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~23.57s kv=211 s=0.0440
+[  42/100] ✓  pred=d              gold=d              latent=120  ≳ 27.4k txt ~23.57s kv=211 s=0.0440
+[  43/100] ✗  pred=d              gold=b              latent=120  ≳ 27.4k txt ~23.57s kv=211 s=0.0440
+[  44/100] ✓  pred=b              gold=b              latent=120  ≳ 27.4k txt ~23.57s kv=211 s=0.0440
+[  45/100] ✗  pred=c              gold=a              latent=120  ≳ 27.4k txt ~23.57s kv=211 s=0.0440
+[  46/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~23.57s kv=211 s=0.0440
+[  47/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~23.57s kv=211 s=0.0440
+[  48/100] ✓  pred=b              gold=b              latent=120  ≳ 27.4k txt ~23.57s kv=211 s=0.0440
+[  49/100] ✓  pred=d              gold=d              latent=120  ≳ 27.4k txt ~9.18s kv=211 s=0.0435
+[  50/100] ✓  pred=a              gold=a              latent=120  ≳ 27.4k txt ~9.18s kv=211 s=0.0435
+           acc 0.900 (45/50) · elapsed 21m41s · eta 21m41s · vram 33.3GiB · cut 1
+[  51/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~9.18s kv=211 s=0.0435
+[  52/100] ✓  pred=a              gold=a              latent=120  ≳ 27.4k txt ~9.18s kv=211 s=0.0435
+[  53/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~9.18s kv=211 s=0.0435
+[  54/100] ✓  pred=b              gold=b              latent=120  ≳ 27.4k txt ~9.18s kv=211 s=0.0435
+[  55/100] ✓  pred=b              gold=b              latent=120  ≳ 27.4k txt ~9.18s kv=211 s=0.0435
+[  56/100] ✓  pred=a              gold=a              latent=120  ≳ 27.4k txt ~9.18s kv=211 s=0.0435
+[  57/100] ✓  pred=b              gold=b              latent=120  ≳ 27.4k txt ~37.85s kv=211 s=0.0437
+[  58/100] ✓  pred=b              gold=b              latent=120  ≳ 27.4k txt ~37.85s kv=211 s=0.0437
+[  59/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~37.85s kv=211 s=0.0437
+[  60/100] ✗  pred=b              gold=d              latent=120  ≳ 27.4k txt ~37.85s kv=211 s=0.0437
+           acc 0.900 (54/60) · elapsed 26m44s · eta 17m49s · vram 33.3GiB · cut 1
+[  61/100] ✓  pred=d              gold=d              latent=120  ≳ 27.4k txt ~37.85s kv=211 s=0.0437
+[  62/100] ✓  pred=d              gold=d              latent=120  ≳ 27.4k txt ~37.85s kv=211 s=0.0437
+[  63/100] ✓  pred=d              gold=d              latent=120  ≳ 27.4k txt ~37.85s kv=211 s=0.0437
+[  64/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~37.85s kv=211 s=0.0437
+[  65/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~31.08s kv=211 s=0.0435
+[  66/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~31.08s kv=211 s=0.0435
+[  67/100] ✓  pred=a              gold=a              latent=120  ≳ 27.4k txt ~31.08s kv=211 s=0.0435
+[  68/100] ✓  pred=b              gold=b              latent=120  ≳ 27.4k txt ~31.08s kv=211 s=0.0435
+[  69/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~31.08s kv=211 s=0.0435
+[  70/100] ✓  pred=b              gold=b              latent=120  ≳ 27.4k txt ~31.08s kv=211 s=0.0435
+           acc 0.914 (64/70) · elapsed 30m53s · eta 13m14s · vram 33.3GiB · cut 1
+[  71/100] ✗  pred=19             gold=d              latent=120  ≳ 27.4k txt ~31.08s kv=211 s=0.0435 CUT
+[  72/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~31.08s kv=211 s=0.0435[dbg + 1853.4s] batch: 8 items (done 72/100)
+[dbg + 1853.4s] agent Planner (planner) — latent thinking
+[dbg + 1853.8s] [◆ latent Planner] 40 steps (bs=8) ...
+[dbg + 1855.5s] [◆ latent Planner] 40 steps in 1.74s · 23.0 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1855.7s] [◆ republish Planner] 40 steps (bs=8) ...
+[dbg + 1857.4s] [◆ republish Planner] 40 steps in 1.68s · 23.8 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1857.5s] workspace after Planner: kv_len=83 kv=20.8MiB state=396.0MiB state_norm=0.051168
+[dbg + 1857.5s] agent Critic (critic) — latent thinking
+[dbg + 1857.5s] append: padded over live state (pad prefix 171) — 171 column(s) stepwise with per-row state restore, then 257 in one forward
+[dbg + 1857.5s] [◆ append Critic] 171 steps (bs=8) ...
+[dbg + 1865.4s] [◆ append Critic] 171 steps in 7.89s · 21.7 step/s (bs=8) · ≳39.1k text-tok (×228.6)
+[dbg + 1865.7s] [◆ latent Critic] 40 steps (bs=8) ...
+[dbg + 1867.5s] [◆ latent Critic] 40 steps in 1.75s · 22.9 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1867.7s] [◆ republish Critic] 40 steps (bs=8) ...
+[dbg + 1869.4s] [◆ republish Critic] 40 steps in 1.70s · 23.5 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1869.5s] workspace after Critic: kv_len=148 kv=37.0MiB state=396.0MiB state_norm=0.047013
+[dbg + 1869.5s] agent Refiner (refiner) — latent thinking
+[dbg + 1869.5s] append: padded over live state (pad prefix 171) — 171 column(s) stepwise with per-row state restore, then 241 in one forward
+[dbg + 1869.5s] [◆ append Refiner] 171 steps (bs=8) ...
+[dbg + 1877.5s] [◆ append Refiner] 171 steps in 7.92s · 21.6 step/s (bs=8) · ≳39.1k text-tok (×228.6)
+[dbg + 1877.7s] [◆ latent Refiner] 40 steps (bs=8) ...
+[dbg + 1879.5s] [◆ latent Refiner] 40 steps in 1.80s · 22.2 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1879.7s] [◆ republish Refiner] 40 steps (bs=8) ...
+[dbg + 1881.5s] [◆ republish Refiner] 40 steps in 1.74s · 23.1 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1881.6s] workspace after Refiner: kv_len=211 kv=52.8MiB state=396.0MiB state_norm=0.043016
+[dbg + 1881.6s] agent Judger (judger) — text decode
+[dbg + 1881.6s] append: padded over live state (pad prefix 171) — 171 column(s) stepwise with per-row state restore, then 266 in one forward
+[dbg + 1881.6s] [◆ append Judger] 171 steps (bs=8) ...
+[dbg + 1889.6s] [◆ append Judger] 171 steps in 7.99s · 21.4 step/s (bs=8) · ≳39.1k text-tok (×228.6)
+[dbg + 1996.8s] [⚡ decode Judger] 2314 tok in 106.88s · 21.7 tok/s/seq · ×8 = 173.2 tok/s
+[dbg + 1996.8s] batch: 8 items (done 80/100)
+[dbg + 1996.8s] agent Planner (planner) — latent thinking
+[dbg + 1997.3s] [◆ latent Planner] 40 steps (bs=8) ...
+[dbg + 1999.1s] [◆ latent Planner] 40 steps in 1.80s · 22.2 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1999.3s] [◆ republish Planner] 40 steps (bs=8) ...
+[dbg + 2001.0s] [◆ republish Planner] 40 steps in 1.73s · 23.2 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 2001.2s] workspace after Planner: kv_len=83 kv=20.8MiB state=396.0MiB state_norm=0.051206
+[dbg + 2001.2s] agent Critic (critic) — latent thinking
+[dbg + 2001.2s] append: padded over live state (pad prefix 240) — 240 column(s) stepwise with per-row state restore, then 249 in one forward
+[dbg + 2001.2s] [◆ append Critic] 240 steps (bs=8) ...
+[dbg + 2012.4s] [◆ append Critic] 240 steps in 11.20s · 21.4 step/s (bs=8) · ≳54.9k text-tok (×228.6)
+[dbg + 2012.7s] [◆ latent Critic] 40 steps (bs=8) ...
+[dbg + 2014.5s] [◆ latent Critic] 40 steps in 1.80s · 22.2 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 2014.7s] [◆ republish Critic] 40 steps (bs=8) ...
+[dbg + 2016.4s] [◆ republish Critic] 40 steps in 1.75s · 22.8 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 2016.6s] workspace after Critic: kv_len=148 kv=37.0MiB state=396.0MiB state_norm=0.047042
+[dbg + 2016.6s] agent Refiner (refiner) — latent thinking
+[dbg + 2016.6s] append: padded over live state (pad prefix 240) — 240 column(s) stepwise with per-row state restore, then 233 in one forward
+[dbg + 2016.6s] [◆ append Refiner] 240 steps (bs=8) ...
+[dbg + 2027.8s] [◆ append Refiner] 240 steps in 11.13s · 21.6 step/s (bs=8) · ≳54.9k text-tok (×228.6)
+[dbg + 2028.0s] [◆ latent Refiner] 40 steps (bs=8) ...
+[dbg + 2029.8s] [◆ latent Refiner] 40 steps in 1.80s · 22.2 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 2030.0s] [◆ republish Refiner] 40 steps (bs=8) ...
+[dbg + 2031.8s] [◆ republish Refiner] 40 steps in 1.76s · 22.8 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 2031.9s] workspace after Refiner: kv_len=211 kv=52.8MiB state=396.0MiB state_norm=0.042316
+[dbg + 2031.9s] agent Judger (judger) — text decode
+[dbg + 2031.9s] append: padded over live state (pad prefix 240) — 240 column(s) stepwise with per-row state restore, then 258 in one forward
+[dbg + 2031.9s] [◆ append Judger] 240 steps (bs=8) ...
+[dbg + 2043.0s] [◆ append Judger] 240 steps in 11.07s · 21.7 step/s (bs=8) · ≳54.9k text-tok (×228.6)
+[dbg + 2154.2s] [⚡ decode Judger] 2375 tok in 110.87s · 21.4 tok/s/seq · ×8 = 171.4 tok/s
+[dbg + 2154.2s] batch: 8 items (done 88/100)
+[dbg + 2154.2s] agent Planner (planner) — latent thinking
+[dbg + 2155.0s] [◆ latent Planner] 40 steps (bs=8) ...
+[dbg + 2156.7s] [◆ latent Planner] 40 steps in 1.74s · 22.9 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 2156.9s] [◆ republish Planner] 40 steps (bs=8) ...
+[dbg + 2158.6s] [◆ republish Planner] 40 steps in 1.71s · 23.3 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 2158.8s] workspace after Planner: kv_len=83 kv=20.8MiB state=396.0MiB state_norm=0.050027
+[dbg + 2158.8s] agent Critic (critic) — latent thinking
+[dbg + 2158.8s] append: padded over live state (pad prefix 371) — 371 column(s) stepwise with per-row state restore, then 278 in one forward
+[dbg + 2158.8s] [◆ append Critic] 371 steps (bs=8) ...
+[dbg + 2175.7s] [◆ append Critic] 371 steps in 16.98s · 21.9 step/s (bs=8) · ≳84.8k text-tok (×228.6)
+[dbg + 2176.1s] [◆ latent Critic] 40 steps (bs=8) ...
+[dbg + 2177.8s] [◆ latent Critic] 40 steps in 1.73s · 23.1 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 2178.0s] [◆ republish Critic] 40 steps (bs=8) ...
+[dbg + 2179.7s] [◆ republish Critic] 40 steps in 1.76s · 22.7 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 2179.9s] workspace after Critic: kv_len=148 kv=37.0MiB state=396.0MiB state_norm=0.04601
+[dbg + 2179.9s] agent Refiner (refiner) — latent thinking
+[dbg + 2179.9s] append: padded over live state (pad prefix 371) — 371 column(s) stepwise with per-row state restore, then 262 in one forward
+[dbg + 2179.9s] [◆ append Refiner] 371 steps (bs=8) ...
+[dbg + 2197.3s] [◆ append Refiner] 371 steps in 17.33s · 21.4 step/s (bs=8) · ≳84.8k text-tok (×228.6)
+[dbg + 2197.6s] [◆ latent Refiner] 40 steps (bs=8) ...
+[dbg + 2199.3s] [◆ latent Refiner] 40 steps in 1.77s · 22.6 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 2199.5s] [◆ republish Refiner] 40 steps (bs=8) ...
+[dbg + 2201.3s] [◆ republish Refiner] 40 steps in 1.77s · 22.5 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 2201.5s] workspace after Refiner: kv_len=211 kv=52.8MiB state=396.0MiB state_norm=0.044106
+[dbg + 2201.5s] agent Judger (judger) — text decode
+[dbg + 2201.5s] append: padded over live state (pad prefix 371) — 371 column(s) stepwise with per-row state restore, then 287 in one forward
+[dbg + 2201.5s] [◆ append Judger] 371 steps (bs=8) ...
+[dbg + 2218.7s] [◆ append Judger] 371 steps in 17.26s · 21.5 step/s (bs=8) · ≳84.8k text-tok (×228.6)
+[dbg + 2328.0s] [⚡ decode Judger] 2329 tok in 108.96s · 21.4 tok/s/seq · ×8 = 171.0 tok/s
+[dbg + 2328.0s] batch: 4 items (done 96/100)
+[dbg + 2328.0s] agent Planner (planner) — latent thinking
+[dbg + 2328.3s] [◆ latent Planner] 40 steps (bs=4) ...
+[dbg + 2330.1s] [◆ latent Planner] 40 steps in 1.78s · 22.5 step/s (bs=4) · ≳9.1k text-tok (×228.6)
+[dbg + 2330.2s] [◆ republish Planner] 40 steps (bs=4) ...
+[dbg + 2331.9s] [◆ republish Planner] 40 steps in 1.71s · 23.3 step/s (bs=4) · ≳9.1k text-tok (×228.6)
+[dbg + 2332.1s] workspace after Planner: kv_len=83 kv=10.4MiB state=198.0MiB state_norm=0.047316
+[dbg + 2332.1s] agent Critic (critic) — latent thinking
+[dbg + 2332.1s] append: padded over live state (pad prefix 128) — 128 column(s) stepwise with per-row state restore, then 298 in one forward
+[dbg + 2332.1s] [◆ append Critic] 128 steps (bs=4) ...
+[dbg + 2338.0s] [◆ append Critic] 128 steps in 5.90s · 21.7 step/s (bs=4) · ≳29.3k text-tok (×228.6)
+[dbg + 2338.2s] [◆ latent Critic] 40 steps (bs=4) ...
+[dbg + 2340.0s] [◆ latent Critic] 40 steps in 1.80s · 22.3 step/s (bs=4) · ≳9.1k text-tok (×228.6)
+[dbg + 2340.2s] [◆ republish Critic] 40 steps (bs=4) ...
+[dbg + 2341.9s] [◆ republish Critic] 40 steps in 1.73s · 23.1 step/s (bs=4) · ≳9.1k text-tok (×228.6)
+[dbg + 2342.1s] workspace after Critic: kv_len=148 kv=18.5MiB state=198.0MiB state_norm=0.042295
+[dbg + 2342.1s] agent Refiner (refiner) — latent thinking
+[dbg + 2342.1s] append: padded over live state (pad prefix 128) — 128 column(s) stepwise with per-row state restore, then 282 in one forward
+[dbg + 2342.1s] [◆ append Refiner] 128 steps (bs=4) ...
+[dbg + 2347.9s] [◆ append Refiner] 128 steps in 5.75s · 22.2 step/s (bs=4) · ≳29.3k text-tok (×228.6)
+[dbg + 2348.1s] [◆ latent Refiner] 40 steps (bs=4) ...
+[dbg + 2349.8s] [◆ latent Refiner] 40 steps in 1.75s · 22.8 step/s (bs=4) · ≳9.1k text-tok (×228.6)
+[dbg + 2350.0s] [◆ republish Refiner] 40 steps (bs=4) ...
+[dbg + 2351.7s] [◆ republish Refiner] 40 steps in 1.71s · 23.4 step/s (bs=4) · ≳9.1k text-tok (×228.6)
+[dbg + 2351.8s] workspace after Refiner: kv_len=211 kv=26.4MiB state=198.0MiB state_norm=0.041957
+[dbg + 2351.8s] agent Judger (judger) — text decode
+[dbg + 2351.9s] append: padded over live state (pad prefix 128) — 128 column(s) stepwise with per-row state restore, then 307 in one forward
+[dbg + 2351.9s] [◆ append Judger] 128 steps (bs=4) ...
+[dbg + 2357.6s] [◆ append Judger] 128 steps in 5.77s · 22.2 step/s (bs=4) · ≳29.3k text-tok (×228.6)
+[dbg + 2446.1s] [⚡ decode Judger] 1994 tok in 88.29s · 22.6 tok/s/seq · ×4 = 90.3 tok/s
+[print2] WARNING: 2/100 answers hit --max_new_tokens and were cut off. Accuracy and token totals both reflect the cap, not the method.
+
+[  73/100] ✓  pred=a              gold=a              latent=120  ≳ 27.4k txt ~17.93s kv=211 s=0.0430
+[  74/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~17.93s kv=211 s=0.0430
+[  75/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~17.93s kv=211 s=0.0430
+[  76/100] ✓  pred=a              gold=a              latent=120  ≳ 27.4k txt ~17.93s kv=211 s=0.0430
+[  77/100] ✓  pred=a              gold=a              latent=120  ≳ 27.4k txt ~17.93s kv=211 s=0.0430
+[  78/100] ✓  pred=b              gold=b              latent=120  ≳ 27.4k txt ~17.93s kv=211 s=0.0430
+[  79/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~17.93s kv=211 s=0.0430
+[  80/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~17.93s kv=211 s=0.0430
+           acc 0.912 (73/80) · elapsed 33m16s · eta 8m19s · vram 33.3GiB · cut 2
+[  81/100] ✓  pred=d              gold=d              latent=120  ≳ 27.4k txt ~19.67s kv=211 s=0.0423
+[  82/100] ✓  pred=a              gold=a              latent=120  ≳ 27.4k txt ~19.67s kv=211 s=0.0423
+[  83/100] ✓  pred=d              gold=d              latent=120  ≳ 27.4k txt ~19.67s kv=211 s=0.0423
+[  84/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~19.67s kv=211 s=0.0423
+[  85/100] ✗  pred=b              gold=c              latent=120  ≳ 27.4k txt ~19.67s kv=211 s=0.0423
+[  86/100] ✓  pred=a              gold=a              latent=120  ≳ 27.4k txt ~19.67s kv=211 s=0.0423
+[  87/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~19.67s kv=211 s=0.0423
+[  88/100] ✓  pred=b              gold=b              latent=120  ≳ 27.4k txt ~19.67s kv=211 s=0.0423
+[  89/100] ✓  pred=a              gold=a              latent=120  ≳ 27.4k txt ~21.73s kv=211 s=0.0441
+[  90/100] ✓  pred=d              gold=d              latent=120  ≳ 27.4k txt ~21.73s kv=211 s=0.0441
+           acc 0.911 (82/90) · elapsed 38m47s · eta 4m18s · vram 33.3GiB · cut 2
+[  91/100] ✓  pred=a              gold=a              latent=120  ≳ 27.4k txt ~21.73s kv=211 s=0.0441
+[  92/100] ✓  pred=b              gold=b              latent=120  ≳ 27.4k txt ~21.73s kv=211 s=0.0441
+[  93/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~21.73s kv=211 s=0.0441
+[  94/100] ✓  pred=a              gold=a              latent=120  ≳ 27.4k txt ~21.73s kv=211 s=0.0441
+[  95/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~21.73s kv=211 s=0.0441
+[  96/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~21.73s kv=211 s=0.0441
+[  97/100] ✓  pred=a              gold=a              latent=120  ≳ 27.4k txt ~29.52s kv=211 s=0.0420
+[  98/100] ✓  pred=a              gold=a              latent=120  ≳ 27.4k txt ~29.52s kv=211 s=0.0420
+[  99/100] ✓  pred=a              gold=a              latent=120  ≳ 27.4k txt ~29.52s kv=211 s=0.0420
+[ 100/100] ✓  pred=a              gold=a              latent=120  ≳ 27.4k txt ~29.52s kv=211 s=0.0420
+           acc 0.920 (92/100) · elapsed 40m45s · eta 0s · vram 33.3GiB · cut 2
+{"method": "latent_mas", "model": "Qwen/Qwen3.5-9B", "task": "medqa", "sample_offset": 100, "latent_steps": 40, "latent_turn": "think", "latent_visibility": "latent_only", "chat_thinking": "off", "judger_thinking": "inherit", "latent_space_realign": true, "max_new_tokens": 4096, "generate_bs": 8, "state_transfer": "both", "split": "test", "seed": 42, "max_samples": 100, "processed": 100, "status": "completed", "accuracy": 0.92, "accuracy_ci95": {"low": 0.85, "high": 0.9589, "half_width": 0.0544, "z": 1.96}, "correct": 92, "generated_tokens": 97802, "generated_tokens_per_sample": 978.02, "prompt_tokens": 140340, "latent_steps_total": 12000, "truncated_final": 2, "peak_vram_mib": 34116.0, "total_time_sec": 2228.5991, "time_per_sample_sec": 22.286}
+[print2] runs/20260823_065355_latent_mas_medqa/trace.jsonl  (100 samples, completed)
+[print2] runs/20260823_065355_latent_mas_medqa/batches.jsonl  (13 batches)
+[print2] runs/20260823_065355_latent_mas_medqa/manifest.json  acc=0.9200 (92/100)

@@ -1,0 +1,349 @@
+[dbg +    0.1s] init: method=latent_mas model=Qwen/Qwen3.5-9B task=medqa device=cuda state_transfer=none
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[dbg +    0.9s] dtype: loading Qwen/Qwen3.5-9B in torch.bfloat16
+[dbg +    0.9s] [▶ load model Qwen/Qwen3.5-9B (HF, torch.bfloat16)] ...
+[print2] writing run to runs/20260823_175329_latent_mas_medqa/
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]Fetching 4 files: 100%|██████████| 4/4 [00:00<00:00, 1845.48it/s]
+Loading weights:   0%|          | 0/427 [00:00<?, ?it/s]Loading weights: 100%|██████████| 427/427 [00:00<00:00, 6385.16it/s]
+[dbg +    1.5s] [✓ load model Qwen/Qwen3.5-9B (HF, torch.bfloat16)] 0.60s
+[dbg +    1.5s] [▶ move model to cuda] ...
+[dbg +    3.3s] [✓ move model to cuda] 1.83s
+[dbg +    3.3s] model: 24/32 layers are Gated DeltaNet (recurrent state [B, 32, 128, 128] per layer, conv kernel 4)
+[dbg +    4.5s] hybrid: append-carries-state probe — split 3.12e-02 vs reset 7.87e+00 (0.4% of a full reset; state |max| 11.5, dtype torch.bfloat16) -> carries
+[dbg +    4.5s] hybrid: append mode = auto
+[dbg +    4.5s] model: attn_implementation = sdpa, dtype = torch.bfloat16
+[dbg +    4.6s] theorem 3.1: d_h=4096 |V|=248077 — 1 latent thought >= 228.6 text tokens
+[dbg +    4.6s] latent_mas: template tails {'auto': '<think>\n', 'on': '<think>\n', 'off': '<think>\n\n</think>\n\n'}
+[dbg +    4.6s] latent_mas: chat framing resolved against the live template
+[dbg +    4.6s] latent_mas: latent_turn=content latent_visibility=full chat_thinking=off judger_thinking=off
+[dbg +    4.6s] latent_mas: generate_bs=8 > 1 — ragged batches pay extra forwards on every append after the first; compare against --generate_bs 1 on your hardware
+[dbg +    4.6s] [▶ load dataset medqa] ...
+[dbg +    4.7s] [✓ load dataset medqa] 0.08s
+[dbg +    4.7s] dataset medqa: 100 samples to run
+[dbg +    4.7s] warmup batch 1/1 (8 items, discarded)
+[dbg +    4.7s] agent Planner (planner) — latent thinking
+[dbg +    5.5s] [◆ latent Planner] 40 steps (bs=8) ...
+[dbg +    5.5s] [▶ build latent realignment matrix] ...
+[dbg +    5.5s] [✓ build latent realignment matrix] 0.02s
+[dbg +    7.2s] [◆ latent Planner] 40 steps in 1.76s · 22.7 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +    7.4s] workspace after Planner: kv_len=0 kv=0.0MiB state=0.0MiB state_norm=None
+[dbg +    7.4s] agent Critic (critic) — latent thinking
+[dbg +    8.1s] [◆ latent Critic] 40 steps (bs=8) ...
+[dbg +    9.9s] [◆ latent Critic] 40 steps in 1.74s · 23.0 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +   10.0s] workspace after Critic: kv_len=0 kv=0.0MiB state=0.0MiB state_norm=None
+[dbg +   10.0s] agent Refiner (refiner) — latent thinking
+[dbg +   10.8s] [◆ latent Refiner] 40 steps (bs=8) ...
+[dbg +   12.5s] [◆ latent Refiner] 40 steps in 1.72s · 23.2 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +   12.7s] workspace after Refiner: kv_len=0 kv=0.0MiB state=0.0MiB state_norm=None
+[dbg +   12.7s] agent Judger (judger) — text decode
+[dbg +  111.0s] [⚡ decode Judger] 2151 tok in 98.32s · 21.9 tok/s/seq · ×8 = 175.0 tok/s
+[dbg +  111.0s] batch: 8 items (done 0/100)
+[dbg +  111.0s] agent Planner (planner) — latent thinking
+[dbg +  111.7s] [◆ latent Planner] 40 steps (bs=8) ...
+[dbg +  113.4s] [◆ latent Planner] 40 steps in 1.71s · 23.4 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  113.6s] workspace after Planner: kv_len=0 kv=0.0MiB state=0.0MiB state_norm=None
+[dbg +  113.6s] agent Critic (critic) — latent thinking
+[dbg +  114.4s] [◆ latent Critic] 40 steps (bs=8) ...
+[dbg +  116.1s] [◆ latent Critic] 40 steps in 1.71s · 23.3 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  116.2s] workspace after Critic: kv_len=0 kv=0.0MiB state=0.0MiB state_norm=None
+[dbg +  116.2s] agent Refiner (refiner) — latent thinking
+[dbg +  117.0s] [◆ latent Refiner] 40 steps (bs=8) ...
+[dbg +  118.7s] [◆ latent Refiner] 40 steps in 1.71s · 23.4 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  118.9s] workspace after Refiner: kv_len=0 kv=0.0MiB state=0.0MiB state_norm=None
+[dbg +  118.9s] agent Judger (judger) — text decode
+[dbg +  217.8s] [⚡ decode Judger] 2151 tok in 98.91s · 21.7 tok/s/seq · ×8 = 174.0 tok/s
+[dbg +  217.8s] batch: 8 items (done 8/100)
+[dbg +  217.8s] agent Planner (planner) — latent thinking
+[dbg +  218.3s] [◆ latent Planner] 40 steps (bs=8) ...
+[dbg +  220.0s] [◆ latent Planner] 40 steps in 1.70s · 23.5 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  220.2s] workspace after Planner: kv_len=0 kv=0.0MiB state=0.0MiB state_norm=None
+[dbg +  220.2s] agent Critic (critic) — latent thinking
+[dbg +  220.7s] [◆ latent Critic] 40 steps (bs=8) ...
+[dbg +  222.4s] [◆ latent Critic] 40 steps in 1.73s · 23.2 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  222.6s] workspace after Critic: kv_len=0 kv=0.0MiB state=0.0MiB state_norm=None
+[dbg +  222.6s] agent Refiner (refiner) — latent thinking
+[dbg +  223.2s] [◆ latent Refiner] 40 steps (bs=8) ...
+[dbg +  224.9s] [◆ latent Refiner] 40 steps in 1.71s · 23.4 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  225.0s] workspace after Refiner: kv_len=0 kv=0.0MiB state=0.0MiB state_norm=None
+[dbg +  225.0s] agent Judger (judger) — text decode
+[dbg +  268.0s] [⚡ decode Judger] 974 tok in 42.99s · 22.7 tok/s/seq · ×8 = 181.3 tok/s
+[dbg +  268.0s] batch: 8 items (done 16/100)
+[dbg +  268.0s] agent Planner (planner) — latent thinking
+[dbg +  268.7s] [◆ latent Planner] 40 steps (bs=8) ...
+[dbg +  270.5s] [◆ latent Planner] 40 steps in 1.73s · 23.1 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  270.6s] workspace after Planner: kv_len=0 kv=0.0MiB state=0.0MiB state_norm=None
+[dbg +  270.6s] agent Critic (critic) — latent thinking
+[dbg +  271.4s] [◆ latent Critic] 40 steps (bs=8) ...
+[dbg +  273.1s] [◆ latent Critic] 40 steps in 1.74s · 23.0 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  273.3s] workspace after Critic: kv_len=0 kv=0.0MiB state=0.0MiB state_norm=None
+[dbg +  273.3s] agent Refiner (refiner) — latent thinking
+[dbg +  274.1s] [◆ latent Refiner] 40 steps (bs=8) ...
+[dbg +  275.8s] [◆ latent Refiner] 40 steps in 1.73s · 23.1 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  276.0s] workspace after Refiner: kv_len=0 kv=0.0MiB state=0.0MiB state_norm=None
+[dbg +  276.0s] agent Judger (judger) — text decode
+[dbg +  362.5s] [⚡ decode Judger] 1904 tok in 86.52s · 22.0 tok/s/seq · ×8 = 176.1 tok/s
+[dbg +  362.5s] batch: 8 items (done 24/100)
+[dbg +  362.5s] agent Planner (planner) — latent thinking
+[dbg +  363.0s] [◆ latent Planner] 40 steps (bs=8) ...
+[dbg +  364.7s] [◆ latent Planner] 40 steps in 1.72s · 23.3 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  364.9s] workspace after Planner: kv_len=0 kv=0.0MiB state=0.0MiB state_norm=None
+[dbg +  364.9s] agent Critic (critic) — latent thinking
+[dbg +  365.4s] [◆ latent Critic] 40 steps (bs=8) ...
+[dbg +  367.2s] [◆ latent Critic] 40 steps in 1.73s · 23.2 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  367.3s] workspace after Critic: kv_len=0 kv=0.0MiB state=0.0MiB state_norm=None
+[dbg +  367.3s] agent Refiner (refiner) — latent thinking
+[dbg +  367.8s] [◆ latent Refiner] 40 steps (bs=8) ...
+[dbg +  369.6s] [◆ latent Refiner] 40 steps in 1.73s · 23.1 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  369.7s] workspace after Refiner: kv_len=0 kv=0.0MiB state=0.0MiB state_norm=None
+[dbg +  369.7s] agent Judger (judger) — text decode
+[dbg +  570.9s] [⚡ decode Judger] 4096 tok in 201.12s · 20.4 tok/s/seq · ×8 = 162.9 tok/s
+[dbg +  570.9s] batch: 8 items (done 32/100)
+[dbg +  570.9s] agent Planner (planner) — latent thinking
+[dbg +  571.4s] [◆ latent Planner] 40 steps (bs=8) ...
+[dbg +  573.2s] [◆ latent Planner] 40 steps in 1.71s · 23.4 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  573.3s] workspace after Planner: kv_len=0 kv=0.0MiB state=0.0MiB state_norm=None
+[dbg +  573.3s] agent Critic (critic) — latent thinking
+[dbg +  574.0s] [◆ latent Critic] 40 steps (bs=8) ...
+[dbg +  575.7s] [◆ latent Critic] 40 steps in 1.75s · 22.8 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  575.9s] workspace after Critic: kv_len=0 kv=0.0MiB state=0.0MiB state_norm=None
+[dbg +  575.9s] agent Refiner (refiner) — latent thinking
+[dbg +  576.5s] [◆ latent Refiner] 40 steps (bs=8) ...
+[dbg +  578.2s] [◆ latent Refiner] 40 steps in 1.74s · 23.0 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  578.4s] workspace after Refiner: kv_len=0 kv=0.0MiB state=0.0MiB state_norm=None
+[dbg +  578.4s] agent Judger (judger) — text decode
+[dbg +  763.5s] [⚡ decode Judger] 3797 tok in 185.13s · 20.5 tok/s/seq · ×8 = 164.1 tok/s
+[dbg +  763.5s] batch: 8 items (done 40/100)
+[dbg +  763.5s] agent Planner (planner) — latent thinking
+[dbg +  764.1s] [◆ latent Planner] 40 steps (bs=8) ...
+[dbg +  765.8s] [◆ latent Planner] 40 steps in 1.73s · 23.1 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  766.0s] workspace after Planner: kv_len=0 kv=0.0MiB state=0.0MiB state_norm=None
+[dbg +  766.0s] agent Critic (critic) — latent thinking
+[dbg +  766.6s] [◆ latent Critic] 40 steps (bs=8) ...
+[dbg +  768.3s] [◆ latent Critic] 40 steps in 1.73s · 23.1 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  768.5s] workspace after Critic: kv_len=0 kv=0.0MiB state=0.0MiB state_norm=None
+[dbg +  768.5s] agent Refiner (refiner) — latent thinking
+[dbg +  769.1s] [◆ latent Refiner] 40 steps (bs=8) ...
+[dbg +  770.8s] [◆ latent Refiner] 40 steps in 1.73s · 23.1 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  771.0s] workspace after Refiner: kv_len=0 kv=0.0MiB state=0.0MiB state_norm=None
+[dbg +  771.0s] agent Judger (judger) — text decode
+[dbg +  973.0s] [⚡ decode Judger] 4096 tok in 202.05s · 20.3 tok/s/seq · ×8 = 162.2 tok/s
+[dbg +  973.0s] batch: 8 items (done 48/100)
+[dbg +  973.0s] agent Planner (planner) — latent thinking
+[dbg +  973.7s] [◆ latent Planner] 40 steps (bs=8) ...
+[dbg +  975.4s] [◆ latent Planner] 40 steps in 1.72s · 23.3 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  975.6s] workspace after Planner: kv_len=0 kv=0.0MiB state=0.0MiB state_norm=None
+[dbg +  975.6s] agent Critic (critic) — latent thinking
+[dbg +  976.3s] [◆ latent Critic] 40 steps (bs=8) ...
+[dbg +  978.0s] [◆ latent Critic] 40 steps in 1.72s · 23.3 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  978.1s] workspace after Critic: kv_len=0 kv=0.0MiB state=0.0MiB state_norm=None
+[dbg +  978.1s] agent Refiner (refiner) — latent thinking
+[dbg +  978.8s] [◆ latent Refiner] 40 steps (bs=8) ...
+[dbg +  980.5s] [◆ latent Refiner] 40 steps in 1.73s · 23.1 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg +  980.7s] workspace after Refiner: kv_len=0 kv=0.0MiB state=0.0MiB state_norm=None
+[dbg +  980.7s] agent Judger (judger) — text decode
+[dbg + 1050.0s] [⚡ decode Judger] 1552 tok in 69.27s · 22.4 tok/s/seq · ×8 = 179.2 tok/s
+[dbg + 1050.0s] batch: 8 items (done 56/100)
+[dbg + 1050.0s] agent Planner (planner) — latent thinking
+[dbg + 1050.6s] [◆ latent Planner] 40 steps (bs=8) ...
+[dbg + 1052.3s] [◆ latent Planner] 40 steps in 1.72s · 23.3 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1052.4s] workspace after Planner: kv_len=0 kv=0.0MiB state=0.0MiB state_norm=None
+[dbg + 1052.4s] agent Critic (critic) — latent thinking
+[dbg + 1053.1s] [◆ latent Critic] 40 steps (bs=8) ...
+[dbg + 1054.8s] [◆ latent Critic] 40 steps in 1.69s · 23.7 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1054.9s] workspace after Critic: kv_len=0 kv=0.0MiB state=0.0MiB state_norm=None
+[dbg + 1054.9s] agent Refiner (refiner) — latent thinking
+[dbg + 1055.5s] [◆ latent Refiner] 40 steps (bs=8) ...
+[dbg + 1057.2s] [◆ latent Refiner] 40 steps in 1.69s · 23.7 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1057.4s] workspace after Refiner: kv_len=0 kv=0.0MiB state=0.0MiB state_norm=None
+[dbg + 1057.4s] agent Judger (judger) — text decode
+[dbg + 1122.7s] [⚡ decode Judger] 1454 tok in 65.35s · 22.2 tok/s/seq · ×8 = 178.0 tok/s
+[dbg + 1122.7s] batch: 8 items (done 64/100)
+[dbg + 1122.7s] agent Planner (planner) — latent thinking
+[dbg + 1123.3s] [◆ latent Planner] 40 steps (bs=8) ...
+[dbg + 1125.0s] [◆ latent Planner] 40 steps in 1.71s · 23.3 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1125.2s] workspace after Planner: kv_len=0 kv=0.0MiB state=0.0MiB state_norm=None
+[dbg + 1125.2s] agent Critic (critic) — latent thinking
+[dbg + 1125.9s] [◆ latent Critic] 40 steps (bs=8) ...
+[dbg + 1127.6s] [◆ latent Critic] 40 steps in 1.72s · 23.2 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1127.7s] workspace after Critic: kv_len=0 kv=0.0MiB state=0.0MiB state_norm=None
+[dbg + 1127.7s] agent Refiner (refiner) — latent thinking
+[dbg + 1128.3s] [◆ latent Refiner] 40 steps (bs=8) ...
+[dbg + 1130.1s] [◆ latent Refiner] 40 steps in 1.73s · 23.2 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1130.2s] workspace after Refiner: kv_len=0 kv=0.0MiB state=0.0MiB state_norm=None
+[dbg + 1130.2s] agent Judger (judger) — text decode
+[dbg + 1188.6s] [⚡ decode Judger] 1312 tok in 58.40s · 22.5 tok/s/seq · ×8 = 179.7 tok/s
+[dbg + 1188.6s] batch: 8 items (done 72/100)
+[dbg + 1188.6s] agent Planner (planner) — latent thinking
+[dbg + 1189.3s] [◆ latent Planner] 40 steps (bs=8) ...
+[dbg + 1191.0s] [◆ latent Planner] 40 steps in 1.74s · 22.9 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1191.2s] workspace after Planner: kv_len=0 kv=0.0MiB state=0.0MiB state_norm=None
+[dbg + 1191.2s] agent Critic (critic) — latent thinking
+[dbg + 1191.9s] [◆ latent Critic] 40 steps (bs=8) ...
+[dbg + 1193.6s] [◆ latent Critic] 40 steps in 1.73s · 23.1 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1193.7s] workspace after Critic: kv_len=0 kv=0.0MiB state=0.0MiB state_norm=None
+[dbg + 1193.8s] agent Refiner (refiner) — latent thinking
+[dbg + 1194.4s] [◆ latent Refiner] 40 steps (bs=8) ...
+[dbg + 1196.1s] [◆ latent Refiner] 40 steps in 1.71s · 23.3 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1196.3s] workspace after Refiner: kv_len=0 kv=0.0MiB state=0.0MiB state_norm=None
+[dbg + 1196.3s] agent Judger (judger) — text decode
+[dbg + 1301.2s] [⚡ decode Judger] 2285 tok in 104.96s · 21.8 tok/s/seq · ×8 = 174.2 tok/s
+[   1/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~13.35s kv=0 s=None
+[   2/100] ✓  pred=d              gold=d              latent=120  ≳ 27.4k txt ~13.35s kv=0 s=None
+[   3/100] ✓  pred=d              gold=d              latent=120  ≳ 27.4k txt ~13.35s kv=0 s=None
+[   4/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~13.35s kv=0 s=None
+[   5/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~13.35s kv=0 s=None
+[   6/100] ✓  pred=d              gold=d              latent=120  ≳ 27.4k txt ~13.35s kv=0 s=None
+[   7/100] ✓  pred=a              gold=a              latent=120  ≳ 27.4k txt ~13.35s kv=0 s=None
+[   8/100] ✓  pred=a              gold=a              latent=120  ≳ 27.4k txt ~13.35s kv=0 s=None
+[   9/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~6.28s kv=0 s=None
+[  10/100] ✓  pred=a              gold=a              latent=120  ≳ 27.4k txt ~6.28s kv=0 s=None
+           acc 1.000 (10/10) · elapsed 4m27s · eta 40m10s · vram 24.1GiB
+[  11/100] ✓  pred=b              gold=b              latent=120  ≳ 27.4k txt ~6.28s kv=0 s=None
+[  12/100] ✓  pred=d              gold=d              latent=120  ≳ 27.4k txt ~6.28s kv=0 s=None
+[  13/100] ✓  pred=d              gold=d              latent=120  ≳ 27.4k txt ~6.28s kv=0 s=None
+[  14/100] ✓  pred=a              gold=a              latent=120  ≳ 27.4k txt ~6.28s kv=0 s=None
+[  15/100] ✓  pred=a              gold=a              latent=120  ≳ 27.4k txt ~6.28s kv=0 s=None
+[  16/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~6.28s kv=0 s=None
+[  17/100] ✓  pred=b              gold=b              latent=120  ≳ 27.4k txt ~11.81s kv=0 s=None
+[  18/100] ✓  pred=a              gold=a              latent=120  ≳ 27.4k txt ~11.81s kv=0 s=None
+[  19/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~11.81s kv=0 s=None
+[  20/100] ✓  pred=a              gold=a              latent=120  ≳ 27.4k txt ~11.81s kv=0 s=None
+           acc 1.000 (20/20) · elapsed 6m02s · eta 24m09s · vram 24.1GiB
+[  21/100] ✓  pred=b              gold=b              latent=120  ≳ 27.4k txt ~11.81s kv=0 s=None
+[  22/100] ✓  pred=b              gold=b              latent=120  ≳ 27.4k txt ~11.81s kv=0 s=None
+[  23/100] ✓  pred=b              gold=b              latent=120  ≳ 27.4k txt ~11.81s kv=0 s=None
+[  24/100] ✓  pred=d              gold=d              latent=120  ≳ 27.4k txt ~11.81s kv=0 s=None
+[  25/100] ✓  pred=b              gold=b              latent=120  ≳ 27.4k txt ~26.05s kv=0 s=None
+[  26/100] ✓  pred=d              gold=d              latent=120  ≳ 27.4k txt ~26.05s kv=0 s=None
+[  27/100] ✗  pred=1              gold=a              latent=120  ≳ 27.4k txt ~26.05s kv=0 s=None CUT
+[  28/100] ✓  pred=b              gold=b              latent=120  ≳ 27.4k txt ~26.05s kv=0 s=None
+[  29/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~26.05s kv=0 s=None
+[  30/100] ✗  pred=b              gold=a              latent=120  ≳ 27.4k txt ~26.05s kv=0 s=None
+           acc 0.933 (28/30) · elapsed 9m30s · eta 22m11s · vram 40.7GiB · cut 1
+[  31/100] ✓  pred=d              gold=d              latent=120  ≳ 27.4k txt ~26.05s kv=0 s=None
+[  32/100] ✓  pred=b              gold=b              latent=120  ≳ 27.4k txt ~26.05s kv=0 s=None
+[  33/100] ✓  pred=d              gold=d              latent=120  ≳ 27.4k txt ~24.08s kv=0 s=None
+[  34/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~24.08s kv=0 s=None
+[  35/100] ✓  pred=a              gold=a              latent=120  ≳ 27.4k txt ~24.08s kv=0 s=None
+[  36/100] ✓  pred=b              gold=b              latent=120  ≳ 27.4k txt ~24.08s kv=0 s=None
+[  37/100] ✓  pred=d              gold=d              latent=120  ≳ 27.4k txt ~24.08s kv=0 s=None
+[  38/100] ✓  pred=b              gold=b              latent=120  ≳ 27.4k txt ~24.08s kv=0 s=None
+[  39/100] ✓  pred=d              gold=d              latent=120  ≳ 27.4k txt ~24.08s kv=0 s=None
+[  40/100] ✓  pred=d              gold=d              latent=120  ≳ 27.4k txt ~24.08s kv=0 s=None
+           acc 0.950 (38/40) · elapsed 12m43s · eta 19m05s · vram 40.7GiB · cut 1
+[  41/100] ✗  pred=d              gold=a              latent=120  ≳ 27.4k txt ~26.19s kv=0 s=None
+[  42/100] ✗  pred=2              gold=d              latent=120  ≳ 27.4k txt ~26.19s kv=0 s=None CUT
+[  43/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~26.19s kv=0 s=None
+[  44/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~26.19s kv=0 s=None
+[  45/100] ✓  pred=a              gold=a              latent=120  ≳ 27.4k txt ~26.19s kv=0 s=None
+[  46/100] ✓  pred=d              gold=d              latent=120  ≳ 27.4k txt ~26.19s kv=0 s=None
+[  47/100] ✗  pred=c              gold=d              latent=120  ≳ 27.4k txt ~26.19s kv=0 s=None
+[  48/100] ✓  pred=a              gold=a              latent=120  ≳ 27.4k txt ~26.19s kv=0 s=None
+[  49/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~9.61s kv=0 s=None
+[  50/100] ✓  pred=a              gold=a              latent=120  ≳ 27.4k txt ~9.61s kv=0 s=None
+           acc 0.900 (45/50) · elapsed 17m29s · eta 17m29s · vram 41.8GiB · cut 2
+[  51/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~9.61s kv=0 s=None
+[  52/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~9.61s kv=0 s=None
+[  53/100] ✓  pred=d              gold=d              latent=120  ≳ 27.4k txt ~9.61s kv=0 s=None
+[  54/100] ✓  pred=b              gold=b              latent=120  ≳ 27.4k txt ~9.61s kv=0 s=None
+[  55/100] ✓  pred=b              gold=b              latent=120  ≳ 27.4k txt ~9.61s kv=0 s=None
+[  56/100] ✗  pred=b              gold=d              latent=120  ≳ 27.4k txt ~9.61s kv=0 s=None
+[  57/100] ✓  pred=d              gold=d              latent=120  ≳ 27.4k txt ~9.10s kv=0 s=None
+[  58/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~9.10s kv=0 s=None
+[  59/100] ✓  pred=a              gold=a              latent=120  ≳ 27.4k txt ~9.10s kv=0 s=None
+[  60/100] ✓  pred=d              gold=d              latent=120  ≳ 27.4k txt ~9.10s kv=0 s=None
+           acc 0.900 (54/60) · elapsed 18m42s · eta 12m28s · vram 41.8GiB · cut 2
+[  61/100] ✗  pred=c              gold=d              latent=120  ≳ 27.4k txt ~9.10s kv=0 s=None
+[  62/100] ✓  pred=d              gold=d              latent=120  ≳ 27.4k txt ~9.10s kv=0 s=None
+[  63/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~9.10s kv=0 s=None
+[  64/100] ✓  pred=d              gold=d              latent=120  ≳ 27.4k txt ~9.10s kv=0 s=None
+[  65/100] ✓  pred=b              gold=b              latent=120  ≳ 27.4k txt ~8.24s kv=0 s=None
+[  66/100] ✓  pred=b              gold=b              latent=120  ≳ 27.4k txt ~8.24s kv=0 s=None
+[  67/100] ✓  pred=b              gold=b              latent=120  ≳ 27.4k txt ~8.24s kv=0 s=None
+[  68/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~8.24s kv=0 s=None
+[  69/100] ✓  pred=b              gold=b              latent=120  ≳ 27.4k txt ~8.24s kv=0 s=None
+[  70/100] ✓  pred=b              gold=b              latent=120  ≳ 27.4k txt ~8.24s kv=0 s=None
+           acc 0.900 (63/70) · elapsed 19m48s · eta 8m29s · vram 41.8GiB · cut 2
+[  71/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~8.24s kv=0 s=None
+[  72/100] ✓  pred=a              gold=a              latent=120  ≳ 27.4k txt ~8.24s kv=0 s=None
+[  73/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~14.08s kv=0 s=None
+[  74/100] ✗  pred=b              gold=a              latent=120  ≳ 27.4k txt ~14.08s kv=0 s=None
+[  75/100] ✗  pred=d              gold=a              latent=120  ≳ 27.4k txt ~14.08s kv=0 s=None[dbg + 1301.3s] batch: 8 items (done 80/100)
+[dbg + 1301.3s] agent Planner (planner) — latent thinking
+[dbg + 1301.8s] [◆ latent Planner] 40 steps (bs=8) ...
+[dbg + 1303.5s] [◆ latent Planner] 40 steps in 1.72s · 23.2 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1303.7s] workspace after Planner: kv_len=0 kv=0.0MiB state=0.0MiB state_norm=None
+[dbg + 1303.7s] agent Critic (critic) — latent thinking
+[dbg + 1304.2s] [◆ latent Critic] 40 steps (bs=8) ...
+[dbg + 1305.9s] [◆ latent Critic] 40 steps in 1.72s · 23.3 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1306.1s] workspace after Critic: kv_len=0 kv=0.0MiB state=0.0MiB state_norm=None
+[dbg + 1306.1s] agent Refiner (refiner) — latent thinking
+[dbg + 1306.7s] [◆ latent Refiner] 40 steps (bs=8) ...
+[dbg + 1308.4s] [◆ latent Refiner] 40 steps in 1.73s · 23.2 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1308.6s] workspace after Refiner: kv_len=0 kv=0.0MiB state=0.0MiB state_norm=None
+[dbg + 1308.6s] agent Judger (judger) — text decode
+[dbg + 1467.4s] [⚡ decode Judger] 3336 tok in 158.83s · 21.0 tok/s/seq · ×8 = 168.0 tok/s
+[dbg + 1467.4s] batch: 8 items (done 88/100)
+[dbg + 1467.4s] agent Planner (planner) — latent thinking
+[dbg + 1467.9s] [◆ latent Planner] 40 steps (bs=8) ...
+[dbg + 1469.6s] [◆ latent Planner] 40 steps in 1.73s · 23.2 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1469.8s] workspace after Planner: kv_len=0 kv=0.0MiB state=0.0MiB state_norm=None
+[dbg + 1469.8s] agent Critic (critic) — latent thinking
+[dbg + 1470.4s] [◆ latent Critic] 40 steps (bs=8) ...
+[dbg + 1472.1s] [◆ latent Critic] 40 steps in 1.72s · 23.3 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1472.2s] workspace after Critic: kv_len=0 kv=0.0MiB state=0.0MiB state_norm=None
+[dbg + 1472.2s] agent Refiner (refiner) — latent thinking
+[dbg + 1472.8s] [◆ latent Refiner] 40 steps (bs=8) ...
+[dbg + 1474.5s] [◆ latent Refiner] 40 steps in 1.74s · 22.9 step/s (bs=8) · ≳9.1k text-tok (×228.6)
+[dbg + 1474.7s] workspace after Refiner: kv_len=0 kv=0.0MiB state=0.0MiB state_norm=None
+[dbg + 1474.7s] agent Judger (judger) — text decode
+[dbg + 1518.3s] [⚡ decode Judger] 973 tok in 43.59s · 22.3 tok/s/seq · ×8 = 178.6 tok/s
+[dbg + 1518.3s] batch: 4 items (done 96/100)
+[dbg + 1518.3s] agent Planner (planner) — latent thinking
+[dbg + 1518.5s] [◆ latent Planner] 40 steps (bs=4) ...
+[dbg + 1520.3s] [◆ latent Planner] 40 steps in 1.73s · 23.1 step/s (bs=4) · ≳9.1k text-tok (×228.6)
+[dbg + 1520.4s] workspace after Planner: kv_len=0 kv=0.0MiB state=0.0MiB state_norm=None
+[dbg + 1520.4s] agent Critic (critic) — latent thinking
+[dbg + 1520.7s] [◆ latent Critic] 40 steps (bs=4) ...
+[dbg + 1522.4s] [◆ latent Critic] 40 steps in 1.74s · 23.0 step/s (bs=4) · ≳9.1k text-tok (×228.6)
+[dbg + 1522.6s] workspace after Critic: kv_len=0 kv=0.0MiB state=0.0MiB state_norm=None
+[dbg + 1522.6s] agent Refiner (refiner) — latent thinking
+[dbg + 1522.8s] [◆ latent Refiner] 40 steps (bs=4) ...
+[dbg + 1524.6s] [◆ latent Refiner] 40 steps in 1.72s · 23.2 step/s (bs=4) · ≳9.1k text-tok (×228.6)
+[dbg + 1524.7s] workspace after Refiner: kv_len=0 kv=0.0MiB state=0.0MiB state_norm=None
+[dbg + 1524.7s] agent Judger (judger) — text decode
+[dbg + 1577.1s] [⚡ decode Judger] 1199 tok in 52.34s · 22.9 tok/s/seq · ×4 = 91.6 tok/s
+[print2] WARNING: 2/100 answers hit --max_new_tokens and were cut off. Accuracy and token totals both reflect the cap, not the method.
+
+[  76/100] ✓  pred=b              gold=b              latent=120  ≳ 27.4k txt ~14.08s kv=0 s=None
+[  77/100] ✓  pred=a              gold=a              latent=120  ≳ 27.4k txt ~14.08s kv=0 s=None
+[  78/100] ✓  pred=a              gold=a              latent=120  ≳ 27.4k txt ~14.08s kv=0 s=None
+[  79/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~14.08s kv=0 s=None
+[  80/100] ✓  pred=a              gold=a              latent=120  ≳ 27.4k txt ~14.08s kv=0 s=None
+           acc 0.887 (71/80) · elapsed 21m41s · eta 5m25s · vram 41.8GiB · cut 2
+[  81/100] ✓  pred=a              gold=a              latent=120  ≳ 27.4k txt ~20.77s kv=0 s=None
+[  82/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~20.77s kv=0 s=None
+[  83/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~20.77s kv=0 s=None
+[  84/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~20.77s kv=0 s=None
+[  85/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~20.77s kv=0 s=None
+[  86/100] ✗  pred=a              gold=c              latent=120  ≳ 27.4k txt ~20.77s kv=0 s=None
+[  87/100] ✓  pred=b              gold=b              latent=120  ≳ 27.4k txt ~20.77s kv=0 s=None
+[  88/100] ✓  pred=d              gold=d              latent=120  ≳ 27.4k txt ~20.77s kv=0 s=None
+[  89/100] ✓  pred=a              gold=a              latent=120  ≳ 27.4k txt ~6.36s kv=0 s=None
+[  90/100] ✓  pred=a              gold=a              latent=120  ≳ 27.4k txt ~6.36s kv=0 s=None
+           acc 0.889 (80/90) · elapsed 25m18s · eta 2m48s · vram 41.8GiB · cut 2
+[  91/100] ✓  pred=a              gold=a              latent=120  ≳ 27.4k txt ~6.36s kv=0 s=None
+[  92/100] ✓  pred=b              gold=b              latent=120  ≳ 27.4k txt ~6.36s kv=0 s=None
+[  93/100] ✓  pred=a              gold=a              latent=120  ≳ 27.4k txt ~6.36s kv=0 s=None
+[  94/100] ✓  pred=d              gold=d              latent=120  ≳ 27.4k txt ~6.36s kv=0 s=None
+[  95/100] ✓  pred=a              gold=a              latent=120  ≳ 27.4k txt ~6.36s kv=0 s=None
+[  96/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~6.36s kv=0 s=None
+[  97/100] ✓  pred=c              gold=c              latent=120  ≳ 27.4k txt ~14.70s kv=0 s=None
+[  98/100] ✓  pred=a              gold=a              latent=120  ≳ 27.4k txt ~14.70s kv=0 s=None
+[  99/100] ✓  pred=d              gold=d              latent=120  ≳ 27.4k txt ~14.70s kv=0 s=None
+[ 100/100] ✓  pred=b              gold=b              latent=120  ≳ 27.4k txt ~14.70s kv=0 s=None
+           acc 0.900 (90/100) · elapsed 26m16s · eta 0s · vram 41.8GiB · cut 2
+{"method": "latent_mas", "model": "Qwen/Qwen3.5-9B", "task": "medqa", "sample_offset": 0, "latent_steps": 40, "latent_turn": "content", "latent_visibility": "full", "chat_thinking": "off", "judger_thinking": "inherit", "latent_space_realign": false, "max_new_tokens": 4096, "generate_bs": 8, "state_transfer": "none", "split": "test", "seed": 42, "max_samples": 100, "processed": 100, "status": "completed", "accuracy": 0.9, "accuracy_ci95": {"low": 0.8256, "high": 0.9448, "half_width": 0.0596, "z": 1.96}, "correct": 90, "generated_tokens": 104099, "generated_tokens_per_sample": 1040.99, "prompt_tokens": 138792, "latent_steps_total": 12000, "truncated_final": 2, "peak_vram_mib": 42834.0, "total_time_sec": 1466.0698, "time_per_sample_sec": 14.6607}
+[print2] runs/20260823_175329_latent_mas_medqa/trace.jsonl  (100 samples, completed)
+[print2] runs/20260823_175329_latent_mas_medqa/batches.jsonl  (13 batches)
+[print2] runs/20260823_175329_latent_mas_medqa/manifest.json  acc=0.9000 (90/100)

@@ -1,0 +1,220 @@
+{
+ "run_id": "20260822_214812_latent_mas_medqa",
+ "command": "run.py --task medqa --model_name Qwen/Qwen3.5-9B --device cuda --max_samples 100 --generate_bs 4 --max_new_tokens 2048 --temperature 0 --chat_thinking off --print2 --debug --method latent_mas --latent_steps 40 --latent_space_realign --latent_turn content",
+ "git": {
+  "commit": null,
+  "dirty": null
+ },
+ "environment": {
+  "python": "3.12.13",
+  "platform": "Linux-x86_64-with-glibc2.39",
+  "hostname": "anonymized",
+  "torch": "2.8.0",
+  "transformers": "5.15.1",
+  "accelerate": "1.14.0",
+  "numpy": "1.26.4",
+  "datasets": "5.0.1",
+  "cuda": "12.9",
+  "gpus": [
+   {
+    "name": "NVIDIA L40S",
+    "vram_gb": 44.4
+   }
+  ],
+  "device_details": {
+   "devices": [
+    {
+     "index": 0,
+     "name": "NVIDIA L40S",
+     "vram_gib": 44.4,
+     "compute_capability": "8.9",
+     "multi_processor_count": 142,
+     "driver_version": "595.91.07",
+     "power_limit_w": "350.00",
+     "max_sm_clock_mhz": "2520",
+     "max_mem_clock_mhz": "9001"
+    }
+   ],
+   "torch_cuda_build": "12.9",
+   "cudnn": 91002,
+   "tf32_matmul": false,
+   "tf32_cudnn": true
+  }
+ },
+ "model": {
+  "name": "Qwen/Qwen3.5-9B",
+  "dtype": "torch.bfloat16",
+  "attn_implementation": "sdpa",
+  "append_mode": "auto",
+  "append_carries_state": true,
+  "hidden_size": 4096,
+  "vocab_size": 248077,
+  "num_hidden_layers": 32,
+  "linear_attention_layers": 24,
+  "weights_mib": 17078.0,
+  "chat": {
+   "chat_thinking": "off",
+   "template_sha256": "a4aee8afcf2e0711",
+   "template_chars": 7756,
+   "generation_tail_auto": "<think>\n",
+   "generation_tail_on": "<think>\n",
+   "generation_tail_off": "<think>\n\n</think>\n\n"
+  },
+  "memory_after_load": {
+   "cuda:0": {
+    "allocated_mib": 17086.2,
+    "reserved_mib": 17370.0,
+    "peak_allocated_mib": 17338.4,
+    "peak_reserved_mib": 17370.0
+   }
+  }
+ },
+ "started": "2026-08-22T21:48:12.942738+00:00",
+ "updated": "2026-08-22T22:29:24.405958+00:00",
+ "status": "completed",
+ "args": {
+  "method": "latent_mas",
+  "model_name": "Qwen/Qwen3.5-9B",
+  "max_samples": 100,
+  "task": "medqa",
+  "prompt": "sequential",
+  "device": "cuda",
+  "split": "test",
+  "max_new_tokens": 2048,
+  "latent_steps": 40,
+  "temperature": 0.0,
+  "top_p": 0.95,
+  "generate_bs": 4,
+  "text_mas_context_length": -1,
+  "think": false,
+  "latent_space_realign": true,
+  "dtype": "auto",
+  "seed": 42,
+  "print2": true,
+  "debug": true,
+  "warmup": 1,
+  "gpu_telemetry": false,
+  "telemetry_interval": 5.0,
+  "state_transfer": "both",
+  "mamba_append": "auto",
+  "latent_turn": "content",
+  "latent_visibility": "full",
+  "chat_thinking": "off",
+  "judger_thinking": "inherit",
+  "backend": "hf",
+  "api_model": null,
+  "api_base": null,
+  "api_key_env": "OPENAI_API_KEY",
+  "aws_region": null,
+  "aws_profile": null,
+  "api_concurrency": 8,
+  "api_timeout": 600.0,
+  "use_vllm": false
+ },
+ "accuracy": 0.81,
+ "accuracy_ci95": {
+  "low": 0.7222,
+  "high": 0.8749,
+  "half_width": 0.0763,
+  "z": 1.96
+ },
+ "correct": 81,
+ "processed": 100,
+ "total": 100,
+ "total_time_sec": 2396.8664,
+ "time_per_sample_sec": 23.9687,
+ "timing": {
+  "total_sec": 2396.8664,
+  "sec_per_sample": 23.9687,
+  "samples_per_sec": 0.0417,
+  "warmup_batches_discarded": 1,
+  "cold_batches_excluded_from_steady": 0,
+  "batches": 25,
+  "batch_sec": {
+   "n": 25,
+   "mean": 95.8722,
+   "median": 101.8257,
+   "p90": 131.2542,
+   "min": 47.6664,
+   "max": 139.0174
+  },
+  "steady_sec_per_sample": {
+   "n": 25,
+   "mean": 23.968,
+   "median": 25.4564,
+   "p90": 32.8135,
+   "min": 11.9166,
+   "max": 34.7544
+  },
+  "phase_sec": {
+   "append": 686.0,
+   "latent": 134.185,
+   "decode": 1563.276,
+   "measured_total": 2383.462
+  },
+  "steady_total_sec": 2396.8039,
+  "steady_samples": 100,
+  "steady_sec_per_sample_mean": 23.968
+ },
+ "tokens": {
+  "prompt_total": 138792,
+  "generated_total": 87002,
+  "latent_steps_total": 12000,
+  "prompt_per_sample": 1387.92,
+  "generated_per_sample": 870.02,
+  "latent_steps_per_sample": 120.0,
+  "generated_tok_per_sec": 36.3,
+  "append_forwards_total": 58360,
+  "append_positions_total": 554768,
+  "append_forwards_per_sample": 583.6,
+  "decode_tok_per_sec": 55.65
+ },
+ "generation": {
+  "truncated_final": 16,
+  "truncated_final_rate": 0.16,
+  "truncated_any_agent": 16,
+  "max_new_tokens": 2048,
+  "temperature": 0.0,
+  "top_p": 0.95,
+  "greedy": true,
+  "seed": 42
+ },
+ "memory": {
+  "peak": {
+   "cuda:0": {
+    "allocated_mib": 17150.2,
+    "reserved_mib": 19278.0,
+    "peak_allocated_mib": 18517.2,
+    "peak_reserved_mib": 19278.0
+   }
+  },
+  "after_load": {
+   "cuda:0": {
+    "allocated_mib": 17086.2,
+    "reserved_mib": 17370.0,
+    "peak_allocated_mib": 17338.4,
+    "peak_reserved_mib": 17370.0
+   }
+  }
+ },
+ "channel": {
+  "workspace_kv_mib_max": 235.5,
+  "workspace_state_mib_max": 198.0,
+  "transferred_kv_mib_max": 235.75,
+  "transferred_state_mib_max": 198.0,
+  "transferred_total_mib_max": 433.75,
+  "state_transfer": "both"
+ },
+ "theorem_3_1": {
+  "hidden_size": 4096,
+  "vocab_size": 248077,
+  "log_base": 2.0,
+  "text_tokens_per_latent_step": 228.566,
+  "source": "Theorem 3.1, arXiv:2511.20639 (lower bound)",
+  "text_equivalent_tokens_total": 2742791.56,
+  "text_equivalent_tokens_per_sample": 27427.92,
+  "text_tokens_per_latent_step_log3": 362.2685,
+  "text_equivalent_tokens_total_log3": 4347221.78,
+  "latent_vs_generated_ratio": 31.526
+ }
+}

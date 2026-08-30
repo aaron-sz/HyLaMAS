@@ -1,0 +1,187 @@
+[dbg +    0.1s] init: method=baseline model=Qwen/Qwen3.5-9B task=humanevalplus device=cuda state_transfer=both
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[dbg +    0.9s] dtype: loading Qwen/Qwen3.5-9B in torch.bfloat16
+[dbg +    0.9s] [▶ load model Qwen/Qwen3.5-9B (HF, torch.bfloat16)] ...
+[print2] writing run to runs/20260823_010643_baseline_humanevalplus/
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]Fetching 4 files: 100%|██████████| 4/4 [00:00<00:00, 1499.57it/s]
+Loading weights:   0%|          | 0/427 [00:00<?, ?it/s]Loading weights: 100%|██████████| 427/427 [00:00<00:00, 4996.12it/s]
+[dbg +    1.5s] [✓ load model Qwen/Qwen3.5-9B (HF, torch.bfloat16)] 0.65s
+[dbg +    1.5s] [▶ move model to cuda] ...
+[dbg +    3.8s] [✓ move model to cuda] 2.26s
+[dbg +    3.8s] model: 24/32 layers are Gated DeltaNet (recurrent state [B, 32, 128, 128] per layer, conv kernel 4)
+[dbg +    5.5s] hybrid: append-carries-state probe — split 3.12e-02 vs reset 7.87e+00 (0.4% of a full reset; state |max| 11.5, dtype torch.bfloat16) -> carries
+[dbg +    5.5s] hybrid: append mode = auto
+[dbg +    5.5s] model: attn_implementation = sdpa, dtype = torch.bfloat16
+[dbg +    5.6s] theorem 3.1: d_h=4096 |V|=248077 — 1 latent thought >= 228.6 text tokens
+[dbg +    5.7s] [▶ load dataset humanevalplus] ...
+Generating test split:   0%|          | 0/164 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 164/164 [00:00<00:00, 3388.92 examples/s]
+[dbg +    6.7s] [✓ load dataset humanevalplus] 1.05s
+[dbg +    6.7s] dataset humanevalplus: 100 samples to run
+[dbg +    6.7s] warmup batch 1/1 (4 items, discarded)
+[dbg +   65.9s] [⚡ decode] 737 tok in 59.16s · 12.5 tok/s/seq · ×4 = 49.8 tok/s
+=========================================
+Question 0
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 3, in <module>
+NameError: name 'List' is not defined. Did you mean: 'list'?
+
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: None
+[dbg +   66.6s] batch: 4 items (done 0/100)
+[dbg +  125.8s] [⚡ decode] 737 tok in 59.25s · 12.4 tok/s/seq · ×4 = 49.8 tok/s
+=========================================
+Question 3
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 1, in <module>
+NameError: name 'List' is not defined. Did you mean: 'list'?
+
+=========================================
+Question 0
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 3, in <module>
+NameError: name 'List' is not defined. Did you mean: 'list'?
+
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: None
+[dbg +  126.7s] batch: 4 items (done 4/100)
+[dbg +  176.7s] [⚡ decode] 634 tok in 49.94s · 12.7 tok/s/seq · ×4 = 50.8 tok/s
+=========================================
+Question 3
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 1, in <module>
+NameError: name 'List' is not defined. Did you mean: 'list'?
+
+[   1/100] ✗  pred=import math  … gold=  import nump… latent=0    ~15.03s
+[   2/100] ✓  pred=from typing i… gold=  import nump… latent=0    ~15.03s
+[   3/100] ✓  pred=def truncate_… gold=  import nump… latent=0    ~15.03s
+[   4/100] ✗  pred=def below_zer… gold=  import nump… latent=0    ~15.03s
+=========================================
+Question 0
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 3, in <module>
+NameError: name 'List' is not defined. Did you mean: 'list'?
+
+=========================================
+Question 1
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 1, in <module>
+NameError: name 'List' is not defined. Did you mean: 'list'?
+
+=========================================
+Question 2
+error_msg: None
+[dbg +  177.3s] batch: 4 items (done 8/100)
+[dbg +  201.2s] [⚡ decode] 296 tok in 23.85s · 12.4 tok/s/seq · ×4 = 49.6 tok/s
+=========================================
+Question 3
+error_msg: None
+[   5/100] ✗  pred=import math  … gold=  import nump… latent=0    ~12.65s
+[   6/100] ✗  pred=def intersper… gold=  import nump… latent=0    ~12.65s
+[   7/100] ✓  pred=from typing i… gold=  import nump… latent=0    ~12.65s
+[   8/100] ✓  pred=from typing i… gold=  import nump… latent=0    ~12.65s
+=========================================
+Question 0
+error_msg: None
+=========================================
+Question 1
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 1, in <module>
+NameError: name 'List' is not defined. Did you mean: 'list'?
+
+=========================================
+Question 2
+error_msg: None
+[dbg +  202.1s] batch: 4 items (done 12/100)
+[dbg +  276.5s] [⚡ decode] 925 tok in 74.38s · 12.4 tok/s/seq · ×4 = 49.7 tok/s
+=========================================
+Question 3
+error_msg: None
+[   9/100] ✓  pred=from typing i… gold=  import nump… latent=0    ~6.19s
+[  10/100] ✗  pred=def rolling_m… gold=  import nump… latent=0    ~6.19s
+           acc 0.500 (5/10) · elapsed 3m21s · eta 30m17s · vram 17.5GiB
+[  11/100] ✓  pred=def is_palind… gold=  import nump… latent=0    ~6.19s
+[  12/100] ✓  pred=def string_xo… gold=  import nump… latent=0    ~6.19s
+=========================================
+Question 0
+error_msg: None
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: None
+[dbg +  281.8s] batch: 4 items (done 16/100)
+[dbg +  392.4s] [⚡ decode] 1389 tok in 110.66s · 12.6 tok/s/seq · ×4 = 50.2 tok/s
+=========================================
+Question 3
+error_msg: None
+[  13/100] ✓  pred=from typing i… gold=  import nump… latent=0    ~19.92s
+[  14/100] ✓  pred=def greatest_… gold=  import nump… latent=0    ~19.92s
+[  15/100] ✓  pred=from typing i… gold=import numpy … latent=0    ~19.92s
+[  16/100] ✓  pred=def string_se… gold=import numpy … latent=0    ~19.92s
+=========================================
+Question 0
+error_msg: None
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: None
+[dbg +  393.1s] batch: 4 items (done 20/100)
+[dbg +  448.3s] [⚡ decode] 691 tok in 55.16s · 12.5 tok/s/seq · ×4 = 50.1 tok/s
+=========================================
+Question 3
+error_msg: None
+[  17/100] ✓  pred=def count_dis… gold=  import nump… latent=0    ~27.84s
+[  18/100] ✓  pred=from typing i… gold=  import nump… latent=0    ~27.84s
+[  19/100] ✓  pred=def how_many_… gold=  import nump… latent=0    ~27.84s
+[  20/100] ✓  pred=from typing i… gold=  import nump… latent=0    ~27.84s
+           acc 0.750 (15/20) · elapsed 6m32s · eta 26m11s · vram 18.4GiB
+=========================================
+Question 0
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 3, in <module>
+NameError: name 'List' is not defined. Did you mean: 'list'?
+
+=========================================
+Question 1
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 1, in <module>
+NameError: name 'List' is not defined. Did you mean: 'list'?
+
+=========================================
+Question 2
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 1, in <module>
+NameError: name 'List' is not defined. Did you mean: 'list'?
+
+[dbg +  449.1s] batch: 4 items (done 24/100)

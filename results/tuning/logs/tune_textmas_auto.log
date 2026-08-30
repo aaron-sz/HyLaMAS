@@ -1,0 +1,143 @@
+[dbg +    0.1s] init: method=text_mas model=Qwen/Qwen3.5-9B task=medqa device=cuda state_transfer=both
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[dbg +    0.9s] dtype: loading Qwen/Qwen3.5-9B in torch.bfloat16
+[dbg +    0.9s] [▶ load model Qwen/Qwen3.5-9B (HF, torch.bfloat16)] ...
+[print2] writing run to runs/20260823_042329_text_mas_medqa/
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]Fetching 4 files: 100%|██████████| 4/4 [00:00<00:00, 1947.89it/s]
+Loading weights:   0%|          | 0/427 [00:00<?, ?it/s]Loading weights: 100%|██████████| 427/427 [00:00<00:00, 6091.04it/s]
+[dbg +    1.5s] [✓ load model Qwen/Qwen3.5-9B (HF, torch.bfloat16)] 0.62s
+[dbg +    1.5s] [▶ move model to cuda] ...
+[dbg +    3.3s] [✓ move model to cuda] 1.83s
+[dbg +    3.3s] model: 24/32 layers are Gated DeltaNet (recurrent state [B, 32, 128, 128] per layer, conv kernel 4)
+[dbg +    4.5s] hybrid: append-carries-state probe — split 3.12e-02 vs reset 7.87e+00 (0.4% of a full reset; state |max| 11.5, dtype torch.bfloat16) -> carries
+[dbg +    4.5s] hybrid: append mode = auto
+[dbg +    4.5s] model: attn_implementation = sdpa, dtype = torch.bfloat16
+[dbg +    4.6s] theorem 3.1: d_h=4096 |V|=248077 — 1 latent thought >= 228.6 text tokens
+[dbg +    4.6s] [▶ load dataset medqa] ...
+[dbg +    4.7s] [✓ load dataset medqa] 0.06s
+[dbg +    4.7s] dataset medqa: skipped 100, 200 remain
+[dbg +    4.7s] dataset medqa: 100 samples to run
+[dbg +    4.7s] warmup batch 1/1 (8 items, discarded)
+[dbg +  207.5s] [⚡ decode] 4096 tok in 202.83s · 20.2 tok/s/seq · ×8 = 161.6 tok/s
+[dbg +  487.5s] [⚡ decode] 4096 tok in 279.94s · 14.6 tok/s/seq · ×8 = 117.1 tok/s
+[dbg +  845.7s] [⚡ decode] 4096 tok in 358.15s · 11.4 tok/s/seq · ×8 = 91.5 tok/s
+[dbg + 1244.0s] [⚡ decode] 4096 tok in 398.14s · 10.3 tok/s/seq · ×8 = 82.3 tok/s
+[dbg + 1244.0s] batch: 8 items (done 0/100)
+[dbg + 1446.3s] [⚡ decode] 4096 tok in 202.37s · 20.2 tok/s/seq · ×8 = 161.9 tok/s
+[dbg + 1726.2s] [⚡ decode] 4096 tok in 279.80s · 14.6 tok/s/seq · ×8 = 117.1 tok/s
+[dbg + 2083.7s] [⚡ decode] 4096 tok in 357.42s · 11.5 tok/s/seq · ×8 = 91.7 tok/s
+[dbg + 2481.6s] [⚡ decode] 4096 tok in 397.80s · 10.3 tok/s/seq · ×8 = 82.4 tok/s
+[dbg + 2481.6s] batch: 8 items (done 8/100)
+[dbg + 2614.3s] [⚡ decode] 2844 tok in 132.71s · 21.4 tok/s/seq · ×8 = 171.4 tok/s
+[dbg + 2868.4s] [⚡ decode] 4096 tok in 254.02s · 16.1 tok/s/seq · ×8 = 129.0 tok/s
+[dbg + 3068.6s] [⚡ decode] 2609 tok in 200.13s · 13.0 tok/s/seq · ×8 = 104.3 tok/s
+[dbg + 3282.9s] [⚡ decode] 2390 tok in 214.25s · 11.2 tok/s/seq · ×8 = 89.2 tok/s
+[dbg + 3282.9s] batch: 8 items (done 16/100)
+[dbg + 3484.7s] [⚡ decode] 4096 tok in 201.76s · 20.3 tok/s/seq · ×8 = 162.4 tok/s
+[dbg + 3761.6s] [⚡ decode] 4096 tok in 276.93s · 14.8 tok/s/seq · ×8 = 118.3 tok/s
+[dbg + 4116.0s] [⚡ decode] 4096 tok in 354.32s · 11.6 tok/s/seq · ×8 = 92.5 tok/s
+[   1/100] ✗  pred=3              gold=a              latent=0    ~154.70s CUT
+[   2/100] ✓  pred=c              gold=c              latent=0    ~154.70s
+[   3/100] ✓  pred=b              gold=b              latent=0    ~154.70s
+[   4/100] ✓  pred=c              gold=c              latent=0    ~154.70s
+[   5/100] ✓  pred=c              gold=c              latent=0    ~154.70s
+[   6/100] ✓  pred=b              gold=b              latent=0    ~154.70s
+[   7/100] ✓  pred=c              gold=c              latent=0    ~154.70s
+[   8/100] ✗  pred=a              gold=c              latent=0    ~154.70s
+[   9/100] ✓  pred=d              gold=d              latent=0    ~100.16s
+[  10/100] ✓  pred=b              gold=b              latent=0    ~100.16s
+           acc 0.800 (8/10) · elapsed 54m42s · eta 8h12m · vram 42.1GiB · cut 1
+[  11/100] ✓  pred=b              gold=b              latent=0    ~100.16s
+[  12/100] ✓  pred=a              gold=a              latent=0    ~100.16s
+[  13/100] ✓  pred=d              gold=d              latent=0    ~100.16s
+[  14/100] ✓  pred=b              gold=b              latent=0    ~100.16s
+[  15/100] ✓  pred=a              gold=a              latent=0    ~100.16s
+[  16/100] ✓  pred=c              gold=c              latent=0    ~100.16s
+Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/run.py", line 596, in <module>
+    main()
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/run.py", line 509, in main
+    processed, preds = process_batch(
+                       ^^^^^^^^^^^^^^
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/run.py", line 81, in process_batch
+    results = method.run_batch(current_batch)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/methods/text_mas.py", line 79, in run_batch
+    generated_texts, gen_stats, gen_token_counts = self.model.generate_text_batch(
+                                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 120, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/models.py", line 836, in generate_text_batch
+    outputs = self.model.generate(
+              ^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/torch/utils/_contextlib.py", line 120, in decorate_context
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/transformers/generation/utils.py", line 2668, in generate
+    result = decoding_method(
+             ^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/transformers/generation/utils.py", line 2868, in _sample
+    outputs = self._prefill(
+              ^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/transformers/generation/utils.py", line 3948, in _prefill
+    return self(**model_inputs, return_dict=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/transformers/utils/generic.py", line 939, in wrapper
+    output = func(self, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/transformers/models/qwen3_5/modeling_qwen3_5.py", line 1624, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+                                       ^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/transformers/utils/generic.py", line 1068, in wrapper
+    output = func(self, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/transformers/utils/output_capturing.py", line 262, in wrapper
+    outputs = func(self, *args, **kwargs)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/transformers/models/qwen3_5/modeling_qwen3_5.py", line 1199, in forward
+    hidden_states = decoder_layer(
+                    ^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/transformers/modeling_layers.py", line 114, in __call__
+    return super().__call__(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/transformers/models/qwen3_5/modeling_qwen3_5.py", line 768, in forward
+    hidden_states = self.linear_attn(
+                    ^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1773, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1784, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/transformers/integrations/accelerate.py", line 947, in wrapped
+    output = forward_func(self, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/transformers/models/qwen3_5/modeling_qwen3_5.py", line 519, in forward
+    core_attn_out, last_recurrent_state = torch_chunk_gated_delta_rule(
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/transformers/integrations/hub_kernels.py", line 797, in wrapped
+    return implementation(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/conda/lib/python3.12/site-packages/transformers/models/qwen3_5/modeling_qwen3_5.py", line 326, in torch_chunk_gated_delta_rule
+    core_attn_out = core_attn_out.transpose(1, 2).contiguous().to(initial_dtype)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 1.56 GiB. GPU 0 has a total capacity of 44.39 GiB of which 633.31 MiB is free. Including non-PyTorch memory, this process has 43.77 GiB memory in use. Of the allocated memory 37.96 GiB is allocated by PyTorch, and 5.31 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://pytorch.org/docs/stable/notes/cuda.html#environment-variables)

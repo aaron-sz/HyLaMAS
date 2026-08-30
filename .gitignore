@@ -1,0 +1,21 @@
+# Fresh run output lands in runs/ and is filed under results/ once checked.
+runs/
+
+# Scheduler bookkeeping from scripts/
+results/*/logs/.queue
+results/*/logs/.claim/
+results/*/logs/.running/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# HF dataset cache
+.cache/
+
+# Archives
+*.tar
+*.tar.gz
+*.zip

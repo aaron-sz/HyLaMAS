@@ -1,0 +1,488 @@
+[dbg +    0.1s] init: method=text_mas model=Qwen/Qwen3.5-9B task=mbppplus device=cuda state_transfer=both
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[dbg +    0.9s] dtype: loading Qwen/Qwen3.5-9B in torch.bfloat16
+[dbg +    0.9s] [▶ load model Qwen/Qwen3.5-9B (HF, torch.bfloat16)] ...
+[print2] writing run to runs/20260823_003232_text_mas_mbppplus/
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]Fetching 4 files: 100%|██████████| 4/4 [00:00<00:00, 1626.80it/s]
+Loading weights:   0%|          | 0/427 [00:00<?, ?it/s]Loading weights: 100%|██████████| 427/427 [00:00<00:00, 5321.93it/s]
+[dbg +    1.6s] [✓ load model Qwen/Qwen3.5-9B (HF, torch.bfloat16)] 0.68s
+[dbg +    1.6s] [▶ move model to cuda] ...
+[dbg +    3.3s] [✓ move model to cuda] 1.76s
+[dbg +    3.3s] model: 24/32 layers are Gated DeltaNet (recurrent state [B, 32, 128, 128] per layer, conv kernel 4)
+[dbg +    4.5s] hybrid: append-carries-state probe — split 3.12e-02 vs reset 7.87e+00 (0.4% of a full reset; state |max| 11.5, dtype torch.bfloat16) -> carries
+[dbg +    4.5s] hybrid: append mode = auto
+[dbg +    4.5s] model: attn_implementation = sdpa, dtype = torch.bfloat16
+[dbg +    4.6s] theorem 3.1: d_h=4096 |V|=248077 — 1 latent thought >= 228.6 text tokens
+[dbg +    4.6s] [▶ load dataset mbppplus] ...
+[dbg +    4.9s] [✓ load dataset mbppplus] 0.24s
+[dbg +    4.9s] dataset mbppplus: 100 samples to run
+[dbg +    4.9s] warmup batch 1/1 (4 items, discarded)
+[dbg +   17.3s] [⚡ decode] 273 tok in 12.42s · 22.0 tok/s/seq · ×4 = 87.9 tok/s
+[dbg +   45.4s] [⚡ decode] 622 tok in 28.04s · 22.2 tok/s/seq · ×4 = 88.7 tok/s
+[dbg +   61.3s] [⚡ decode] 339 tok in 15.91s · 21.3 tok/s/seq · ×4 = 85.2 tok/s
+[dbg +   75.6s] [⚡ decode] 297 tok in 14.27s · 20.8 tok/s/seq · ×4 = 83.2 tok/s
+=========================================
+Question 0
+error_msg: None
+All tests passed.
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: None
+[dbg +   76.1s] batch: 4 items (done 0/100)
+[dbg +   88.5s] [⚡ decode] 273 tok in 12.39s · 22.0 tok/s/seq · ×4 = 88.1 tok/s
+[dbg +  116.9s] [⚡ decode] 622 tok in 28.41s · 21.9 tok/s/seq · ×4 = 87.6 tok/s
+[dbg +  133.1s] [⚡ decode] 339 tok in 16.21s · 20.9 tok/s/seq · ×4 = 83.7 tok/s
+[dbg +  147.6s] [⚡ decode] 297 tok in 14.46s · 20.5 tok/s/seq · ×4 = 82.2 tok/s
+=========================================
+Question 3
+error_msg: None
+=========================================
+Question 0
+error_msg: None
+All tests passed.
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: None
+[dbg +  148.1s] batch: 4 items (done 4/100)
+[dbg +  167.1s] [⚡ decode] 413 tok in 19.01s · 21.7 tok/s/seq · ×4 = 86.9 tok/s
+[dbg +  207.1s] [⚡ decode] 882 tok in 39.90s · 22.1 tok/s/seq · ×4 = 88.4 tok/s
+[dbg +  228.5s] [⚡ decode] 458 tok in 21.45s · 21.3 tok/s/seq · ×4 = 85.4 tok/s
+[dbg +  241.0s] [⚡ decode] 250 tok in 12.49s · 20.0 tok/s/seq · ×4 = 80.1 tok/s
+=========================================
+Question 3
+error_msg: None
+[   1/100] ✓  pred=def similar_e… gold=import numpy … latent=0    ~18.01s
+[   2/100] ✓  pred=import math  … gold=import numpy … latent=0    ~18.01s
+[   3/100] ✓  pred=import heapq … gold=import numpy … latent=0    ~18.01s
+[   4/100] ✓  pred=def differ_At… gold=import numpy … latent=0    ~18.01s
+=========================================
+Question 0
+error_msg: None
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: None
+[dbg +  241.6s] batch: 4 items (done 8/100)
+[dbg +  285.2s] [⚡ decode] 971 tok in 43.68s · 22.2 tok/s/seq · ×4 = 88.9 tok/s
+[dbg +  347.2s] [⚡ decode] 1365 tok in 61.94s · 22.0 tok/s/seq · ×4 = 88.2 tok/s
+[dbg +  362.2s] [⚡ decode] 289 tok in 15.00s · 19.3 tok/s/seq · ×4 = 77.1 tok/s
+[dbg +  380.3s] [⚡ decode] 353 tok in 18.06s · 19.5 tok/s/seq · ×4 = 78.2 tok/s
+=========================================
+Question 3
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 44, in <module>
+  File "<string>", line 38, in assertion
+AssertionError: out: , exp: bcd
+
+[   5/100] ✓  pred=import re  de… gold=import numpy … latent=0    ~23.36s
+[   6/100] ✓  pred=def square_nu… gold=import numpy … latent=0    ~23.36s
+[   7/100] ✓  pred=def find_Rota… gold=import numpy … latent=0    ~23.36s
+[   8/100] ✗  pred=def remove_Oc… gold=import numpy … latent=0    ~23.36s
+=========================================
+Question 0
+error_msg: None
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: None
+[dbg +  380.8s] batch: 4 items (done 12/100)
+[dbg +  473.7s] [⚡ decode] 2048 tok in 92.85s · 22.1 tok/s/seq · ×4 = 88.2 tok/s
+[dbg +  567.8s] [⚡ decode] 2048 tok in 94.11s · 21.8 tok/s/seq · ×4 = 87.1 tok/s
+[dbg +  587.5s] [⚡ decode] 362 tok in 19.66s · 18.4 tok/s/seq · ×4 = 73.7 tok/s
+[dbg +  609.3s] [⚡ decode] 393 tok in 21.75s · 18.1 tok/s/seq · ×4 = 72.3 tok/s
+=========================================
+Question 3
+error_msg: None
+[   9/100] ✓  pred=def sort_matr… gold=import numpy … latent=0    ~34.81s
+[  10/100] ✓  pred=def find_Volu… gold=import numpy … latent=0    ~34.81s
+           acc 0.900 (9/10) · elapsed 6m20s · eta 57m06s · vram 24.3GiB
+[  11/100] ✓  pred=import re  de… gold=import numpy … latent=0    ~34.81s
+[  12/100] ✓  pred=def square_pe… gold=import numpy … latent=0    ~34.81s
+=========================================
+Question 0
+error_msg: None
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 51, in <module>
+  File "<string>", line 45, in assertion
+AssertionError: out: True, exp: False
+
+[dbg +  609.8s] batch: 4 items (done 16/100)
+[dbg +  700.5s] [⚡ decode] 2012 tok in 90.69s · 22.2 tok/s/seq · ×4 = 88.7 tok/s
+[dbg +  795.0s] [⚡ decode] 2048 tok in 94.47s · 21.7 tok/s/seq · ×4 = 86.7 tok/s
+[dbg +  822.6s] [⚡ decode] 530 tok in 27.62s · 19.2 tok/s/seq · ×4 = 76.8 tok/s
+[dbg +  849.6s] [⚡ decode] 500 tok in 26.93s · 18.6 tok/s/seq · ×4 = 74.3 tok/s
+=========================================
+Question 3
+error_msg: None
+[  13/100] ✓  pred=def remove_di… gold=import numpy … latent=0    ~57.24s
+[  14/100] ✓  pred=def test_dupl… gold=import numpy … latent=0    ~57.24s
+[  15/100] ✗  pred=import math  … gold=import numpy … latent=0    ~57.24s
+[  16/100] ✓  pred=def check(n):… gold=import numpy … latent=0    ~57.24s
+All test cases passed.
+=========================================
+Question 0
+error_msg: None
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: None
+[dbg +  850.1s] batch: 4 items (done 20/100)
+[dbg +  866.0s] [⚡ decode] 349 tok in 15.88s · 22.0 tok/s/seq · ×4 = 87.9 tok/s
+[dbg +  901.1s] [⚡ decode] 764 tok in 35.14s · 21.7 tok/s/seq · ×4 = 87.0 tok/s
+[dbg +  916.7s] [⚡ decode] 326 tok in 15.56s · 21.0 tok/s/seq · ×4 = 83.8 tok/s
+[dbg +  926.7s] [⚡ decode] 198 tok in 10.04s · 19.7 tok/s/seq · ×4 = 78.9 tok/s
+=========================================
+Question 3
+error_msg: None
+[  17/100] ✓  pred=def find_Max_… gold=import numpy … latent=0    ~60.08s
+[  18/100] ✓  pred=def opposite_… gold=import numpy … latent=0    ~60.08s
+[  19/100] ✓  pred=def is_octago… gold=import numpy … latent=0    ~60.08s
+[  20/100] ✓  pred=def count_Sub… gold=import numpy … latent=0    ~60.08s
+           acc 0.900 (18/20) · elapsed 14m09s · eta 56m39s · vram 33.8GiB
+=========================================
+Question 0
+error_msg: None
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: None
+[dbg +  927.3s] batch: 4 items (done 24/100)
+[dbg +  943.3s] [⚡ decode] 352 tok in 15.99s · 22.0 tok/s/seq · ×4 = 88.0 tok/s
+[dbg +  984.7s] [⚡ decode] 913 tok in 41.37s · 22.1 tok/s/seq · ×4 = 88.3 tok/s
+[dbg + 1005.9s] [⚡ decode] 449 tok in 21.19s · 21.2 tok/s/seq · ×4 = 84.8 tok/s
+[dbg + 1026.9s] [⚡ decode] 437 tok in 21.01s · 20.8 tok/s/seq · ×4 = 83.2 tok/s
+=========================================
+Question 3
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 40, in <module>
+  File "<string>", line 32, in assertion
+AssertionError
+
+[  21/100] ✓  pred=def smallest_… gold=import numpy … latent=0    ~19.30s
+[  22/100] ✓  pred=def max_diffe… gold=import numpy … latent=0    ~19.30s
+[  23/100] ✓  pred=def subject_m… gold=import numpy … latent=0    ~19.30s
+[  24/100] ✗  pred=def recursive… gold=import numpy … latent=0    ~19.30s
+=========================================
+Question 0
+error_msg: None
+=========================================
+Question 1
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 40, in <module>
+AssertionError
+
+=========================================
+Question 2
+error_msg: None
+[dbg + 1027.4s] batch: 4 items (done 28/100)
+[dbg + 1046.5s] [⚡ decode] 412 tok in 19.06s · 21.6 tok/s/seq · ×4 = 86.5 tok/s
+[dbg + 1086.1s] [⚡ decode] 860 tok in 39.53s · 21.8 tok/s/seq · ×4 = 87.0 tok/s
+[dbg + 1106.2s] [⚡ decode] 425 tok in 20.13s · 21.1 tok/s/seq · ×4 = 84.4 tok/s
+[dbg + 1126.1s] [⚡ decode] 413 tok in 19.90s · 20.8 tok/s/seq · ×4 = 83.0 tok/s
+=========================================
+Question 3
+error_msg: None
+[  25/100] ✓  pred=def pos_count… gold=import numpy … latent=0    ~25.03s
+[  26/100] ✗  pred=def bell_numb… gold=import numpy … latent=0    ~25.03s
+[  27/100] ✓  pred=def is_Monoto… gold=import numpy … latent=0    ~25.03s
+[  28/100] ✓  pred=def is_sublis… gold=import numpy … latent=0    ~25.03s
+=========================================
+Question 0
+error_msg: None
+All tests passed.
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: None
+All tests passed.
+[dbg + 1126.7s] batch: 4 items (done 32/100)
+[dbg + 1139.9s] [⚡ decode] 289 tok in 13.19s · 21.9 tok/s/seq · ×4 = 87.6 tok/s
+[dbg + 1179.4s] [⚡ decode] 866 tok in 39.49s · 21.9 tok/s/seq · ×4 = 87.7 tok/s
+[dbg + 1192.8s] [⚡ decode] 273 tok in 13.43s · 20.3 tok/s/seq · ×4 = 81.3 tok/s
+[dbg + 1206.9s] [⚡ decode] 284 tok in 14.11s · 20.1 tok/s/seq · ×4 = 80.5 tok/s
+=========================================
+Question 3
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 63, in <module>
+  File "<string>", line 57, in assertion
+AssertionError: out: False, exp: True
+
+[  29/100] ✓  pred=def get_equal… gold=import numpy … latent=0    ~24.80s
+[  30/100] ✓  pred=def comb_sort… gold=import numpy … latent=0    ~24.80s
+           acc 0.867 (26/30) · elapsed 18m46s · eta 43m48s · vram 33.8GiB
+[  31/100] ✓  pred=def dif_Squar… gold=import numpy … latent=0    ~24.80s
+[  32/100] ✗  pred=def is_samepa… gold=import numpy … latent=0    ~24.80s
+=========================================
+Question 0
+error_msg: None
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: None
+[dbg + 1207.5s] batch: 4 items (done 36/100)
+[dbg + 1221.9s] [⚡ decode] 315 tok in 14.46s · 21.8 tok/s/seq · ×4 = 87.1 tok/s
+[dbg + 1252.7s] [⚡ decode] 672 tok in 30.75s · 21.9 tok/s/seq · ×4 = 87.4 tok/s
+[dbg + 1269.1s] [⚡ decode] 345 tok in 16.43s · 21.0 tok/s/seq · ×4 = 84.0 tok/s
+[dbg + 1287.5s] [⚡ decode] 387 tok in 18.32s · 21.1 tok/s/seq · ×4 = 84.5 tok/s
+=========================================
+Question 3
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 58, in <module>
+  File "<string>", line 18, in tetrahedral_number
+ValueError: Input must be a positive integer.
+
+[  33/100] ✓  pred=def find_tupl… gold=import numpy … latent=0    ~20.20s
+[  34/100] ✓  pred=def is_Diff(n… gold=import numpy … latent=0    ~20.20s
+[  35/100] ✓  pred=def word_len(… gold=import numpy … latent=0    ~20.20s
+[  36/100] ✗  pred=def tetrahedr… gold=import numpy … latent=0    ~20.20s
+=========================================
+Question 0
+error_msg: None
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: None
+[dbg + 1289.1s] batch: 4 items (done 40/100)
+[dbg + 1307.6s] [⚡ decode] 404 tok in 18.48s · 21.9 tok/s/seq · ×4 = 87.4 tok/s
+[dbg + 1339.6s] [⚡ decode] 702 tok in 32.07s · 21.9 tok/s/seq · ×4 = 87.6 tok/s
+[dbg + 1355.2s] [⚡ decode] 324 tok in 15.58s · 20.8 tok/s/seq · ×4 = 83.2 tok/s
+[dbg + 1372.2s] [⚡ decode] 348 tok in 16.95s · 20.5 tok/s/seq · ×4 = 82.1 tok/s
+=========================================
+Question 3
+error_msg: None
+[  37/100] ✓  pred=import math  … gold=import numpy … latent=0    ~20.40s
+[  38/100] ✓  pred=def sequence(… gold=import numpy … latent=0    ~20.40s
+[  39/100] ✓  pred=import math  … gold=import numpy … latent=0    ~20.40s
+[  40/100] ✓  pred=def centered_… gold=import numpy … latent=0    ~20.40s
+           acc 0.850 (34/40) · elapsed 21m28s · eta 32m13s · vram 33.8GiB
+=========================================
+Question 0
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 10, in <module>
+AssertionError
+
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: None
+[dbg + 1372.7s] batch: 4 items (done 44/100)
+[dbg + 1388.7s] [⚡ decode] 350 tok in 15.96s · 21.9 tok/s/seq · ×4 = 87.7 tok/s
+[dbg + 1437.9s] [⚡ decode] 1084 tok in 49.21s · 22.0 tok/s/seq · ×4 = 88.1 tok/s
+[dbg + 1458.7s] [⚡ decode] 436 tok in 20.79s · 21.0 tok/s/seq · ×4 = 83.9 tok/s
+[dbg + 1471.8s] [⚡ decode] 253 tok in 12.99s · 19.5 tok/s/seq · ×4 = 77.9 tok/s
+=========================================
+Question 3
+error_msg: None
+[  41/100] ✗  pred=def merge_dic… gold=import numpy … latent=0    ~20.92s
+[  42/100] ✓  pred=from collecti… gold=import numpy … latent=0    ~20.92s
+[  43/100] ✓  pred=def closest_n… gold=import numpy … latent=0    ~20.92s
+[  44/100] ✓  pred=def len_log(w… gold=import numpy … latent=0    ~20.92s
+=========================================
+Question 0
+error_msg: None
+=========================================
+Question 1
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 54, in <module>
+  File "<string>", line 48, in assertion
+AssertionError: out: False, exp: True
+
+=========================================
+Question 2
+error_msg: None
+[dbg + 1472.3s] batch: 4 items (done 48/100)
+[dbg + 1490.8s] [⚡ decode] 403 tok in 18.45s · 21.8 tok/s/seq · ×4 = 87.4 tok/s
+[dbg + 1534.9s] [⚡ decode] 966 tok in 44.15s · 21.9 tok/s/seq · ×4 = 87.5 tok/s
+[dbg + 1555.2s] [⚡ decode] 421 tok in 20.27s · 20.8 tok/s/seq · ×4 = 83.1 tok/s
+[dbg + 1568.9s] [⚡ decode] 273 tok in 13.70s · 19.9 tok/s/seq · ×4 = 79.7 tok/s
+=========================================
+Question 3
+error_msg: None
+[  45/100] ✓  pred=def find_subs… gold=import numpy … latent=0    ~24.89s
+[  46/100] ✗  pred=def is_undula… gold=import numpy … latent=0    ~24.89s
+[  47/100] ✓  pred=def power(a, … gold=import numpy … latent=0    ~24.89s
+[  48/100] ✓  pred=def index_min… gold=import numpy … latent=0    ~24.89s
+=========================================
+Question 0
+error_msg: None
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: None
+[dbg + 1569.5s] batch: 4 items (done 52/100)
+[dbg + 1581.7s] [⚡ decode] 269 tok in 12.17s · 22.1 tok/s/seq · ×4 = 88.4 tok/s
+[dbg + 1611.4s] [⚡ decode] 659 tok in 29.72s · 22.2 tok/s/seq · ×4 = 88.7 tok/s
+[dbg + 1626.8s] [⚡ decode] 324 tok in 15.35s · 21.1 tok/s/seq · ×4 = 84.4 tok/s
+[dbg + 1638.6s] [⚡ decode] 243 tok in 11.84s · 20.5 tok/s/seq · ×4 = 82.1 tok/s
+=========================================
+Question 3
+error_msg: None
+[  49/100] ✓  pred=def Find_Min_… gold=import numpy … latent=0    ~24.29s
+[  50/100] ✓  pred=import math  … gold=import numpy … latent=0    ~24.29s
+           acc 0.840 (42/50) · elapsed 26m09s · eta 26m09s · vram 33.8GiB
+[  51/100] ✓  pred=def frequency… gold=import numpy … latent=0    ~24.29s
+[  52/100] ✓  pred=import math  … gold=import numpy … latent=0    ~24.29s
+=========================================
+Question 0
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 52, in <module>
+  File "<string>", line 17, in decimal_to_binary
+ValueError: Input must be a non-negative integer.
+
+All test cases passed.
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: None
+[dbg + 1639.2s] batch: 4 items (done 56/100)
+[dbg + 1656.9s] [⚡ decode] 386 tok in 17.74s · 21.8 tok/s/seq · ×4 = 87.0 tok/s
+[dbg + 1695.1s] [⚡ decode] 834 tok in 38.18s · 21.8 tok/s/seq · ×4 = 87.4 tok/s
+[dbg + 1718.8s] [⚡ decode] 501 tok in 23.74s · 21.1 tok/s/seq · ×4 = 84.4 tok/s
+[dbg + 1756.5s] [⚡ decode] 793 tok in 37.66s · 21.1 tok/s/seq · ×4 = 84.2 tok/s
+=========================================
+Question 3
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 58, in <module>
+  File "<string>", line 52, in assertion
+AssertionError: out: PythonProgram, exp: ___PythonProgram
+
+[  53/100] ✗  pred=def decimal_t… gold=import numpy … latent=0    ~17.42s
+[  54/100] ✓  pred=def is_palind… gold=import numpy … latent=0    ~17.42s
+[  55/100] ✓  pred=def kth_eleme… gold=import numpy … latent=0    ~17.42s
+[  56/100] ✗  pred=def snake_to_… gold=import numpy … latent=0    ~17.42s
+=========================================
+Question 0
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 93, in <module>
+  File "<string>", line 87, in assertion
+AssertionError: out: 1, exp: 4
+
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: None
+[dbg + 1757.1s] batch: 4 items (done 60/100)
+[dbg + 1787.6s] [⚡ decode] 653 tok in 30.55s · 21.4 tok/s/seq · ×4 = 85.5 tok/s
+[dbg + 1851.0s] [⚡ decode] 1379 tok in 63.33s · 21.8 tok/s/seq · ×4 = 87.1 tok/s
+[dbg + 1882.7s] [⚡ decode] 665 tok in 31.72s · 21.0 tok/s/seq · ×4 = 83.9 tok/s
+[dbg + 1912.1s] [⚡ decode] 600 tok in 29.40s · 20.4 tok/s/seq · ×4 = 81.6 tok/s
+=========================================
+Question 3
+error_msg: None
+[  57/100] ✗  pred=def eulerian_… gold=import numpy … latent=0    ~29.48s
+[  58/100] ✓  pred=def sort_subl… gold=import numpy … latent=0    ~29.48s
+[  59/100] ✓  pred=def count(lst… gold=import numpy … latent=0    ~29.48s
+[  60/100] ✓  pred=def add_lists… gold=import numpy … latent=0    ~29.48s
+           acc 0.817 (49/60) · elapsed 29m16s · eta 19m31s · vram 33.8GiB
+=========================================
+Question 0
+error_msg: None
+=========================================
+Question 1
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 63, in <module>
+  File "<string>", line 57, in assertion
+AssertionError: out: 3, exp: 1
+
+All test cases passed.
+=========================================
+Question 2
+error_msg: None
+[dbg + 1912.7s] batch: 4 items (done 64/100)
+[dbg + 1934.3s] [⚡ decode] 477 tok in 21.56s · 22.1 tok/s/seq · ×4 = 88.5 tok/s
+[dbg + 1973.5s] [⚡ decode] 863 tok in 39.23s · 22.0 tok/s/seq · ×4 = 88.0 tok/s
+[dbg + 2005.7s] [⚡ decode] 641 tok in 32.16s · 19.9 tok/s/seq · ×4 = 79.7 tok/s
+[dbg + 2018.3s] [⚡ decode] 232 tok in 12.62s · 18.4 tok/s/seq · ×4 = 73.5 tok/s
+=========================================
+Question 3
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 58, in <module>
+  File "<string>", line 52, in assertion
+AssertionError: out: False, exp: None
+
+[  61/100] ✓  pred=def merge_sor… gold=import numpy … latent=0    ~38.90s
+[  62/100] ✗  pred=def odd_Equiv… gold=import numpy … latent=0    ~38.90s
+[  63/100] ✓  pred=def common_in… gold=import numpy … latent=0    ~38.90s
+[  64/100] ✗  pred=def check_int… gold=import numpy … latent=0    ~38.90s
+=========================================
+Question 0
+error_msg: None
+=========================================
+Question 1
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 35, in <module>
+  File "<string>", line 29, in assertion
+AssertionError: out: [], exp: ['']
+
+=========================================
+Question 2
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 52, in <module>
+  File "<string>", line 25, in search
+IndexError: list index out of range
+
+[dbg + 2019.1s] batch: 4 items (done 68/100)
+[dbg + 2038.5s] [⚡ decode] 407 tok in 19.41s · 21.0 tok/s/seq · ×4 = 83.9 tok/s

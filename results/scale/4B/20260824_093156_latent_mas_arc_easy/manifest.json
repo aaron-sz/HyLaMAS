@@ -1,0 +1,221 @@
+{
+ "run_id": "20260824_093156_latent_mas_arc_easy",
+ "command": "run.py --model_name Qwen/Qwen3.5-4B --device cuda --task arc_easy --max_samples 100 --sample_offset 0 --generate_bs 8 --max_new_tokens 2048 --temperature 0 --chat_thinking off --print2 --debug --method latent_mas --latent_steps 40 --latent_space_realign --latent_turn content --latent_visibility full --judger_thinking inherit",
+ "git": {
+  "commit": null,
+  "dirty": null
+ },
+ "environment": {
+  "python": "3.12.6",
+  "platform": "Linux-x86_64-with-glibc2.39",
+  "hostname": "anonymized",
+  "torch": "2.13.0",
+  "transformers": "5.15.1",
+  "accelerate": "1.14.0",
+  "numpy": "2.5.2",
+  "datasets": "5.0.1",
+  "cuda": "13.0",
+  "gpus": [
+   {
+    "name": "NVIDIA A100-SXM4-40GB",
+    "vram_gb": 39.5
+   }
+  ],
+  "device_details": {
+   "devices": [
+    {
+     "index": 0,
+     "name": "NVIDIA A100-SXM4-40GB",
+     "vram_gib": 39.5,
+     "compute_capability": "8.0",
+     "multi_processor_count": 108,
+     "driver_version": "595.71.05",
+     "power_limit_w": "400.00",
+     "max_sm_clock_mhz": "1410",
+     "max_mem_clock_mhz": "1215"
+    }
+   ],
+   "torch_cuda_build": "13.0",
+   "cudnn": 92000,
+   "tf32_matmul": false,
+   "tf32_cudnn": true
+  }
+ },
+ "model": {
+  "name": "Qwen/Qwen3.5-4B",
+  "dtype": "torch.bfloat16",
+  "attn_implementation": "sdpa",
+  "append_mode": "auto",
+  "append_carries_state": true,
+  "hidden_size": 2560,
+  "vocab_size": 248077,
+  "num_hidden_layers": 32,
+  "linear_attention_layers": 24,
+  "weights_mib": 8021.8,
+  "chat": {
+   "chat_thinking": "off",
+   "template_sha256": "a4aee8afcf2e0711",
+   "template_chars": 7756,
+   "generation_tail_auto": "<think>\n",
+   "generation_tail_on": "<think>\n",
+   "generation_tail_off": "<think>\n\n</think>\n\n"
+  },
+  "memory_after_load": {
+   "cuda:0": {
+    "allocated_mib": 8126.0,
+    "reserved_mib": 8418.0,
+    "peak_allocated_mib": 8378.2,
+    "peak_reserved_mib": 8418.0
+   }
+  }
+ },
+ "started": "2026-08-24T09:31:56.040923+00:00",
+ "updated": "2026-08-24T09:45:56.231285+00:00",
+ "status": "completed",
+ "args": {
+  "method": "latent_mas",
+  "model_name": "Qwen/Qwen3.5-4B",
+  "max_samples": 100,
+  "sample_offset": 0,
+  "task": "arc_easy",
+  "prompt": "sequential",
+  "device": "cuda",
+  "split": "test",
+  "max_new_tokens": 2048,
+  "latent_steps": 40,
+  "temperature": 0.0,
+  "top_p": 0.95,
+  "generate_bs": 8,
+  "text_mas_context_length": -1,
+  "think": false,
+  "latent_space_realign": true,
+  "dtype": "auto",
+  "seed": 42,
+  "print2": true,
+  "debug": true,
+  "warmup": 1,
+  "gpu_telemetry": false,
+  "telemetry_interval": 5.0,
+  "state_transfer": "both",
+  "mamba_append": "auto",
+  "latent_turn": "content",
+  "latent_visibility": "full",
+  "chat_thinking": "off",
+  "judger_thinking": "inherit",
+  "backend": "hf",
+  "api_model": null,
+  "api_base": null,
+  "api_key_env": "OPENAI_API_KEY",
+  "aws_region": null,
+  "aws_profile": null,
+  "api_concurrency": 8,
+  "api_timeout": 600.0,
+  "use_vllm": false
+ },
+ "accuracy": 0.99,
+ "accuracy_ci95": {
+  "low": 0.9455,
+  "high": 0.9982,
+  "half_width": 0.0264,
+  "z": 1.96
+ },
+ "correct": 99,
+ "processed": 100,
+ "total": 100,
+ "total_time_sec": 787.8871,
+ "time_per_sample_sec": 7.8789,
+ "timing": {
+  "total_sec": 787.8871,
+  "sec_per_sample": 7.8789,
+  "samples_per_sec": 0.1269,
+  "warmup_batches_discarded": 1,
+  "cold_batches_excluded_from_steady": 0,
+  "batches": 13,
+  "batch_sec": {
+   "n": 13,
+   "mean": 60.6029,
+   "median": 53.1743,
+   "p90": 79.5665,
+   "min": 35.9637,
+   "max": 141.0456
+  },
+  "steady_sec_per_sample": {
+   "n": 13,
+   "mean": 7.9212,
+   "median": 6.849,
+   "p90": 9.9459,
+   "min": 4.942,
+   "max": 17.6307
+  },
+  "phase_sec": {
+   "append": 135.985,
+   "latent": 91.633,
+   "decode": 550.762,
+   "measured_total": 778.381
+  },
+  "steady_total_sec": 787.8371,
+  "steady_samples": 100,
+  "steady_sec_per_sample_mean": 7.8784
+ },
+ "tokens": {
+  "prompt_total": 66872,
+  "generated_total": 36134,
+  "latent_steps_total": 12000,
+  "prompt_per_sample": 668.72,
+  "generated_per_sample": 361.34,
+  "latent_steps_per_sample": 120.0,
+  "generated_tok_per_sec": 45.86,
+  "append_forwards_total": 16348,
+  "append_positions_total": 523008,
+  "append_forwards_per_sample": 163.48,
+  "decode_tok_per_sec": 65.61
+ },
+ "generation": {
+  "truncated_final": 1,
+  "truncated_final_rate": 0.01,
+  "truncated_any_agent": 1,
+  "max_new_tokens": 2048,
+  "temperature": 0.0,
+  "top_p": 0.95,
+  "greedy": true,
+  "seed": 42
+ },
+ "memory": {
+  "peak": {
+   "cuda:0": {
+    "allocated_mib": 8151.0,
+    "reserved_mib": 15526.0,
+    "peak_allocated_mib": 9761.7,
+    "peak_reserved_mib": 15526.0
+   }
+  },
+  "after_load": {
+   "cuda:0": {
+    "allocated_mib": 8126.0,
+    "reserved_mib": 8418.0,
+    "peak_allocated_mib": 8378.2,
+    "peak_reserved_mib": 8418.0
+   }
+  }
+ },
+ "channel": {
+  "workspace_kv_mib_max": 195.75,
+  "workspace_state_mib_max": 396.0,
+  "transferred_kv_mib_max": 196.25,
+  "transferred_state_mib_max": 396.0,
+  "transferred_total_mib_max": 592.25,
+  "state_transfer": "both"
+ },
+ "theorem_3_1": {
+  "hidden_size": 2560,
+  "vocab_size": 248077,
+  "log_base": 2.0,
+  "text_tokens_per_latent_step": 142.8537,
+  "source": "Theorem 3.1, arXiv:2511.20639 (lower bound)",
+  "text_equivalent_tokens_total": 1714244.73,
+  "text_equivalent_tokens_per_sample": 17142.45,
+  "text_tokens_per_latent_step_log3": 226.4178,
+  "text_equivalent_tokens_total_log3": 2717013.61,
+  "latent_vs_generated_ratio": 47.441
+ }
+}

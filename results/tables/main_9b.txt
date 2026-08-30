@@ -1,0 +1,38 @@
+model  method      transfer  task           n    bs  Acc.       Token  Speed(s)  s/sample  latent  cut  VRAM  chan   Tok vs baseline  Speed vs baseline
+-----  ----------  --------  -------------  ---  --  ---------  -----  --------  --------  ------  ---  ----  -----  ---------------  -----------------
+9B     baseline    -         arc_challenge  100  8   94.0±4.9   466    514       5.14      0       2%!  27.0  0.0    1.00x            1.00x            
+9B     latent_mas  both      arc_challenge  100  8   93.0±5.2   430    685       6.85      120     2%!  19.8  608.8  0.92x            1.33x            
+9B     text_mas    -         arc_challenge  100  8   95.0±4.5   1524   1431      14.31     0       0%   29.2  0.0    3.27x            2.79x            
+9B     baseline    -         arc_easy       100  8   100.0±1.8  387    393       3.93      0       0%   23.9  0.0    1.00x            1.00x            
+9B     latent_mas  both      arc_easy       100  8   99.0±2.6   357    574       5.74      120     0%   19.5  592.2  0.92x            1.46x            
+9B     text_mas    -         arc_easy       100  8   98.0±3.2   1350   1176      11.76     0       0%   25.2  0.0    3.49x            2.99x            
+9B     baseline    -         gsm8k          100  8   96.0±4.1   368    438       4.38      0       2%!  26.8  0.0    1.00x            1.00x            
+9B     latent_mas  both      gsm8k          100  8   97.0±3.7   355    656       6.56      120     1%!  20.3  605.0  0.96x            1.50x            
+9B     text_mas    -         gsm8k          100  8   90.0±6.0   1223   1341      13.41     0       0%   36.8  0.0    3.32x            3.06x            
+9B     baseline    -         humanevalplus  100  8   83.0±7.3   618    1057      10.57     0       2%!  43.7  0.0    1.00x            1.00x            
+9B     latent_mas  both      humanevalplus  100  8   90.0±6.0   725    1588      15.88     120     7%!  43.7  780.5  1.17x            1.50x            
+9B     text_mas    -         humanevalplus  100  8   93.0±5.2   1558   1798      17.98     0       0%   43.7  0.0    2.52x            1.70x            
+9B     baseline    -         mbppplus       100  8   85.0±7.0   723    1321      13.21     0       1%!  43.7  0.0    1.00x            1.00x            
+9B     latent_mas  both      mbppplus       100  8   76.0±8.3   619    1615      16.15     120     3%!  43.8  881.0  0.86x            1.22x            
+9B     text_mas    -         mbppplus       100  8   79.0±7.9   1716   2623      26.23     0       1%!  43.5  0.0    2.37x            1.99x            
+9B     baseline    -         medqa          100  8   89.0±6.2   1140   1686      16.86     0       4%!  43.7  0.0    1.00x            1.00x            
+9B     latent_mas  both      medqa          100  8   88.0±6.4   967    2437      24.37     120     7%!  43.6  867.5  0.85x            1.44x            
+9B     text_mas    -         medqa          100  8   88.0±6.4   2741   3878      38.78     0       1%!  43.5  0.0    2.40x            2.30x            
+
+Acc. = % correct ± Wilson 95% half width · Token = generated tokens/sample
+Speed(s) = end-to-end seconds for the run · chan = MiB crossing the widest
+agent boundary · * = interrupted run · ! = answers hit --max_new_tokens
+
+Runs with clipped answers; Acc. and Token both partly measure the cap:
+  20260823_133237_baseline_arc_challenge  2.0% of finals hit --max_new_tokens
+  20260823_134209_latent_mas_arc_challenge  2.0% of finals hit --max_new_tokens
+  20260823_142056_baseline_gsm8k  2.0% of finals hit --max_new_tokens
+  20260823_142852_latent_mas_gsm8k  1.0% of finals hit --max_new_tokens
+  20260823_121510_baseline_humanevalplus  2.0% of finals hit --max_new_tokens
+  20260823_123350_latent_mas_humanevalplus  7.0% of finals hit --max_new_tokens
+  20260823_103729_baseline_mbppplus  1.0% of finals hit --max_new_tokens
+  20260823_110023_latent_mas_mbppplus  3.0% of finals hit --max_new_tokens
+  20260823_112859_text_mas_mbppplus  1.0% of finals hit --max_new_tokens
+  20260823_081747_baseline_medqa  4.0% of finals hit --max_new_tokens
+  20260823_084727_latent_mas_medqa  7.0% of finals hit --max_new_tokens
+  20260823_093004_text_mas_medqa  1.0% of finals hit --max_new_tokens

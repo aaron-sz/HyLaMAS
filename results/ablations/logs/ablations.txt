@@ -1,0 +1,63 @@
+nohup: ignoring input
+----------------------------------------------------------------------------
+TASK medqa   n=100  bs=8  cap=4096  offset=0
+!! no completed latent_mas/both run found at offset 0 for medqa --
+   falling back to defaults. The ablation will NOT be directly
+   comparable to your main table unless these match it:
+   turn=content vis=full chat=off steps=40
+----------------------------------------------------------------------------
+  channel ablation (--state_transfer), latent_steps=40 held fixed:
+    [run ] abl_medqa_channel_both           acc=0.8800+/-0.064  tok=923.27  cut=3  2297s
+    [run ] abl_medqa_channel_kv_only        acc=0.8700+/-0.066  tok=1169.56  cut=6  2118s
+    [run ] abl_medqa_channel_state_only     acc=0.8400+/-0.072  tok=791.15  cut=2  1698s
+    [run ] abl_medqa_channel_none           acc=0.9000+/-0.060  tok=1040.99  cut=2  1583s
+  latent-step sweep (--latent_steps), state_transfer=both held fixed:
+    [run ] abl_medqa_steps_0                acc=0.9000+/-0.060  tok=1040.99  cut=2  1867s
+    [run ] abl_medqa_steps_10               acc=0.8900+/-0.062  tok=920.0  cut=2  1972s
+    [run ] abl_medqa_steps_20               acc=0.8900+/-0.062  tok=926.83  cut=4  2100s
+    [run ] abl_medqa_steps_40               acc=0.8800+/-0.064  tok=923.27  cut=3  2307s
+    [run ] abl_medqa_steps_80               acc=0.8600+/-0.068  tok=916.62  cut=4  2216s
+
+----------------------------------------------------------------------------
+TABLES
+----------------------------------------------------------------------------
+note: collapsed 5 runs to 4 distinct state_transfer values (most recent per value); pass --steps/--transfer to pin the other dimension explicitly
+
+channel ablation  --  task=medqa  offset=0  n=100  (reference: both)
+
+       arm           Acc.    Token   s/samp    CUT%   KV MiB   St MiB                sn:P/C/R        vs ref (McNemar)
+---------------------------------------------------------------------------------------------------------------------
+      both   88.00+/- 6.4    923.3    21.89    3.0%    471.5    396.0    0.0417/0.0438/0.0460             (reference)
+   kv_only   87.00+/- 6.6   1169.6    20.51    6.0%    471.5    396.0                   -/-/-              +5/-6  p=1
+state_only   84.00+/- 7.2    791.1    15.53    2.0%      0.0    396.0    0.0417/0.0445/0.0470          +3/-7  p=0.344
+      none   90.00+/- 6.0   1041.0    14.66    2.0%      0.0      0.0                   -/-/-          +6/-4  p=0.754
+
+correctness gate: PASS  (state present/absent per arm, KV zeroed under
+                        state_only, cache growing under both/kv_only)
+
+Read the arms as a DEPTH partition, not a symmetric split: attention is
+8 of 32 layers, Gated DeltaNet is 24. `kv_only` leaves 25% of the depth
+with history and is NOT equivalent to upstream's full-KV handoff on a
+pure transformer. The honest contrast is kv_only vs both on this model.
+
+wrote ablation_channel_medqa.md
+wrote ablation_channel_medqa.csv
+note: collapsed 6 runs to 5 distinct latent_steps values (most recent per value); pass --steps/--transfer to pin the other dimension explicitly
+
+steps ablation  --  task=medqa  offset=0  n=100  (reference: 40)
+
+         m           Acc.    Token   s/samp    CUT%   KV MiB   St MiB                sn:P/C/R        vs ref (McNemar)
+---------------------------------------------------------------------------------------------------------------------
+         0   90.00+/- 6.0   1041.0    17.20    2.0%    441.5    396.0    0.0482/0.0499/0.0522          +6/-4  p=0.754
+        10   89.00+/- 6.2    920.0    18.59    2.0%    449.0    396.0    0.0449/0.0468/0.0494              +3/-2  p=1
+        20   89.00+/- 6.2    926.8    19.88    4.0%    456.5    396.0    0.0436/0.0458/0.0482              +6/-5  p=1
+        40   88.00+/- 6.4    923.3    21.89    3.0%    471.5    396.0    0.0417/0.0438/0.0460             (reference)
+        80   86.00+/- 6.8    916.6    20.99    4.0%    501.5    396.0    0.0388/0.0410/0.0428          +4/-6  p=0.754
+
+
+If accuracy peaks and then falls while state_norm flattens, that is the
+recurrent state saturating: later thoughts overwrite earlier ones through
+the delta rule rather than accumulating. Attention cannot show this.
+
+wrote ablation_steps_medqa.md
+wrote ablation_steps_medqa.csv

@@ -1,0 +1,84 @@
+model  method      transfer  task           n    bs  Acc.       Token  Speed(s)  s/sample  latent  cut   VRAM  chan   Tok vs baseline  Speed vs baseline
+-----  ----------  --------  -------------  ---  --  ---------  -----  --------  --------  ------  ----  ----  -----  ---------------  -----------------
+2B     baseline    -         arc_challenge  100  8   87.0±6.6   573    889       8.89      0       4%!   6.4   0.0    1.00x            1.00x            
+4B     baseline    -         arc_challenge  100  8   94.0±4.9   436    584       5.84      0       0%    12.8  0.0    1.00x            1.00x            
+2B     latent_mas  both      arc_challenge  100  8   81.0±7.6   414    681       6.81      120     2%!   5.0   230.5  0.72x            0.77x            
+4B     latent_mas  both      arc_challenge  100  8   91.0±5.7   481    1135      11.35     120     1%!   16.7  608.8  1.10x            1.94x            
+2B     text_mas    -         arc_challenge  100  8   81.0±7.6   1510   1853      18.53     0       1%!   11.3  0.0    2.64x            2.08x            
+4B     text_mas    -         arc_challenge  100  8   92.0±5.4   1297   1747      17.47     0       1%!   22.0  0.0    2.98x            2.99x            
+2B     baseline    -         arc_easy       100  8   96.0±4.1   429    423       4.23      0       1%!   6.3   0.0    1.00x            1.00x            
+4B     baseline    -         arc_easy       100  8   100.0±1.8  361    417       4.17      0       0%    10.6  0.0    1.00x            1.00x            
+2B     latent_mas  both      arc_easy       100  8   94.0±4.9   303    514       5.14      120     2%!   4.8   224.3  0.71x            1.22x            
+4B     latent_mas  both      arc_easy       100  8   99.0±2.6   361    788       7.88      120     1%!   15.2  592.2  1.00x            1.89x            
+2B     text_mas    -         arc_easy       100  8   91.0±5.7   1273   1397      13.97     0       3%!   10.3  0.0    2.97x            3.30x            
+4B     text_mas    -         arc_easy       100  8   100.0±1.8  1138   1196      11.96     0       0%    20.0  0.0    3.16x            2.87x            
+2B     baseline    -         gsm8k          100  8   73.0±8.6   517    718       7.18      0       4%!   6.3   0.0    1.00x            1.00x            
+4B     baseline    -         gsm8k          100  8   92.0±5.4   393    760       7.60      0       2%!   18.3  0.0    1.00x            1.00x            
+2B     latent_mas  both      gsm8k          100  8   80.0±7.8   430    830       8.30      120     7%!   5.0   229.1  0.83x            1.16x            
+4B     latent_mas  both      gsm8k          100  8   93.0±5.2   286    710       7.10      120     0%    10.5  605.0  0.73x            0.93x            
+2B     text_mas    -         gsm8k          100  8   67.0±9.1   1549   2305      23.05     0       9%!   13.2  0.0    3.00x            3.21x            
+4B     text_mas    -         gsm8k          100  8   85.0±7.0   898    1261      12.61     0       0%    25.1  0.0    2.28x            1.66x            
+2B     baseline    -         humanevalplus  100  8   50.0±9.6   887    1462      14.62     0       8%!   14.0  0.0    1.00x            1.00x            
+4B     baseline    -         humanevalplus  100  8   70.0±8.8   281    768       7.68      0       1%!   38.9  0.0    1.00x            1.00x            
+2B     latent_mas  both      humanevalplus  100  8   58.0±9.5   625    1519      15.19     120     6%!   15.7  294.9  0.71x            1.04x            
+4B     latent_mas  both      humanevalplus  100  8   87.0±6.6   563    1518      15.18     120     3%!   38.9  780.5  2.00x            1.98x            
+2B     text_mas    -         humanevalplus  100  8   52.0±9.6   1980   3428      34.28     0       5%!   26.1  0.0    2.23x            2.34x            
+4B     text_mas    -         humanevalplus  100  8   77.0±8.2   1283   2228      22.28     0       0%    38.8  0.0    4.57x            2.90x            
+0.8B   baseline    -         mbppplus       100  8   35.0±9.2   487    1577      15.77     0       8%!   12.3  0.0    1.00x            1.00x            
+2B     baseline    -         mbppplus       100  8   42.0±9.5   993    1797      17.97     0       12%!  14.4  0.0    1.00x            1.00x            
+4B     baseline    -         mbppplus       100  8   73.0±8.6   442    1521      15.21     0       3%!   38.9  0.0    1.00x            1.00x            
+0.8B   latent_mas  both      mbppplus       100  8   14.0±6.8   739    2264      22.64     120     13%!  22.1  332.6  1.52x            1.44x            
+2B     latent_mas  both      mbppplus       100  8   49.0±9.6   732    1745      17.45     120     9%!   18.7  332.6  0.74x            0.97x            
+4B     latent_mas  both      mbppplus       100  8   73.0±8.6   369    1337      13.37     120     1%!   32.1  881.0  0.84x            0.88x            
+0.8B   text_mas*   -         mbppplus       8    8   37.5±27.9  3247   456       56.97     0       0%    23.0  0.0    6.67x            0.29x            
+2B     text_mas    -         mbppplus       100  8   49.0±9.6   2034   4126      41.26     0       2%!   23.5  0.0    2.05x            2.30x            
+4B     text_mas    -         mbppplus       100  8   75.0±8.4   1219   2619      26.19     0       0%    39.0  0.0    2.76x            1.72x            
+0.8B   baseline    -         medqa          100  8   36.0±9.2   1512   1981      19.81     0       15%!  11.6  0.0    1.00x            1.00x            
+2B     baseline    -         medqa          100  8   61.0±9.4   1433   2045      20.45     0       10%!  13.7  0.0    1.00x            1.00x            
+4B     baseline    -         medqa          100  8   80.0±7.8   1064   1892      18.92     0       5%!   35.7  0.0    1.00x            1.00x            
+0.8B   latent_mas  both      medqa          100  8   31.0±8.9   1366   2697      26.97     120     19%!  21.2  327.6  0.90x            1.36x            
+2B     latent_mas  both      medqa          100  8   63.0±9.3   1108   2121      21.21     120     11%!  16.8  327.6  0.77x            1.04x            
+4B     latent_mas  both      medqa          100  8   77.0±8.2   907    2678      26.78     120     3%!   39.0  867.5  0.85x            1.42x            
+0.8B   text_mas*   -         medqa          40   8   45.0±14.7  2911   2205      55.12     0       2%!   35.2  0.0    1.93x            1.11x            
+2B     text_mas    -         medqa          100  8   61.0±9.4   2902   4451      44.51     0       4%!   20.5  0.0    2.03x            2.18x            
+4B     text_mas    -         medqa          100  8   81.0±7.6   2139   3125      31.25     0       1%!   38.6  0.0    2.01x            1.65x            
+
+Acc. = % correct ± Wilson 95% half width · Token = generated tokens/sample
+Speed(s) = end-to-end seconds for the run · chan = MiB crossing the widest
+agent boundary · * = interrupted run · ! = answers hit --max_new_tokens
+
+Runs with clipped answers; Acc. and Token both partly measure the cap:
+  20260824_164521_baseline_arc_challenge  4.0% of finals hit --max_new_tokens
+  20260824_170213_latent_mas_arc_challenge  2.0% of finals hit --max_new_tokens
+  20260824_074105_latent_mas_arc_challenge  1.0% of finals hit --max_new_tokens
+  20260824_171444_text_mas_arc_challenge  1.0% of finals hit --max_new_tokens
+  20260824_080110_text_mas_arc_challenge  1.0% of finals hit --max_new_tokens
+  20260824_185809_baseline_arc_easy  1.0% of finals hit --max_new_tokens
+  20260824_190650_latent_mas_arc_easy  2.0% of finals hit --max_new_tokens
+  20260824_093156_latent_mas_arc_easy  1.0% of finals hit --max_new_tokens
+  20260824_191605_text_mas_arc_easy  3.0% of finals hit --max_new_tokens
+  20260824_174932_baseline_gsm8k  4.0% of finals hit --max_new_tokens
+  20260824_083231_baseline_gsm8k  2.0% of finals hit --max_new_tokens
+  20260824_180222_latent_mas_gsm8k  7.0% of finals hit --max_new_tokens
+  20260824_181700_text_mas_gsm8k  9.0% of finals hit --max_new_tokens
+  20260824_145308_baseline_humanevalplus  8.0% of finals hit --max_new_tokens
+  20260824_061102_baseline_humanevalplus  1.0% of finals hit --max_new_tokens
+  20260824_152038_latent_mas_humanevalplus  6.0% of finals hit --max_new_tokens
+  20260824_062423_latent_mas_humanevalplus  3.0% of finals hit --max_new_tokens
+  20260824_154643_text_mas_humanevalplus  5.0% of finals hit --max_new_tokens
+  20260824_214913_baseline_mbppplus  8.0% of finals hit --max_new_tokens
+  20260824_123849_baseline_mbppplus  12.0% of finals hit --max_new_tokens
+  20260824_042735_baseline_mbppplus  3.0% of finals hit --max_new_tokens
+  20260824_221838_latent_mas_mbppplus  13.0% of finals hit --max_new_tokens
+  20260824_131155_latent_mas_mbppplus  9.0% of finals hit --max_new_tokens
+  20260824_045447_latent_mas_mbppplus  1.0% of finals hit --max_new_tokens
+  20260824_134202_text_mas_mbppplus  2.0% of finals hit --max_new_tokens
+  20260824_194234_baseline_medqa  15.0% of finals hit --max_new_tokens
+  20260824_100736_baseline_medqa  10.0% of finals hit --max_new_tokens
+  20260824_021141_baseline_medqa  5.0% of finals hit --max_new_tokens
+  20260824_201853_latent_mas_medqa  19.0% of finals hit --max_new_tokens
+  20260824_104336_latent_mas_medqa  11.0% of finals hit --max_new_tokens
+  20260824_024602_latent_mas_medqa  3.0% of finals hit --max_new_tokens
+  20260824_210755_text_mas_medqa  2.5% of finals hit --max_new_tokens
+  20260824_112039_text_mas_medqa  4.0% of finals hit --max_new_tokens
+  20260824_033257_text_mas_medqa  1.0% of finals hit --max_new_tokens

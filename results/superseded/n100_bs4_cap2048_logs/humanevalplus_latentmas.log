@@ -1,0 +1,80 @@
+[dbg +    0.1s] init: method=latent_mas model=Qwen/Qwen3.5-9B task=humanevalplus device=cuda state_transfer=both
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[dbg +    0.9s] dtype: loading Qwen/Qwen3.5-9B in torch.bfloat16
+[dbg +    0.9s] [▶ load model Qwen/Qwen3.5-9B (HF, torch.bfloat16)] ...
+[print2] writing run to runs/20260823_011449_latent_mas_humanevalplus/
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]Fetching 4 files: 100%|██████████| 4/4 [00:00<00:00, 1531.19it/s]
+Loading weights:   0%|          | 0/427 [00:00<?, ?it/s]Loading weights: 100%|██████████| 427/427 [00:00<00:00, 4556.47it/s]
+[dbg +    1.7s] [✓ load model Qwen/Qwen3.5-9B (HF, torch.bfloat16)] 0.77s
+[dbg +    1.7s] [▶ move model to cuda] ...
+[dbg +    3.8s] [✓ move model to cuda] 2.07s
+[dbg +    3.8s] model: 24/32 layers are Gated DeltaNet (recurrent state [B, 32, 128, 128] per layer, conv kernel 4)
+[dbg +    5.2s] hybrid: append-carries-state probe — split 3.12e-02 vs reset 7.87e+00 (0.4% of a full reset; state |max| 11.5, dtype torch.bfloat16) -> carries
+[dbg +    5.2s] hybrid: append mode = auto
+[dbg +    5.2s] model: attn_implementation = sdpa, dtype = torch.bfloat16
+[dbg +    5.3s] theorem 3.1: d_h=4096 |V|=248077 — 1 latent thought >= 228.6 text tokens
+[dbg +    5.4s] latent_mas: template tails {'auto': '<think>\n', 'on': '<think>\n', 'off': '<think>\n\n</think>\n\n'}
+[dbg +    5.4s] latent_mas: chat framing resolved against the live template
+[dbg +    5.4s] latent_mas: latent_turn=content latent_visibility=full chat_thinking=off judger_thinking=off
+[dbg +    5.4s] latent_mas: generate_bs=4 > 1 — ragged batches pay extra forwards on every append after the first; compare against --generate_bs 1 on your hardware
+[dbg +    5.4s] [▶ load dataset humanevalplus] ...
+[dbg +    5.7s] [✓ load dataset humanevalplus] 0.30s
+[dbg +    5.7s] dataset humanevalplus: 100 samples to run
+[dbg +    5.7s] warmup batch 1/1 (4 items, discarded)
+[dbg +    5.7s] agent Planner (planner) — latent thinking
+[dbg +    5.9s] [◆ latent Planner] 40 steps (bs=4) ...
+[dbg +    5.9s] [▶ build latent realignment matrix] ...
+[dbg +    6.4s] [✓ build latent realignment matrix] 0.43s
+[dbg +    8.6s] [◆ latent Planner] 40 steps in 2.63s · 15.2 step/s (bs=4) · ≳9.1k text-tok (×228.6)
+[dbg +    8.8s] workspace after Planner: kv_len=293 kv=36.6MiB state=198.0MiB state_norm=0.049192
+[dbg +    8.8s] agent Critic (critic) — latent thinking
+[dbg +    8.9s] append: padded over live state (pad prefix 39) — 39 column(s) stepwise with per-row state restore, then 236 in one forward
+[dbg +    8.9s] [◆ append Critic] 39 steps (bs=4) ...
+[dbg +   11.9s] [◆ append Critic] 39 steps in 3.03s · 12.9 step/s (bs=4) · ≳8.9k text-tok (×228.6)
+[dbg +   12.2s] [◆ latent Critic] 40 steps (bs=4) ...
+[dbg +   15.1s] [◆ latent Critic] 40 steps in 2.92s · 13.7 step/s (bs=4) · ≳9.1k text-tok (×228.6)
+[dbg +   15.4s] workspace after Critic: kv_len=610 kv=76.2MiB state=198.0MiB state_norm=0.052378
+[dbg +   15.4s] agent Refiner (refiner) — latent thinking
+[dbg +   15.4s] append: padded over live state (pad prefix 39) — 39 column(s) stepwise with per-row state restore, then 220 in one forward
+[dbg +   15.4s] [◆ append Refiner] 39 steps (bs=4) ...
+[dbg +   18.4s] [◆ append Refiner] 39 steps in 2.98s · 13.1 step/s (bs=4) · ≳8.9k text-tok (×228.6)
+[dbg +   18.7s] [◆ latent Refiner] 40 steps (bs=4) ...
+[dbg +   21.6s] [◆ latent Refiner] 40 steps in 2.92s · 13.7 step/s (bs=4) · ≳9.1k text-tok (×228.6)
+[dbg +   21.9s] workspace after Refiner: kv_len=911 kv=113.9MiB state=198.0MiB state_norm=0.050305
+[dbg +   21.9s] agent Judger (judger) — text decode
+[dbg +   21.9s] append: padded over live state (pad prefix 39) — 39 column(s) stepwise with per-row state restore, then 266 in one forward
+[dbg +   21.9s] [◆ append Judger] 39 steps (bs=4) ...
+[dbg +   24.9s] [◆ append Judger] 39 steps in 3.00s · 13.0 step/s (bs=4) · ≳8.9k text-tok (×228.6)
+[dbg +  173.0s] [⚡ decode Judger] 1760 tok in 147.71s · 11.9 tok/s/seq · ×4 = 47.7 tok/s
+=========================================
+Question 0
+error_msg: None
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: None
+[dbg +  173.8s] batch: 4 items (done 0/100)
+[dbg +  173.8s] agent Planner (planner) — latent thinking
+[dbg +  174.1s] [◆ latent Planner] 40 steps (bs=4) ...
+[dbg +  177.0s] [◆ latent Planner] 40 steps in 2.86s · 14.0 step/s (bs=4) · ≳9.1k text-tok (×228.6)
+[dbg +  177.2s] workspace after Planner: kv_len=293 kv=36.6MiB state=198.0MiB state_norm=0.049192
+[dbg +  177.2s] agent Critic (critic) — latent thinking
+[dbg +  177.3s] append: padded over live state (pad prefix 39) — 39 column(s) stepwise with per-row state restore, then 236 in one forward
+[dbg +  177.3s] [◆ append Critic] 39 steps (bs=4) ...
+[dbg +  180.2s] [◆ append Critic] 39 steps in 2.97s · 13.1 step/s (bs=4) · ≳8.9k text-tok (×228.6)
+[dbg +  180.6s] [◆ latent Critic] 40 steps (bs=4) ...
+[dbg +  183.5s] [◆ latent Critic] 40 steps in 2.95s · 13.6 step/s (bs=4) · ≳9.1k text-tok (×228.6)
+[dbg +  183.8s] workspace after Critic: kv_len=610 kv=76.2MiB state=198.0MiB state_norm=0.052378
+[dbg +  183.8s] agent Refiner (refiner) — latent thinking
+[dbg +  183.8s] append: padded over live state (pad prefix 39) — 39 column(s) stepwise with per-row state restore, then 220 in one forward
+[dbg +  183.8s] [◆ append Refiner] 39 steps (bs=4) ...
+[dbg +  186.8s] [◆ append Refiner] 39 steps in 2.98s · 13.1 step/s (bs=4) · ≳8.9k text-tok (×228.6)
+[dbg +  187.1s] [◆ latent Refiner] 40 steps (bs=4) ...
+[dbg +  190.1s] [◆ latent Refiner] 40 steps in 2.95s · 13.5 step/s (bs=4) · ≳9.1k text-tok (×228.6)
+[dbg +  190.4s] workspace after Refiner: kv_len=911 kv=113.9MiB state=198.0MiB state_norm=0.050305
+[dbg +  190.4s] agent Judger (judger) — text decode
+[dbg +  190.4s] append: padded over live state (pad prefix 39) — 39 column(s) stepwise with per-row state restore, then 266 in one forward
+[dbg +  190.4s] [◆ append Judger] 39 steps (bs=4) ...
+[dbg +  193.4s] [◆ append Judger] 39 steps in 2.98s · 13.1 step/s (bs=4) · ≳8.9k text-tok (×228.6)

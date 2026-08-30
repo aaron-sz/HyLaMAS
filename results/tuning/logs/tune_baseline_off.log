@@ -1,0 +1,163 @@
+[dbg +    0.1s] init: method=baseline model=Qwen/Qwen3.5-9B task=medqa device=cuda state_transfer=both
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[dbg +    0.9s] dtype: loading Qwen/Qwen3.5-9B in torch.bfloat16
+[dbg +    0.9s] [▶ load model Qwen/Qwen3.5-9B (HF, torch.bfloat16)] ...
+[print2] writing run to runs/20260823_015843_baseline_medqa/
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]Fetching 4 files: 100%|██████████| 4/4 [00:00<00:00, 1880.85it/s]
+Loading weights:   0%|          | 0/427 [00:00<?, ?it/s]Loading weights:  29%|██▉       | 123/427 [00:00<00:00, 1158.54it/s]Loading weights:  56%|█████▌    | 239/427 [00:00<00:00, 1091.71it/s]Loading weights:  82%|████████▏ | 349/427 [00:00<00:00, 1046.46it/s]Loading weights: 100%|██████████| 427/427 [00:00<00:00, 1123.64it/s]
+[dbg +    1.9s] [✓ load model Qwen/Qwen3.5-9B (HF, torch.bfloat16)] 0.94s
+[dbg +    1.9s] [▶ move model to cuda] ...
+[dbg +  141.4s] [✓ move model to cuda] 139.55s
+[dbg +  141.4s] model: 24/32 layers are Gated DeltaNet (recurrent state [B, 32, 128, 128] per layer, conv kernel 4)
+[dbg +  142.6s] hybrid: append-carries-state probe — split 3.12e-02 vs reset 7.87e+00 (0.4% of a full reset; state |max| 11.5, dtype torch.bfloat16) -> carries
+[dbg +  142.6s] hybrid: append mode = auto
+[dbg +  142.6s] model: attn_implementation = sdpa, dtype = torch.bfloat16
+[dbg +  142.7s] theorem 3.1: d_h=4096 |V|=248077 — 1 latent thought >= 228.6 text tokens
+[dbg +  142.8s] [▶ load dataset medqa] ...
+Generating train split: 0 examples [00:00, ? examples/s]Generating train split: 300 examples [00:00, 25109.58 examples/s]
+[dbg +  142.8s] [✓ load dataset medqa] 0.08s
+[dbg +  142.8s] dataset medqa: skipped 100, 200 remain
+[dbg +  142.8s] dataset medqa: 100 samples to run
+[dbg +  142.8s] warmup batch 1/1 (8 items, discarded)
+[dbg +  344.0s] [⚡ decode] 4096 tok in 201.11s · 20.4 tok/s/seq · ×8 = 162.9 tok/s
+[dbg +  344.0s] batch: 8 items (done 0/100)
+[dbg +  544.9s] [⚡ decode] 4096 tok in 200.93s · 20.4 tok/s/seq · ×8 = 163.1 tok/s
+[dbg +  544.9s] batch: 8 items (done 8/100)
+[dbg +  745.2s] [⚡ decode] 4096 tok in 200.27s · 20.5 tok/s/seq · ×8 = 163.6 tok/s
+[dbg +  745.2s] batch: 8 items (done 16/100)
+[dbg +  934.0s] [⚡ decode] 3896 tok in 188.83s · 20.6 tok/s/seq · ×8 = 165.1 tok/s
+[dbg +  934.1s] batch: 8 items (done 24/100)
+[dbg + 1009.8s] [⚡ decode] 1716 tok in 75.75s · 22.7 tok/s/seq · ×8 = 181.2 tok/s
+[dbg + 1009.8s] batch: 8 items (done 32/100)
+[dbg + 1080.7s] [⚡ decode] 1613 tok in 70.91s · 22.7 tok/s/seq · ×8 = 182.0 tok/s
+[dbg + 1080.7s] batch: 8 items (done 40/100)
+[dbg + 1152.8s] [⚡ decode] 1624 tok in 72.06s · 22.5 tok/s/seq · ×8 = 180.3 tok/s
+[dbg + 1152.8s] batch: 8 items (done 48/100)
+[dbg + 1194.7s] [⚡ decode] 971 tok in 41.87s · 23.2 tok/s/seq · ×8 = 185.5 tok/s
+[dbg + 1194.7s] batch: 8 items (done 56/100)
+[dbg + 1299.1s] [⚡ decode] 2197 tok in 104.35s · 21.1 tok/s/seq · ×8 = 168.4 tok/s
+[dbg + 1299.1s] batch: 8 items (done 64/100)
+[dbg + 1499.2s] [⚡ decode] 4096 tok in 200.12s · 20.5 tok/s/seq · ×8 = 163.7 tok/s
+[dbg + 1499.2s] batch: 8 items (done 72/100)
+[dbg + 1594.3s] [⚡ decode] 2126 tok in 95.12s · 22.4 tok/s/seq · ×8 = 178.8 tok/s
+[dbg + 1594.3s] batch: 8 items (done 80/100)
+[dbg + 1638.1s] [⚡ decode] 1011 tok in 43.76s · 23.1 tok/s/seq · ×8 = 184.8 tok/s
+[dbg + 1638.1s] batch: 8 items (done 88/100)
+[dbg + 1700.3s] [⚡ decode] 1407 tok in 62.14s · 22.6 tok/s/seq · ×8 = 181.1 tok/s
+[dbg + 1700.3s] batch: 4 items (done 96/100)
+[dbg + 1877.5s] [⚡ decode] 4096 tok in 177.25s · 23.1 tok/s/seq · ×4 = 92.4 tok/s
+[   1/100] ✓  pred=a              gold=a              latent=0    ~25.12s
+[   2/100] ✓  pred=c              gold=c              latent=0    ~25.12s
+[   3/100] ✓  pred=b              gold=b              latent=0    ~25.12s
+[   4/100] ✗  pred=1              gold=c              latent=0    ~25.12s CUT
+[   5/100] ✓  pred=c              gold=c              latent=0    ~25.12s
+[   6/100] ✓  pred=b              gold=b              latent=0    ~25.12s
+[   7/100] ✗  pred=a              gold=c              latent=0    ~25.12s
+[   8/100] ✗  pred=a              gold=c              latent=0    ~25.12s
+[   9/100] ✓  pred=d              gold=d              latent=0    ~25.04s
+[  10/100] ✓  pred=b              gold=b              latent=0    ~25.04s
+           acc 0.700 (7/10) · elapsed 12m25s · eta 1h51m · vram 30.2GiB · cut 1
+[  11/100] ✓  pred=b              gold=b              latent=0    ~25.04s
+[  12/100] ✓  pred=a              gold=a              latent=0    ~25.04s
+[  13/100] ✓  pred=d              gold=d              latent=0    ~25.04s
+[  14/100] ✗  pred=3              gold=b              latent=0    ~25.04s CUT
+[  15/100] ✓  pred=a              gold=a              latent=0    ~25.04s
+[  16/100] ✓  pred=c              gold=c              latent=0    ~25.04s
+[  17/100] ✓  pred=c              gold=c              latent=0    ~23.61s
+[  18/100] ✓  pred=b              gold=b              latent=0    ~23.61s
+[  19/100] ✓  pred=b              gold=b              latent=0    ~23.61s
+[  20/100] ✓  pred=b              gold=b              latent=0    ~23.61s
+           acc 0.800 (16/20) · elapsed 15m33s · eta 1h02m · vram 30.2GiB · cut 2
+[  21/100] ✓  pred=c              gold=c              latent=0    ~23.61s
+[  22/100] ✓  pred=d              gold=d              latent=0    ~23.61s
+[  23/100] ✓  pred=a              gold=a              latent=0    ~23.61s
+[  24/100] ✓  pred=c              gold=c              latent=0    ~23.61s
+[  25/100] ✓  pred=a              gold=a              latent=0    ~9.47s
+[  26/100] ✓  pred=c              gold=c              latent=0    ~9.47s
+[  27/100] ✓  pred=a              gold=a              latent=0    ~9.47s
+[  28/100] ✓  pred=c              gold=c              latent=0    ~9.47s
+[  29/100] ✓  pred=a              gold=a              latent=0    ~9.47s
+[  30/100] ✓  pred=b              gold=b              latent=0    ~9.47s
+           acc 0.867 (26/30) · elapsed 16m49s · eta 39m15s · vram 30.2GiB · cut 2
+[  31/100] ✓  pred=c              gold=c              latent=0    ~9.47s
+[  32/100] ✓  pred=a              gold=a              latent=0    ~9.47s
+[  33/100] ✓  pred=d              gold=d              latent=0    ~8.87s
+[  34/100] ✓  pred=a              gold=a              latent=0    ~8.87s
+[  35/100] ✓  pred=b              gold=b              latent=0    ~8.87s
+[  36/100] ✓  pred=c              gold=c              latent=0    ~8.87s
+[  37/100] ✓  pred=c              gold=c              latent=0    ~8.87s
+[  38/100] ✗  pred=a              gold=b              latent=0    ~8.87s
+[  39/100] ✓  pred=b              gold=b              latent=0    ~8.87s
+[  40/100] ✓  pred=a              gold=a              latent=0    ~8.87s
+           acc 0.875 (35/40) · elapsed 18m00s · eta 27m00s · vram 30.2GiB · cut 2
+[  41/100] ✓  pred=c              gold=c              latent=0    ~9.01s
+[  42/100] ✓  pred=d              gold=d              latent=0    ~9.01s
+[  43/100] ✗  pred=d              gold=b              latent=0    ~9.01s
+[  44/100] ✓  pred=b              gold=b              latent=0    ~9.01s
+[  45/100] ✓  pred=a              gold=a              latent=0    ~9.01s
+[  46/100] ✗  pred=d              gold=c              latent=0    ~9.01s
+[  47/100] ✓  pred=c              gold=c              latent=0    ~9.01s
+[  48/100] ✗  pred=c              gold=b              latent=0    ~9.01s
+[  49/100] ✓  pred=d              gold=d              latent=0    ~5.24s
+[  50/100] ✓  pred=a              gold=a              latent=0    ~5.24s
+           acc 0.840 (42/50) · elapsed 19m54s · eta 19m54s · vram 30.2GiB · cut 2
+[  51/100] ✓  pred=c              gold=c              latent=0    ~5.24s
+[  52/100] ✓  pred=a              gold=a              latent=0    ~5.24s
+[  53/100] ✓  pred=c              gold=c              latent=0    ~5.24s
+[  54/100] ✓  pred=b              gold=b              latent=0    ~5.24s
+[  55/100] ✓  pred=b              gold=b              latent=0    ~5.24s
+[  56/100] ✓  pred=a              gold=a              latent=0    ~5.24s
+[  57/100] ✓  pred=b              gold=b              latent=0    ~13.05s
+[  58/100] ✓  pred=b              gold=b              latent=0    ~13.05s
+[  59/100] ✓  pred=c              gold=c              latent=0    ~13.05s
+[  60/100] ✗  pred=b              gold=d              latent=0    ~13.05s
+           acc 0.850 (51/60) · elapsed 21m38s · eta 14m25s · vram 30.2GiB · cut 2
+[  61/100] ✓  pred=d              gold=d              latent=0    ~13.05s
+[  62/100] ✓  pred=d              gold=d              latent=0    ~13.05s
+[  63/100] ✓  pred=d              gold=d              latent=0    ~13.05s
+[  64/100] ✓  pred=c              gold=c              latent=0    ~13.05s
+[  65/100] ✓  pred=c              gold=c              latent=0    ~25.02s
+[  66/100] ✓  pred=c              gold=c              latent=0    ~25.02s
+[  67/100] ✓  pred=a              gold=a              latent=0    ~25.02s
+[  68/100] ✓  pred=b              gold=b              latent=0    ~25.02s
+[  69/100] ✓  pred=c              gold=c              latent=0    ~25.02s
+[  70/100] ✓  pred=b              gold=b              latent=0    ~25.02s
+           acc 0.871 (61/70) · elapsed 24m59s · eta 10m42s · vram 30.2GiB · cut 2
+[  71/100] ✗  pred=19             gold=d              latent=0    ~25.02s CUT
+[  72/100] ✓  pred=c              gold=c              latent=0    ~25.02s
+[  73/100] ✓  pred=a              gold=a              latent=0    ~11.89s
+[  74/100] ✓  pred=c              gold=c              latent=0    ~11.89s
+[  75/100] ✓  pred=c              gold=c              latent=0    ~11.89s
+[  76/100] ✓  pred=a              gold=a              latent=0    ~11.89s
+[  77/100] ✓  pred=a              gold=a              latent=0    ~11.89s
+[  78/100] ✓  pred=b              gold=b              latent=0    ~11.89s
+[  79/100] ✓  pred=c              gold=c              latent=0    ~11.89s
+[  80/100] ✓  pred=c              gold=c              latent=0    ~11.89s
+           acc 0.875 (70/80) · elapsed 26m34s · eta 6m38s · vram 30.2GiB · cut 3
+[  81/100] ✓  pred=d              gold=d              latent=0    ~5.47s
+[  82/100] ✓  pred=a              gold=a              latent=0    ~5.47s
+[  83/100] ✓  pred=d              gold=d              latent=0    ~5.47s
+[  84/100] ✓  pred=c              gold=c              latent=0    ~5.47s
+[  85/100] ✗  pred=b              gold=c              latent=0    ~5.47s
+[  86/100] ✓  pred=a              gold=a              latent=0    ~5.47s
+[  87/100] ✓  pred=c              gold=c              latent=0    ~5.47s
+[  88/100] ✓  pred=b              gold=b              latent=0    ~5.47s
+[  89/100] ✓  pred=a              gold=a              latent=0    ~7.77s
+[  90/100] ✓  pred=d              gold=d              latent=0    ~7.77s
+           acc 0.878 (79/90) · elapsed 28m20s · eta 3m08s · vram 30.2GiB · cut 3
+[  91/100] ✓  pred=a              gold=a              latent=0    ~7.77s
+[  92/100] ✓  pred=b              gold=b              latent=0    ~7.77s
+[  93/100] ✓  pred=c              gold=c              latent=0    ~7.77s
+[  94/100] ✓  pred=a              gold=a              latent=0    ~7.77s
+[  95/100] ✓  pred=c              gold=c              latent=0    ~7.77s
+[  96/100] ✓  pred=c              gold=c              latent=0    ~7.77s
+[  97/100] ✗  pred=6              gold=a              latent=0    ~44.32s CUT
+[  98/100] ✓  pred=a              gold=a              latent=0    ~44.32s
+[  99/100] ✓  pred=a              gold=a              latent=0    ~44.32s[print2] WARNING: 4/100 answers hit --max_new_tokens and were cut off. Accuracy and token totals both reflect the cap, not the method.
+
+[ 100/100] ✓  pred=a              gold=a              latent=0    ~44.32s
+           acc 0.880 (88/100) · elapsed 31m17s · eta 0s · vram 30.2GiB · cut 4
+{"method": "baseline", "model": "Qwen/Qwen3.5-9B", "task": "medqa", "sample_offset": 100, "latent_steps": 0, "latent_turn": "raw", "latent_visibility": "full", "chat_thinking": "off", "judger_thinking": "inherit", "latent_space_realign": false, "max_new_tokens": 4096, "generate_bs": 8, "state_transfer": "both", "split": "test", "seed": 42, "max_samples": 100, "processed": 100, "status": "completed", "accuracy": 0.88, "accuracy_ci95": {"low": 0.8019, "high": 0.93, "half_width": 0.0641, "z": 1.96}, "correct": 88, "generated_tokens": 107659, "generated_tokens_per_sample": 1076.59, "prompt_tokens": 33760, "latent_steps_total": 0, "truncated_final": 4, "peak_vram_mib": 30900.0, "total_time_sec": 1533.5634, "time_per_sample_sec": 15.3356}
+[print2] runs/20260823_015843_baseline_medqa/trace.jsonl  (100 samples, completed)
+[print2] runs/20260823_015843_baseline_medqa/batches.jsonl  (13 batches)
+[print2] runs/20260823_015843_baseline_medqa/manifest.json  acc=0.8800 (88/100)

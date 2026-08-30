@@ -1,0 +1,2 @@
+{"batch_index": 0, "batch_size": 8, "wall_sec": 1237.6094, "sec_per_sample": 154.7012, "samples_done": 8, "is_warmup": false, "prompt_tokens": 141643, "generated_tokens": 78783, "latent_steps": 0, "peak_reserved_mib": 43140.0}
+{"batch_index": 1, "batch_size": 8, "wall_sec": 801.3011, "sec_per_sample": 100.1626, "samples_done": 16, "is_warmup": false, "prompt_tokens": 117561, "generated_tokens": 63171, "latent_steps": 0, "peak_reserved_mib": 43140.0}

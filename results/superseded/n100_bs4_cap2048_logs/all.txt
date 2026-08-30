@@ -1,0 +1,44 @@
+nohup: ignoring input
+------------------------------------------------------------------------
+PREFLIGHT
+------------------------------------------------------------------------
+0, NVIDIA L40S, 46068 MiB
+free disk: 20G
+verify_hybrid: 26/26 checks passed
+
+model=Qwen/Qwen3.5-9B  N=100  batch=4  cap=2048  latent_steps=40  gpu=0
+tasks: medqa mbppplus humanevalplus arc_challenge gsm8k arc_easy
+
+------------------------------------------------------------------------
+TASK: medqa
+------------------------------------------------------------------------
+    [run ] medqa_baseline             acc=0.8600+/-0.068  tok=939.15  cut=7  1691s
+    [run ] medqa_latentmas            acc=0.8100+/-0.076  tok=870.02  cut=16  2479s
+    [run ] medqa_textmas              acc=0.8800+/-0.064  tok=2575.99  cut=1  4298s
+------------------------------------------------------------------------
+TASK: mbppplus
+------------------------------------------------------------------------
+    [run ] mbppplus_baseline          acc=0.8100+/-0.076  tok=619.39  cut=5  1341s
+    [run ] mbppplus_latentmas         acc=0.7200+/-0.087  tok=521.8  cut=5  1743s
+    [run ] mbppplus_textmas           Terminated
+FAILED (exit 143, 2051s)
+             IndexError: list index out of range
+             
+             [dbg + 2019.1s] batch: 4 items (done 68/100)
+             [dbg + 2038.5s] [⚡ decode] 407 tok in 19.41s · 21.0 tok/s/seq · ×4 = 83.9 tok/s
+------------------------------------------------------------------------
+TASK: humanevalplus
+------------------------------------------------------------------------
+    [run ] humanevalplus_baseline     Terminated
+FAILED (exit 143, 486s)
+               File "<string>", line 1, in <module>
+             NameError: name 'List' is not defined. Did you mean: 'list'?
+             
+             [dbg +  449.1s] batch: 4 items (done 24/100)
+    [run ] humanevalplus_latentmas    run_all.sh: line 87:  8637 Killed                  CUDA_DEVICE_ORDER=PCI_BUS_ID CUDA_VISIBLE_DEVICES=$GPU "$PY" run.py "$@" > "$log" 2>&1
+FAILED (exit 137, 221s)
+             [dbg +  190.4s] agent Judger (judger) — text decode
+             [dbg +  190.4s] append: padded over live state (pad prefix 39) — 39 column(s) stepwise with per-row state restore, then 266 in one forward
+             [dbg +  190.4s] [◆ append Judger] 39 steps (bs=4) ...
+             [dbg +  193.4s] [◆ append Judger] 39 steps in 2.98s · 13.1 step/s (bs=4) · ≳8.9k text-tok (×228.6)
+    [run ] humanevalplus_textmas      

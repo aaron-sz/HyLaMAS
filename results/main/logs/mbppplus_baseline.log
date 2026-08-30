@@ -1,0 +1,586 @@
+[dbg +    0.1s] init: method=baseline model=Qwen/Qwen3.5-9B task=mbppplus device=cuda state_transfer=both
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[dbg +    0.8s] dtype: loading Qwen/Qwen3.5-9B in torch.bfloat16
+[dbg +    0.8s] [▶ load model Qwen/Qwen3.5-9B (HF, torch.bfloat16)] ...
+[print2] writing run to runs/20260823_103729_baseline_mbppplus/
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]Fetching 4 files: 100%|██████████| 4/4 [00:00<00:00, 1506.98it/s]
+Loading weights:   0%|          | 0/427 [00:00<?, ?it/s]Loading weights: 100%|██████████| 427/427 [00:00<00:00, 6153.28it/s]
+[dbg +    1.5s] [✓ load model Qwen/Qwen3.5-9B (HF, torch.bfloat16)] 0.63s
+[dbg +    1.5s] [▶ move model to cuda] ...
+[dbg +    3.3s] [✓ move model to cuda] 1.82s
+[dbg +    3.3s] model: 24/32 layers are Gated DeltaNet (recurrent state [B, 32, 128, 128] per layer, conv kernel 4)
+[dbg +    4.4s] hybrid: append-carries-state probe — split 3.12e-02 vs reset 7.87e+00 (0.4% of a full reset; state |max| 11.5, dtype torch.bfloat16) -> carries
+[dbg +    4.4s] hybrid: append mode = auto
+[dbg +    4.4s] model: attn_implementation = sdpa, dtype = torch.bfloat16
+[dbg +    4.5s] theorem 3.1: d_h=4096 |V|=248077 — 1 latent thought >= 228.6 text tokens
+[dbg +    4.6s] [▶ load dataset mbppplus] ...
+[dbg +    4.9s] [✓ load dataset mbppplus] 0.26s
+[dbg +    4.9s] dataset mbppplus: 100 samples to run
+[dbg +    4.9s] warmup batch 1/1 (8 items, discarded)
+[dbg +   45.3s] [⚡ decode] 937 tok in 40.43s · 23.2 tok/s/seq · ×8 = 185.4 tok/s
+=========================================
+Question 0
+error_msg: None
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: None
+=========================================
+Question 3
+error_msg: None
+=========================================
+Question 4
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 36, in <module>
+  File "<string>", line 30, in assertion
+AssertionError: out: {'least', 'long.', 'with', 'that', 'long', 'words', 'string', 'This', 'very', 'characters'}, exp: {'least', 'with', 'that', 'long', 'words', 'string', 'This', 'very', 'characters'}
+
+=========================================
+Question 5
+error_msg: None
+=========================================
+Question 6
+error_msg: None
+[dbg +   46.3s] batch: 8 items (done 0/100)
+[dbg +   86.6s] [⚡ decode] 937 tok in 40.25s · 23.3 tok/s/seq · ×8 = 186.2 tok/s
+=========================================
+Question 7
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 35, in <module>
+  File "<string>", line 29, in assertion
+AssertionError: out: a, exp: 
+
+=========================================
+Question 0
+error_msg: None
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: None
+=========================================
+Question 3
+error_msg: None
+=========================================
+Question 4
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 36, in <module>
+  File "<string>", line 30, in assertion
+AssertionError: out: {'least', 'long.', 'with', 'that', 'long', 'words', 'string', 'This', 'very', 'characters'}, exp: {'least', 'with', 'that', 'long', 'words', 'string', 'This', 'very', 'characters'}
+
+=========================================
+Question 5
+error_msg: None
+=========================================
+Question 6
+error_msg: None
+[dbg +   87.6s] batch: 8 items (done 8/100)
+[dbg +  139.4s] [⚡ decode] 1201 tok in 51.84s · 23.2 tok/s/seq · ×8 = 185.3 tok/s
+=========================================
+Question 7
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 35, in <module>
+  File "<string>", line 29, in assertion
+AssertionError: out: a, exp: 
+
+[   1/100] ✓  pred=def similar_e… gold=import numpy … latent=0    ~5.16s
+[   2/100] ✓  pred=import math  … gold=import numpy … latent=0    ~5.16s
+[   3/100] ✓  pred=def heap_queu… gold=import numpy … latent=0    ~5.16s
+[   4/100] ✓  pred=def differ_At… gold=import numpy … latent=0    ~5.16s
+[   5/100] ✗  pred=def find_char… gold=import numpy … latent=0    ~5.16s
+[   6/100] ✓  pred=def square_nu… gold=import numpy … latent=0    ~5.16s
+[   7/100] ✓  pred=def find_Rota… gold=import numpy … latent=0    ~5.16s
+[   8/100] ✗  pred=def remove_Oc… gold=import numpy … latent=0    ~5.16s
+=========================================
+Question 0
+error_msg: None
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: None
+=========================================
+Question 3
+error_msg: None
+=========================================
+Question 4
+error_msg: None
+=========================================
+Question 5
+error_msg: None
+=========================================
+Question 6
+error_msg: None
+[dbg +  140.4s] batch: 8 items (done 16/100)
+[dbg +  253.2s] [⚡ decode] 2498 tok in 112.78s · 22.1 tok/s/seq · ×8 = 177.2 tok/s
+=========================================
+Question 7
+error_msg: None
+[   9/100] ✓  pred=def sort_matr… gold=import numpy … latent=0    ~6.61s
+[  10/100] ✓  pred=def find_Volu… gold=import numpy … latent=0    ~6.61s
+           acc 0.800 (8/10) · elapsed 2m20s · eta 21m02s · vram 20.4GiB
+[  11/100] ✓  pred=import re  de… gold=import numpy … latent=0    ~6.61s
+[  12/100] ✓  pred=def square_pe… gold=import numpy … latent=0    ~6.61s
+[  13/100] ✓  pred=def remove_di… gold=import numpy … latent=0    ~6.61s
+[  14/100] ✓  pred=def test_dupl… gold=import numpy … latent=0    ~6.61s
+[  15/100] ✓  pred=def is_woodal… gold=import numpy … latent=0    ~6.61s
+[  16/100] ✓  pred=def check(n):… gold=import numpy … latent=0    ~6.61s
+=========================================
+Question 0
+error_msg: None
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: None
+=========================================
+Question 3
+error_msg: None
+=========================================
+Question 4
+error_msg: None
+=========================================
+Question 5
+error_msg: None
+=========================================
+Question 6
+error_msg: None
+[dbg +  254.3s] batch: 8 items (done 24/100)
+[dbg +  365.9s] [⚡ decode] 2464 tok in 111.69s · 22.1 tok/s/seq · ×8 = 176.5 tok/s
+=========================================
+Question 7
+error_msg: None
+[  17/100] ✓  pred=def find_Max_… gold=import numpy … latent=0    ~14.23s
+[  18/100] ✓  pred=def opposite_… gold=import numpy … latent=0    ~14.23s
+[  19/100] ✓  pred=def is_octago… gold=import numpy … latent=0    ~14.23s
+[  20/100] ✓  pred=def count_Sub… gold=import numpy … latent=0    ~14.23s
+           acc 0.900 (18/20) · elapsed 4m14s · eta 16m56s · vram 31.5GiB
+[  21/100] ✓  pred=def smallest_… gold=import numpy … latent=0    ~14.23s
+[  22/100] ✓  pred=def max_diffe… gold=import numpy … latent=0    ~14.23s
+[  23/100] ✓  pred=def subject_m… gold=import numpy … latent=0    ~14.23s
+[  24/100] ✓  pred=def recursive… gold=import numpy … latent=0    ~14.23s
+=========================================
+Question 0
+error_msg: None
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: None
+=========================================
+Question 3
+error_msg: None
+=========================================
+Question 4
+error_msg: None
+=========================================
+Question 5
+error_msg: None
+=========================================
+Question 6
+error_msg: None
+[dbg +  367.0s] batch: 8 items (done 32/100)
+[dbg +  546.9s] [⚡ decode] 3757 tok in 179.87s · 20.9 tok/s/seq · ×8 = 167.1 tok/s
+=========================================
+Question 7
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 45, in <module>
+  File "<string>", line 39, in assertion
+AssertionError: out: False, exp: True
+
+[  25/100] ✓  pred=def pos_count… gold=import numpy … latent=0    ~14.09s
+[  26/100] ✓  pred=def bell_numb… gold=import numpy … latent=0    ~14.09s
+[  27/100] ✓  pred=def is_Monoto… gold=import numpy … latent=0    ~14.09s
+[  28/100] ✓  pred=def is_sublis… gold=import numpy … latent=0    ~14.09s
+[  29/100] ✓  pred=def get_equal… gold=import numpy … latent=0    ~14.09s
+[  30/100] ✓  pred=def comb_sort… gold=import numpy … latent=0    ~14.09s
+           acc 0.933 (28/30) · elapsed 6m06s · eta 14m15s · vram 31.5GiB
+[  31/100] ✓  pred=def dif_Squar… gold=import numpy … latent=0    ~14.09s
+[  32/100] ✗  pred=def is_samepa… gold=import numpy … latent=0    ~14.09s
+=========================================
+Question 0
+error_msg: None
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: None
+=========================================
+Question 3
+error_msg: None
+=========================================
+Question 4
+error_msg: None
+=========================================
+Question 5
+error_msg: None
+=========================================
+Question 6
+error_msg: None
+[dbg +  548.8s] batch: 8 items (done 40/100)
+[dbg +  667.4s] [⚡ decode] 2602 tok in 118.56s · 21.9 tok/s/seq · ×8 = 175.6 tok/s
+=========================================
+Question 7
+error_msg: None
+[  33/100] ✓  pred=def find_tupl… gold=import numpy … latent=0    ~22.73s
+[  34/100] ✓  pred=def is_Diff(n… gold=import numpy … latent=0    ~22.73s
+[  35/100] ✓  pred=def word_len(… gold=import numpy … latent=0    ~22.73s
+[  36/100] ✓  pred=def tetrahedr… gold=import numpy … latent=0    ~22.73s
+[  37/100] ✓  pred=import math  … gold=import numpy … latent=0    ~22.73s
+[  38/100] ✓  pred=def sequence(… gold=import numpy … latent=0    ~22.73s
+[  39/100] ✓  pred=import math  … gold=import numpy … latent=0    ~22.73s
+[  40/100] ✓  pred=def centered_… gold=import numpy … latent=0    ~22.73s
+           acc 0.925 (37/40) · elapsed 9m08s · eta 13m43s · vram 43.7GiB
+=========================================
+Question 0
+error_msg: None
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: None
+=========================================
+Question 3
+error_msg: None
+=========================================
+Question 4
+error_msg: None
+=========================================
+Question 5
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 46, in <module>
+  File "<string>", line 40, in assertion
+AssertionError: out: False, exp: True
+
+=========================================
+Question 6
+error_msg: None
+[dbg +  668.4s] batch: 8 items (done 48/100)
+[dbg +  708.0s] [⚡ decode] 913 tok in 39.58s · 23.1 tok/s/seq · ×8 = 184.5 tok/s
+=========================================
+Question 7
+error_msg: None
+[  41/100] ✓  pred=def merge_dic… gold=import numpy … latent=0    ~14.95s
+[  42/100] ✓  pred=def freq_coun… gold=import numpy … latent=0    ~14.95s
+[  43/100] ✓  pred=def closest_n… gold=import numpy … latent=0    ~14.95s
+[  44/100] ✓  pred=def len_log(w… gold=import numpy … latent=0    ~14.95s
+[  45/100] ✓  pred=def find_subs… gold=import numpy … latent=0    ~14.95s
+[  46/100] ✗  pred=def is_undula… gold=import numpy … latent=0    ~14.95s
+[  47/100] ✓  pred=def power(a, … gold=import numpy … latent=0    ~14.95s
+[  48/100] ✓  pred=def index_min… gold=import numpy … latent=0    ~14.95s
+=========================================
+Question 0
+error_msg: None
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: None
+=========================================
+Question 3
+error_msg: None
+=========================================
+Question 4
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 29, in <module>
+  File "<string>", line 23, in assertion
+AssertionError: out: b101, exp: -101
+
+=========================================
+Question 5
+error_msg: None
+=========================================
+Question 6
+error_msg: None
+[dbg +  709.0s] batch: 8 items (done 56/100)
+[dbg +  828.6s] [⚡ decode] 2581 tok in 119.59s · 21.6 tok/s/seq · ×8 = 172.7 tok/s
+=========================================
+Question 7
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 30, in <module>
+  File "<string>", line 24, in assertion
+AssertionError: out: PythonProgram, exp: ___PythonProgram
+
+[  49/100] ✓  pred=def Find_Min_… gold=import numpy … latent=0    ~5.08s
+[  50/100] ✓  pred=import math  … gold=import numpy … latent=0    ~5.08s
+           acc 0.920 (46/50) · elapsed 11m48s · eta 11m48s · vram 43.7GiB
+[  51/100] ✓  pred=def frequency… gold=import numpy … latent=0    ~5.08s
+[  52/100] ✓  pred=def multiply_… gold=import numpy … latent=0    ~5.08s
+[  53/100] ✗  pred=def decimal_t… gold=import numpy … latent=0    ~5.08s
+[  54/100] ✓  pred=def next_smal… gold=import numpy … latent=0    ~5.08s
+[  55/100] ✓  pred=def kth_eleme… gold=import numpy … latent=0    ~5.08s
+[  56/100] ✗  pred=def snake_to_… gold=import numpy … latent=0    ~5.08s
+=========================================
+Question 0
+error_msg: None
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: None
+=========================================
+Question 3
+error_msg: None
+=========================================
+Question 4
+error_msg: None
+=========================================
+Question 5
+error_msg: None
+=========================================
+Question 6
+error_msg: None
+[dbg +  829.7s] batch: 8 items (done 64/100)
+[dbg + 1011.0s] [⚡ decode] 3805 tok in 181.31s · 21.0 tok/s/seq · ×8 = 167.9 tok/s
+=========================================
+Question 7
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 33, in <module>
+  File "<string>", line 27, in assertion
+AssertionError: out: False, exp: None
+
+[  57/100] ✓  pred=def eulerian_… gold=import numpy … latent=0    ~15.08s
+[  58/100] ✓  pred=def sort_subl… gold=import numpy … latent=0    ~15.08s
+[  59/100] ✓  pred=def count(boo… gold=import numpy … latent=0    ~15.08s
+[  60/100] ✓  pred=def add_lists… gold=import numpy … latent=0    ~15.08s
+           acc 0.900 (54/60) · elapsed 13m49s · eta 9m13s · vram 43.7GiB
+[  61/100] ✓  pred=def merge_sor… gold=import numpy … latent=0    ~15.08s
+[  62/100] ✓  pred=def odd_Equiv… gold=import numpy … latent=0    ~15.08s
+[  63/100] ✓  pred=def common_in… gold=import numpy … latent=0    ~15.08s
+[  64/100] ✗  pred=def check_int… gold=import numpy … latent=0    ~15.08s
+=========================================
+Question 0
+error_msg: None
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 45, in <module>
+  File "<string>", line 18, in search
+IndexError: list index out of range
+
+=========================================
+Question 3
+error_msg: None
+=========================================
+Question 4
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 47, in <module>
+  File "<string>", line 41, in assertion
+AssertionError: out: 220, exp: 504
+
+=========================================
+Question 5
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 31, in <module>
+  File "<string>", line 4, in angle_complex
+TypeError: must be real number, not complex
+
+=========================================
+Question 6
+error_msg: None
+[dbg + 1012.0s] batch: 8 items (done 72/100)
+[dbg + 1041.7s] [⚡ decode] 682 tok in 29.71s · 23.0 tok/s/seq · ×8 = 183.7 tok/s
+=========================================
+Question 7
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 42, in <module>
+TypeError: 'int' object is not iterable
+
+[  65/100] ✓  pred=def tuple_to_… gold=import numpy … latent=0    ~22.79s
+[  66/100] ✓  pred=def string_to… gold=import numpy … latent=0    ~22.79s
+[  67/100] ✗  pred=def search(ar… gold=import numpy … latent=0    ~22.79s
+[  68/100] ✓  pred=def max_produ… gold=import numpy … latent=0    ~22.79s
+[  69/100] ✗  pred=def sum_divis… gold=import numpy … latent=0    ~22.79s
+[  70/100] ✗  pred=import math  … gold=import numpy … latent=0    ~22.79s
+           acc 0.857 (60/70) · elapsed 16m51s · eta 7m13s · vram 43.7GiB
+[  71/100] ✓  pred=def find_leng… gold=import numpy … latent=0    ~22.79s
+[  72/100] ✗  pred=import math  … gold=import numpy … latent=0    ~22.79s
+=========================================
+Question 0
+error_msg: None
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 75, in <module>
+  File "<string>", line 69, in assertion
+AssertionError: out: False, exp: True
+
+=========================================
+Question 3
+error_msg: None
+=========================================
+Question 4
+error_msg: None
+=========================================
+Question 5
+error_msg: None
+=========================================
+Question 6
+error_msg: None
+[dbg + 1042.8s] batch: 8 items (done 80/100)
+[dbg + 1241.4s] [⚡ decode] 4096 tok in 198.67s · 20.6 tok/s/seq · ×8 = 164.9 tok/s
+=========================================
+Question 7
+error_msg: None
+[  73/100] ✓  pred=def multiply_… gold=import numpy … latent=0    ~3.84s
+[  74/100] ✓  pred=def long_word… gold=import numpy … latent=0    ~3.84s
+[  75/100] ✗  pred=def magic_squ… gold=import numpy … latent=0    ~3.84s
+[  76/100] ✓  pred=from collecti… gold=import numpy … latent=0    ~3.84s
+[  77/100] ✓  pred=def reverse_v… gold=import numpy … latent=0    ~3.84s
+[  78/100] ✓  pred=def tup_strin… gold=import numpy … latent=0    ~3.84s
+[  79/100] ✓  pred=def sum_negat… gold=import numpy … latent=0    ~3.84s
+[  80/100] ✓  pred=def hexagonal… gold=import numpy … latent=0    ~3.84s
+           acc 0.850 (68/80) · elapsed 17m22s · eta 4m20s · vram 43.7GiB
+=========================================
+Question 0
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 43, in <module>
+  File "<string>", line 35, in assertion
+AssertionError
+
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: None
+=========================================
+Question 3
+error_msg: None
+=========================================
+Question 4
+error_msg: None
+=========================================
+Question 5
+error_msg: None
+=========================================
+Question 6
+error_msg: None
+[dbg + 1242.5s] batch: 8 items (done 88/100)
+[dbg + 1320.6s] [⚡ decode] 1769 tok in 78.12s · 22.6 tok/s/seq · ×8 = 181.2 tok/s
+=========================================
+Question 7
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 50, in <module>
+  File "<string>", line 44, in assertion
+AssertionError: out: (-7, 7), exp: (2, 1)
+
+[  81/100] ✗  pred=import math  … gold=import numpy … latent=0    ~24.96s
+[  82/100] ✓  pred=def is_Sum_Of… gold=import numpy … latent=0    ~24.96s CUT
+[  83/100] ✓  pred=import math  … gold=import numpy … latent=0    ~24.96s
+[  84/100] ✓  pred=def extract_s… gold=import numpy … latent=0    ~24.96s
+[  85/100] ✓  pred=def pancake_s… gold=import numpy … latent=0    ~24.96s
+[  86/100] ✓  pred=def count_sam… gold=import numpy … latent=0    ~24.96s
+[  87/100] ✓  pred=def max_Abs_D… gold=import numpy … latent=0    ~24.96s
+[  88/100] ✗  pred=def extended_… gold=import numpy … latent=0    ~24.96s
+=========================================
+Question 0
+error_msg: Traceback (most recent call last):
+  File "/home/sagemaker-user/LatentMAS-Qwen3.5-2/utils.py", line 65, in worker
+    exec(code, local_ns)
+  File "<string>", line 32, in <module>
+  File "<string>", line 3, in remove_elements
+TypeError: unhashable type: 'list'
+
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: None
+=========================================
+Question 3
+error_msg: None
+=========================================
+Question 4
+error_msg: None
+=========================================
+Question 5
+error_msg: None
+=========================================
+Question 6
+error_msg: None
+[dbg + 1322.1s] batch: 4 items (done 96/100)
+[dbg + 1366.4s] [⚡ decode] 1026 tok in 44.31s · 23.2 tok/s/seq · ×4 = 92.6 tok/s
+=========================================
+Question 7
+error_msg: None
+[  89/100] ✗  pred=def remove_el… gold=import numpy … latent=0    ~9.96s
+[  90/100] ✓  pred=def sum_serie… gold=import numpy … latent=0    ~9.96s
+           acc 0.833 (75/90) · elapsed 22m01s · eta 2m26s · vram 43.7GiB · cut 1
+[  91/100] ✓  pred=def count_cha… gold=import numpy … latent=0    ~9.96s
+[  92/100] ✓  pred=def find_even… gold=import numpy … latent=0    ~9.96s
+[  93/100] ✓  pred=def next_powe… gold=import numpy … latent=0    ~9.96s
+[  94/100] ✓  pred=def frequency… gold=import numpy … latent=0    ~9.96s
+[  95/100] ✓  pred=def sum_range… gold=import numpy … latent=0    ~9.96s
+[  96/100] ✓  pred=def perimeter… gold=import numpy … latent=0    ~9.96s
+=========================================
+Question 0
+error_msg: None
+=========================================
+Question 1
+error_msg: None
+=========================================
+Question 2
+error_msg: None
+[print2] WARNING: 1/100 answers hit --max_new_tokens and were cut off. Accuracy and token totals both reflect the cap, not the method.
+=========================================
+Question 3
+error_msg: None
+[  97/100] ✓  pred=def count_occ… gold=import numpy … latent=0    ~11.21s
+[  98/100] ✓  pred=def check_typ… gold=import numpy … latent=0    ~11.21s
+[  99/100] ✓  pred=import bisect… gold=import numpy … latent=0    ~11.21s
+[ 100/100] ✓  pred=def count_Set… gold=import numpy … latent=0    ~11.21s
+           acc 0.850 (85/100) · elapsed 22m46s · eta 0s · vram 43.7GiB · cut 1
+{"method": "baseline", "model": "Qwen/Qwen3.5-9B", "task": "mbppplus", "sample_offset": 0, "latent_steps": 0, "latent_turn": "raw", "latent_visibility": "full", "chat_thinking": "off", "judger_thinking": "inherit", "latent_space_realign": false, "max_new_tokens": 4096, "generate_bs": 8, "state_transfer": "both", "split": "test", "seed": 42, "max_samples": 100, "processed": 100, "status": "completed", "accuracy": 0.85, "accuracy_ci95": {"low": 0.7672, "high": 0.9069, "half_width": 0.0699, "z": 1.96}, "correct": 85, "generated_tokens": 72302, "generated_tokens_per_sample": 723.02, "prompt_tokens": 24729, "latent_steps_total": 0, "truncated_final": 1, "peak_vram_mib": 44770.0, "total_time_sec": 1320.6606, "time_per_sample_sec": 13.2066}
+[print2] runs/20260823_103729_baseline_mbppplus/trace.jsonl  (100 samples, completed)
+[print2] runs/20260823_103729_baseline_mbppplus/batches.jsonl  (13 batches)
+[print2] runs/20260823_103729_baseline_mbppplus/manifest.json  acc=0.8500 (85/100)

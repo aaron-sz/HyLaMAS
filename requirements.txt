@@ -1,0 +1,22 @@
+# Qwen3.5 needs transformers >= 5.2 (model type `qwen3_5` landed 2026-02-09).
+# The floor is a hard requirement, not a preference: the unified Cache API,
+# `LinearAttentionLayer`, and a Gated DeltaNet that passes `initial_state` on
+# the chunked path all arrive with 5.x, and the agent handoff is built on them.
+#
+# Verified against transformers 5.15.0 on torch 2.8.0 (see verify_hybrid.py,
+# which re-derives the cache measurements the method relies on). If you upgrade
+# transformers, run verify_hybrid.py before trusting a result, a change to the
+# DeltaNet cache path would degrade the handoff silently, not loudly.
+#
+# NOTE: this is deliberately NOT the sibling LatentMAS repo's pin
+# (transformers==4.57.1). The two cannot share a virtualenv; see README.md.
+transformers>=5.2,<6
+torch>=2.8
+numpy
+tqdm
+accelerate
+datasets
+matplotlib
+
+# No vLLM. vLLM has no way to hand a DeltaNet recurrent state from one request
+# to the next, and that handoff is the entire method here.

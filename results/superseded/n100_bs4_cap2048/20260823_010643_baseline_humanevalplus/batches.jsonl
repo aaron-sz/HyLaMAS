@@ -1,0 +1,6 @@
+{"batch_index": 0, "batch_size": 4, "wall_sec": 60.1132, "sec_per_sample": 15.0283, "samples_done": 4, "is_warmup": false, "prompt_tokens": 976, "generated_tokens": 1724, "latent_steps": 0, "peak_reserved_mib": 17900.0}
+{"batch_index": 1, "batch_size": 4, "wall_sec": 50.615, "sec_per_sample": 12.6538, "samples_done": 8, "is_warmup": false, "prompt_tokens": 952, "generated_tokens": 1878, "latent_steps": 0, "peak_reserved_mib": 17900.0}
+{"batch_index": 2, "batch_size": 4, "wall_sec": 24.7414, "sec_per_sample": 6.1854, "samples_done": 12, "is_warmup": false, "prompt_tokens": 981, "generated_tokens": 1102, "latent_steps": 0, "peak_reserved_mib": 17900.0}
+{"batch_index": 3, "batch_size": 4, "wall_sec": 79.688, "sec_per_sample": 19.922, "samples_done": 16, "is_warmup": false, "prompt_tokens": 836, "generated_tokens": 2173, "latent_steps": 0, "peak_reserved_mib": 18116.0}
+{"batch_index": 4, "batch_size": 4, "wall_sec": 111.3523, "sec_per_sample": 27.8381, "samples_done": 20, "is_warmup": false, "prompt_tokens": 970, "generated_tokens": 2877, "latent_steps": 0, "peak_reserved_mib": 18868.0}
+{"batch_index": 5, "batch_size": 4, "wall_sec": 55.9565, "sec_per_sample": 13.9891, "samples_done": 24, "is_warmup": false, "prompt_tokens": 961, "generated_tokens": 1812, "latent_steps": 0, "peak_reserved_mib": 18868.0}

@@ -1,0 +1,1 @@
+{"batch_index": 0, "batch_size": 8, "wall_sec": 455.7735, "sec_per_sample": 56.9717, "samples_done": 8, "is_warmup": false, "prompt_tokens": 47911, "generated_tokens": 25974, "latent_steps": 0, "peak_reserved_mib": 23600.0}

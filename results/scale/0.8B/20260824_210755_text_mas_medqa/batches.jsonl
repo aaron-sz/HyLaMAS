@@ -1,0 +1,5 @@
+{"batch_index": 0, "batch_size": 8, "wall_sec": 242.2681, "sec_per_sample": 30.2835, "samples_done": 8, "is_warmup": false, "prompt_tokens": 44775, "generated_tokens": 19551, "latent_steps": 0, "peak_reserved_mib": 16956.0}
+{"batch_index": 1, "batch_size": 8, "wall_sec": 571.9669, "sec_per_sample": 71.4959, "samples_done": 16, "is_warmup": false, "prompt_tokens": 63449, "generated_tokens": 28742, "latent_steps": 0, "peak_reserved_mib": 36018.0}
+{"batch_index": 2, "batch_size": 8, "wall_sec": 126.6395, "sec_per_sample": 15.8299, "samples_done": 24, "is_warmup": false, "prompt_tokens": 32577, "generated_tokens": 13086, "latent_steps": 0, "peak_reserved_mib": 36018.0}
+{"batch_index": 3, "batch_size": 8, "wall_sec": 552.6669, "sec_per_sample": 69.0834, "samples_done": 32, "is_warmup": false, "prompt_tokens": 54602, "generated_tokens": 24872, "latent_steps": 0, "peak_reserved_mib": 36018.0}
+{"batch_index": 4, "batch_size": 8, "wall_sec": 711.4079, "sec_per_sample": 88.926, "samples_done": 40, "is_warmup": false, "prompt_tokens": 59076, "generated_tokens": 30186, "latent_steps": 0, "peak_reserved_mib": 36018.0}
