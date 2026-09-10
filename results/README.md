@@ -60,6 +60,17 @@ transformers 5.15.1 throughout.
     python envreport.py results/main/n100/<run>   # full reproducibility record
     python envreport.py --all                     # cross-run consistency check
 
+## Channel-byte figures
+
+`ablation_report.py --mode channel` derives the KV and state bytes from the
+architecture and the measured cache length, gated on `--state_transfer`, rather
+than reading `channel.transferred_*_mib_max` from the manifest. That recorded
+field is a max over samples, and on the ablation runs it predates the
+`carries_state` gate in `hybrid.state_bytes`, so an arm that stripped the
+DeltaNet state still records a full-size state crossing. The trace's
+`state_norm` is null for exactly those arms. The derived figures are the ones
+reported.
+
 ## HumanEval+ regrading
 
 Manifests for the code tasks carry `regraded_accuracy` alongside `accuracy`.

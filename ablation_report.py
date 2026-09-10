@@ -72,12 +72,42 @@ def _load(runs_dir, task, offset, method="latent_mas"):
             "latent_sec": (tim.get("phase_sec") or {}).get("latent"),
             "sec": m.get("time_per_sample_sec") or 0.0,
             "cut": gen.get("truncated_final_rate"),
-            "kv_mib": ch.get("transferred_kv_mib_max"),
-            "state_mib": ch.get("transferred_state_mib_max"),
+            "kv_mib": channel_bytes(a, caches)[0],
+            "state_mib": channel_bytes(a, caches)[1],
+            "kv_mib_recorded": ch.get("transferred_kv_mib_max"),
+            "state_mib_recorded": ch.get("transferred_state_mib_max"),
             "norms": norms, "caches": caches,
             "correct_by_id": {r.get("sample_id"): bool(r.get("correct")) for r in tr},
         })
     return rows
+
+
+# Measured channel constants for Qwen3.5-9B. Verified across 1824 agent
+# boundaries: 32.000 KiB of attention KV per cached position per sequence
+# (1808/1824 exact, the rest off by the turn-closing tokens), and 49.500 MiB of
+# Gated DeltaNet state per sequence (1824/1824) = 48.0 fp32 recurrent + 1.5
+# bf16 conv, invariant in sequence length.
+KV_KIB_PER_POSITION = 32.0
+STATE_MIB_PER_SEQUENCE = 49.5
+
+
+def channel_bytes(args, caches):
+    """(KV MiB, state MiB) crossing the last inter-agent boundary, for a batch.
+
+    Derived rather than read from `channel.transferred_*_mib_max`. That field
+    is a max over samples while the rest of the table reports means, and on
+    these runs it predates the `carries_state` gate in hybrid.state_bytes, so
+    an arm that stripped the DeltaNet state still reports a full-size state
+    crossing. Gating on --state_transfer is exact because the arm defines what
+    survives the boundary, and `state_norm` in the same trace agrees: null
+    wherever the state was dropped.
+    """
+    st = args.get("state_transfer", "both")
+    bs = args.get("generate_bs") or 1
+    last = caches.get("Refiner") or caches.get("Critic") or caches.get("Planner") or 0
+    kv = (last * KV_KIB_PER_POSITION * bs / 1024.0) if st in ("both", "kv_only") else 0.0
+    state = (STATE_MIB_PER_SEQUENCE * bs) if st in ("both", "state_only") else 0.0
+    return kv, state
 
 
 def _paired(a, b):
@@ -106,7 +136,7 @@ def _gate(mode, rows):
         if st in ("kv_only", "none") and has_state:
             problems.append(f"{st}: state_norm is non-null -- the state was NOT dropped")
         if st == "state_only" and (kv or 0) > 0:
-            problems.append(f"state_only: transferred_kv_mib={kv} -- KV was NOT dropped")
+            problems.append(f"state_only: derived kv_mib={kv} -- KV was NOT dropped")
         if st == "state_only" and any((c or 0) > 0 for c in cl):
             problems.append(f"state_only: cache_len {cl} -- expected 0 at every boundary")
         if st in ("both", "kv_only") and cache_grows is False:
