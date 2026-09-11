@@ -74,13 +74,14 @@ Default values reproduce the behaviour of the upstream implementation.
 
 ## Experimental considerations
 
-**Reasoning mode affects accuracy more than the choice of method.** The
-Qwen3.5-9B chat template opens a reasoning block by default, causing the Judger
-to reason until it reaches `--max_new_tokens`. A truncated Judger is graded on
-the last `\boxed{}` it emitted, which is typically the answer placeholder
-contained in its own prompt. Measured on GSM8K: 20.5% of examples truncated,
-with accuracy of 96.2% among examples that completed against 76.5% overall.
-Pass `--chat_thinking off` and inspect `generation.truncated_final_rate`.
+**The chat template's reasoning default should be set explicitly.** The
+Qwen3.5-9B template opens a reasoning block by default, causing the Judger to
+reason until it reaches `--max_new_tokens`. A truncated Judger is graded on the
+last `\boxed{}` it emitted, which is typically the answer placeholder contained
+in its own prompt. Measured on GSM8K: 20.5% of examples truncated, with
+accuracy of 96.2% among examples that completed against 76.5% overall. All
+reported runs pass `--chat_thinking off`; `generation.truncated_final_rate`
+records the resulting truncation rate for each run.
 
 **Batch size affects the methods asymmetrically.** Only `latent_mas` appends
 over a live recurrent state, and therefore incurs `pad_prefix + 1` forward
